@@ -1,0 +1,15 @@
+version: '2'
+catalog:
+  name: # Name of the versioned template of the Catalog Entry
+  version: # Version of the versioned template of the Catalog Entry
+  description: # Description of the versioned template of the Catalog Entry
+  minimum_rancher_version: # The minimum version of Rancher that supports the template, v1.0.1 and 1.0.1 are acceptable inputs
+  maximum_rancher_version: # The maximum version of Rancher that supports the template, v1.0.1 and 1.0.1 are acceptable inputs
+  upgrade_from: # The previous versions that this template can be upgraded from
+  questions: #Used to request user input for configuration options
+    - variable: # A single word that is used to pair the question and answer.
+      label: # The "question" to be answered.
+      description: | # The description of the question to show the user how to answer the question.
+      default: # (Optional) A default value that will be pre-populated into the UI
+      required: # (Optional) Whether or not an answer is required. By default, it's considered `false`.
+      type: # How the questions are formatted and types of response expected
