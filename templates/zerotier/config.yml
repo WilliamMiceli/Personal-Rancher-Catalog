@@ -1,8 +1,8 @@
 name: ZeroTier-Containerized# Name of the Catalog Entry
 description: |
-  # Description of the Catalog Entry
+  Will put in description later. # Description of the Catalog Entry
 version: # Version of the Catalog to be used
 category: Networking # Category to be used for searching catalog entries
 maintainer: WilliamMiceli # The maintainer of the catalog entry
-license: # The license
+# license: # The license
 projectURL: https://zerotier.com # A URL related to the catalog entry

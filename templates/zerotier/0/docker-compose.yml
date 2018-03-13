@@ -1,0 +1,16 @@
+version: "3"
+services:
+  zerotier:
+    container_name: #(Optional) Custom name for the container, rather than a generated default name.
+    image: zerotier/zerotier-containerized:latest
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    command: -d
+    devices:
+      - "/dev/net/tun"
+    network_mode:
+      - "host"
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_STORAGE}:/var/lib/zerotier-one"
