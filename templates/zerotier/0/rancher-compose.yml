@@ -1,9 +1,9 @@
 version: '2'
 catalog:
-  name: "ZeroTier-Containerized" # Name of the versioned template of the Catalog Entry
-  version: "latest" # Version of the versioned template of the Catalog Entry
-  description: ZeroTier-Containerized instance for virtual networking # Description of the versioned template of the Catalog Entry
-  questions: #Used to request user input for configuration options
+  name: "ZeroTier-Containerized"
+  version: "latest"
+  description: ZeroTier-Containerized instance for virtual networking
+  questions:
     - variable: "NAME"
       label: "Container Name"
       description: |
@@ -11,10 +11,10 @@ catalog:
       default: "ZeroTier"
       required: false
       type: string
-    - variable: "CONFIG_STORAGE" # A single word that is used to pair the question and answer.
-      label: "Persistent Config Path" # The "question" to be answered.
-      description: | # The description of the question to show the user how to answer the question.
+    - variable: "CONFIG_STORAGE"
+      label: "Persistent Config Path"
+      description: |
         The path to where ZeroTier should hold it's persistent files. Preferrably a local-only location.
-      default: "/var/lib/Storage-Local/zerotier-one" # (Optional) A default value that will be pre-populated into the UI
-      required: false # (Optional) Whether or not an answer is required. By default, it's considered `false`.
-      type: string # How the questions are formatted and types of response expected
+      default: "/var/lib/Storage-Local/zerotier-one"
+      required: false
+      type: string
