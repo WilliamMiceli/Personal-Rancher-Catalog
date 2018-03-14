@@ -18,3 +18,15 @@ catalog:
       default: "/var/lib/Storage-Local/zerotier-one"
       required: false
       type: string
+    - variable: "HOST_LABEL_KEY"
+      label: "Host Label Key"
+      description: |
+        The Label Key on the host which ZeroTier should be deployed
+      required: true
+      type: string
+    - variable: "HOST_LABEL_VALUE"
+      label: "Host Label Value"
+      description: |
+        The Label Value on the host which ZeroTier should be deployed
+      required: true
+      type: string
