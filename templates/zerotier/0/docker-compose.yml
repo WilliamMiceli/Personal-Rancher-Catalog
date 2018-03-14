@@ -1,12 +1,13 @@
 version: "3"
 services:
   zerotier:
-    container_name: #(Optional) Custom name for the container, rather than a generated default name.
+    container_name: ${NAME} #(Optional) Custom name for the container, rather than a generated default name.
     image: zerotier/zerotier-containerized:latest
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
-    command: -d
+    command:
+      - -d
     devices:
       - "/dev/net/tun"
     network_mode:

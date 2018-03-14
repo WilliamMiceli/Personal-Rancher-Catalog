@@ -2,8 +2,15 @@ version: '2'
 catalog:
   name: "ZeroTier-Containerized" # Name of the versioned template of the Catalog Entry
   version: "latest" # Version of the versioned template of the Catalog Entry
-  description: "Will fill in description later." # Description of the versioned template of the Catalog Entry
+  description: ZeroTier-Containerized instance for virtual networking # Description of the versioned template of the Catalog Entry
   questions: #Used to request user input for configuration options
+    - variable: "NAME"
+      label: "Container Name"
+      description: |
+        (Optional) Enter a name for the container, otherwise one will be randomly generated.
+      default: "ZeroTier"
+      required: false
+      type: string
     - variable: "CONFIG_STORAGE" # A single word that is used to pair the question and answer.
       label: "Persistent Config Path" # The "question" to be answered.
       description: | # The description of the question to show the user how to answer the question.
