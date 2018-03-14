@@ -30,3 +30,5 @@ catalog:
         The Label Value on the host which ZeroTier should be deployed
       required: true
       type: string
+zerotier:
+  scale: 1
