@@ -12,8 +12,7 @@ services:
       - "/dev/net/tun"
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
-    network_mode:
-      - "host"
+    network_mode: "host"
     restart: unless-stopped
     volumes:
       - ${CONFIG_STORAGE}:/var/lib/zerotier-one
