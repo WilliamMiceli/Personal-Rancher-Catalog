@@ -1,0 +1,43 @@
+version: '2'
+catalog:
+  name: "InvoiceNinja"
+  version: "latest"
+  description: Invoicing
+  questions:
+    - variable: "VOLUME_LOGO"
+      label: "Persistent Logo Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Logo"
+      required: false
+      type: string
+    - variable: "VOLUME_STORAGE"
+      label: "Persistent Storage Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Storage"
+      required: false
+      type: string
+    - variable: "VOLUME_DATA"
+      label: "Persistent Data Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Data"
+      required: false
+      type: string
+    - variable: "HOST_LABEL_KEY"
+      label: "Host Label Key"
+      description: |
+        The Label Key on the host which InvoiceNinja should be deployed
+      default: "personal.host.id"
+      required: true
+      type: string
+    - variable: "HOST_LABEL_VALUE"
+      label: "Host Label Value"
+      description: |
+        The Label Value on the host which InvoiceNinja should be deployed
+      default: "0000"
+      required: true
+      type: string
+invoiceninja:
+  scale: 1

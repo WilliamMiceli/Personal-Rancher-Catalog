@@ -1,0 +1,47 @@
+version: '2'
+services:
+  invoiceninja:
+    image: invoiceninja/invoiceninja
+    env_file: .env
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+    links:
+      - db:mysql
+    restart: always
+    volumes:
+      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
+      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
+  cron:
+    image: invoiceninja/invoiceninja
+    entrypoint: |
+      bash -c 'bash -s <<EOF
+      trap "break;exit" SIGHUP SIGINT SIGTERM
+      sleep 300s
+      while /bin/true; do
+        ./artisan ninja:send-invoices
+        ./artisan ninja:send-reminders
+        sleep 1h
+      done
+      EOF'
+    env_file: .env
+    links:
+      - db:mysql
+    volumes_from:
+      - invoiceninja
+  db:
+    image: mysql
+    env_file: .env
+    restart: always
+    volumes:
+      - ${VOLUME_DATA}:/var/lib/mysql:nocopy
+  web:
+    image: nginx
+    links:
+      - invoiceninja
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - invoiceninja
+volumes_driver: rancher-nfs
