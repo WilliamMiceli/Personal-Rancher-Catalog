@@ -13,7 +13,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     network_mode: "host"
-    restart: no
+    restart: "no"
     volumes:
       - ${STORAGE_VOLUME}:/var/lib/zerotier-one
 volumes_driver: rancher-nfs
