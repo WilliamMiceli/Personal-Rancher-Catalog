@@ -11,11 +11,11 @@ catalog:
       default: "ZeroTier"
       required: false
       type: string
-    - variable: "CONFIG_STORAGE"
-      label: "Persistent Config Path"
+    - variable: "STORAGE_VOLUME"
+      label: "Persistent Storage Volume"
       description: |
-        The path to where ZeroTier should hold it's persistent files. Preferrably a local-only location.
-      default: "/var/lib/Storage-Local/zerotier-one"
+        The Volume Name that ZeroTier should use for it's persistent storage
+      default: "Test"
       required: false
       type: string
     - variable: "HOST_LABEL_KEY"

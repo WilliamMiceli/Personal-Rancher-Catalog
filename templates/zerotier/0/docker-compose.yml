@@ -15,4 +15,5 @@ services:
     network_mode: "host"
     restart: unless-stopped
     volumes:
-      - ${CONFIG_STORAGE}:/var/lib/zerotier-one
+      - ${STORAGE_VOLUME}:/var/lib/zerotier-one
+volumes_driver: rancher-nfs
