@@ -15,7 +15,7 @@ catalog:
       label: "Persistent Storage Volume"
       description: |
         The Volume Name that ZeroTier should use for it's persistent storage
-      default: "Test"
+      default: "TEST"
       required: false
       type: string
     - variable: "HOST_LABEL_KEY"
