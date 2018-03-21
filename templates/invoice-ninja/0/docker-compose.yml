@@ -2,7 +2,18 @@ version: '2'
 services:
   invoiceninja:
     image: invoiceninja/invoiceninja
-    env_file: .env
+    environment:
+      - APP_ENV='production'
+      - APP_DEBUG=0
+      - APP_URL='http://ninja.dev'
+      -e APP_KEY=${APP_KEY}
+      -e APP_CIPHER='AES-256-CBC'
+      -e DB_TYPE='mysql'
+      -e DB_STRICT='false'
+      -e DB_HOST='localhost'
+      -e DB_DATABASE=${DB_DATABASE}
+      -e DB_USERNAME=${DB_USERNAME}
+      -e DB_PASSWORD=${DB_PASSWORD}
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     links:
@@ -23,14 +34,36 @@ services:
         sleep 1h
       done
       EOF'
-    env_file: .env
+    environment:
+      - APP_ENV='production'
+      - APP_DEBUG=0
+      - APP_URL='http://ninja.dev'
+      -e APP_KEY=${APP_KEY}
+      -e APP_CIPHER='AES-256-CBC'
+      -e DB_TYPE='mysql'
+      -e DB_STRICT='false'
+      -e DB_HOST='localhost'
+      -e DB_DATABASE=${DB_DATABASE}
+      -e DB_USERNAME=${DB_USERNAME}
+      -e DB_PASSWORD=${DB_PASSWORD}
     links:
       - db:mysql
     volumes_from:
       - invoiceninja
   db:
     image: mysql
-    env_file: .env
+    environment:
+      - APP_ENV='production'
+      - APP_DEBUG=0
+      - APP_URL='http://ninja.dev'
+      -e APP_KEY=${APP_KEY}
+      -e APP_CIPHER='AES-256-CBC'
+      -e DB_TYPE='mysql'
+      -e DB_STRICT='false'
+      -e DB_HOST='localhost'
+      -e DB_DATABASE=${DB_DATABASE}
+      -e DB_USERNAME=${DB_USERNAME}
+      -e DB_PASSWORD=${DB_PASSWORD}
     restart: always
     volumes:
       - ${VOLUME_DATA}:/var/lib/mysql:nocopy

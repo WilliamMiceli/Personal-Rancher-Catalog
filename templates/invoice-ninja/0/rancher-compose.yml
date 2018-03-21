@@ -4,27 +4,6 @@ catalog:
   version: "latest"
   description: Invoicing
   questions:
-    - variable: "VOLUME_LOGO"
-      label: "Persistent Logo Volume"
-      description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Logo"
-      required: false
-      type: string
-    - variable: "VOLUME_STORAGE"
-      label: "Persistent Storage Volume"
-      description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Storage"
-      required: false
-      type: string
-    - variable: "VOLUME_DATA"
-      label: "Persistent Data Volume"
-      description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Data"
-      required: false
-      type: string
     - variable: "HOST_LABEL_KEY"
       label: "Host Label Key"
       description: |
@@ -37,6 +16,55 @@ catalog:
       description: |
         The Label Value on the host which InvoiceNinja should be deployed
       default: "0000"
+      required: true
+      type: string
+    - variable: "VOLUME_LOGO"
+      label: "Persistent Logo Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Logo"
+      required: true
+      type: string
+    - variable: "VOLUME_STORAGE"
+      label: "Persistent Storage Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Storage"
+      required: true
+      type: string
+    - variable: "VOLUME_DATA"
+      label: "Persistent Data Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Data"
+      required: true
+      type: string
+    - variable: "DB_DATABASE"
+      label: "Name of the database"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "ninja"
+      required: true
+      type: string
+    - variable: "DB_USERNAME"
+      label: "Username for the database"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "ninja"
+      required: true
+      type: string
+    - variable: "DB_PASSWORD"
+      label: "Password for the database user"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "ninja"
+      required: true
+      type: string
+    - variable: "APP_KEY"
+      label: "Random string"
+      description: |
+        A random string
+      default: "SomeRandomStringSomeRandomString"
       required: true
       type: string
 invoiceninja:
