@@ -6,7 +6,7 @@ services:
       - APP_ENV='production'
       - APP_DEBUG=0
       - APP_URL='http://ninja.dev'
-      -e APP_KEY=${APP_KEY}
+      -e APP_KEY='${APP_KEY}'
       -e APP_CIPHER='AES-256-CBC'
       -e DB_TYPE='mysql'
       -e DB_STRICT='false'
