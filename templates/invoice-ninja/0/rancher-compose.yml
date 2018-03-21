@@ -60,6 +60,13 @@ catalog:
       default: "ninja"
       required: true
       type: string
+    - variable: "APP_URL"
+      label: "App URL"
+      description: |
+        URL where the app will be reachable
+      default: "http://ninja.dev"
+      required: true
+      type: string
     - variable: "APP_KEY"
       label: "Random string"
       description: |

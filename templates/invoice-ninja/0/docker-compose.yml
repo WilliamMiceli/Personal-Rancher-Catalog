@@ -4,8 +4,8 @@ services:
     image: invoiceninja/invoiceninja
     environment:
       - APP_ENV: 'production'
-      - APP_DEBUG: 0
-      - APP_URL: 'http://ninja.dev'
+      - APP_DEBUG: false
+      - APP_URL: ${APP_URL}
       - APP_KEY: ${APP_KEY}
       - APP_CIPHER: 'AES-256-CBC'
       - DB_TYPE: 'mysql'
@@ -36,8 +36,8 @@ services:
       EOF'
     environment:
       - APP_ENV: 'production'
-      - APP_DEBUG: 0
-      - APP_URL: 'http://ninja.dev'
+      - APP_DEBUG: false
+      - APP_URL: ${APP_URL}
       - APP_KEY: ${APP_KEY}
       - APP_CIPHER: 'AES-256-CBC'
       - DB_TYPE: 'mysql'
@@ -54,8 +54,8 @@ services:
     image: mysql
     environment:
       - APP_ENV: 'production'
-      - APP_DEBUG: 0
-      - APP_URL: 'http://ninja.dev'
+      - APP_DEBUG: false
+      - APP_URL: ${APP_URL}
       - APP_KEY: ${APP_KEY}
       - APP_CIPHER: 'AES-256-CBC'
       - DB_TYPE: 'mysql'
