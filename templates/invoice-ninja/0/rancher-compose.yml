@@ -39,6 +39,13 @@ catalog:
       default: "InvoiceNinja-Data"
       required: true
       type: string
+    - variable: "VOLUME_WEB"
+      label: "Persistent Web Server Storage Volume"
+      description: |
+        The volume name that should be used for persistent storage
+      default: "InvoiceNinja-Data"
+      required: true
+      type: string
     - variable: "DB_DATABASE"
       label: "Name of the database"
       description: |
