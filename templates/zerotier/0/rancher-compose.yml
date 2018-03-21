@@ -16,7 +16,7 @@ catalog:
       description: |
         The Volume Name that ZeroTier should use for it's persistent storage
       default: "ZeroTier"
-      required: false
+      required: true
       type: string
     - variable: "HOST_LABEL_KEY"
       label: "Host Label Key"
