@@ -1,0 +1,16 @@
+version: '2'
+services:
+  gitlab-ce:
+    image: gitlab/gitlab-ce:latest
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url ${EXTERNAL_URL}
+    hostname: ${HOSTNAME}
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+    restart: always
+    volumes:
+      - ${CONFIG_VOLUME}:/etc/gitlab:nocopy
+      - ${LOGS_VOLUME}:/var/lob/gitlab:nocopy
+      - ${DATA_VOLUME}:/var/opt/gitlab:nocopy
+volumes_driver: rancher-nfs

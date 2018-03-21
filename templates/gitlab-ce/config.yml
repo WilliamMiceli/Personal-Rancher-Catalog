@@ -1,0 +1,8 @@
+name: Gitlab (Community Edition)
+description: |
+  Will fill this in later.
+version: latest
+category: Versioning
+maintainer: WilliamMiceli
+license:
+projectURL: https://hub.docker.com/r/gitlab/gitlab-ce/
