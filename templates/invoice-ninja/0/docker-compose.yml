@@ -48,6 +48,9 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
     links:
       - db:mysql
+    volumes:
+      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
+      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
   db:
     image: mysql
     environment:
@@ -72,5 +75,7 @@ services:
     ports:
       - 8000:80
     volumes:
+      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
+      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
       - ${VOLUME_WEB}:/etc/nginx/nginx.conf:ro
 volumes_driver: rancher-nfs
