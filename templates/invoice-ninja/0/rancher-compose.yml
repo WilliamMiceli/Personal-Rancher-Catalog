@@ -8,7 +8,7 @@ catalog:
       label: "Host Label Key"
       description: |
         The Label Key on the host which InvoiceNinja should be deployed
-      default: "personal.host.id"
+      default: "host.id"
       required: true
       type: string
     - variable: "HOST_LABEL_VALUE"
