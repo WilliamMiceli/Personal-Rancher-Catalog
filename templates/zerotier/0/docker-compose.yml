@@ -1,7 +1,6 @@
 version: '2'
 services:
   zerotier:
-    container_name: ${NAME}
     image: zerotier/zerotier-containerized:latest
     cap_add:
       - NET_ADMIN
