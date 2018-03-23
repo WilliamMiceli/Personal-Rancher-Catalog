@@ -15,5 +15,5 @@ services:
     network_mode: "host"
     restart: on-failure
     volumes:
-      - ${STORAGE_VOLUME}:/var/lib/zerotier-one:nocopy
+      - ${STORAGE_VOLUME}:/var/lib/zerotier-one
 volumes_driver: rancher-nfs
