@@ -6,8 +6,6 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
-    command:
-      - -d
     devices:
       - "/dev/net/tun"
     labels:

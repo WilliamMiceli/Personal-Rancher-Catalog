@@ -5,4 +5,4 @@ version: latest
 category: Networking
 maintainer: WilliamMiceli
 license:
-projectURL: https://hub.docker.com/r/zerotier/zerotier-containerized/
+projectURL: https://zerotier.com
