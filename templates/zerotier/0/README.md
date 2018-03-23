@@ -1,7 +1,7 @@
 # ZeroTier-Containerized
 
-[Official Website](https://zerotier.com)
-[Docker Page](https://hub.docker.com/r/zerotier/zerotier-containerized/)
+* [Official Website](https://zerotier.com)
+* [Docker Page](https://hub.docker.com/r/zerotier/zerotier-containerized/)
 
 ## From Website
 
