@@ -18,13 +18,6 @@ catalog:
       default: "0000"
       required: true
       type: string
-    - variable: "NAME"
-      label: "Container Name"
-      description: |
-        (Optional) Enter a name for the container, otherwise one will be randomly generated.
-      default: "ZeroTier"
-      required: false
-      type: string
     - variable: "STORAGE_VOLUME"
       label: "Persistent Storage Volume"
       description: |
