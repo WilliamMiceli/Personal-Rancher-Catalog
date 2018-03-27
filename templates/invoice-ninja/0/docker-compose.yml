@@ -2,7 +2,6 @@ version: '2'
 services:
   invoiceninja:
     image: invoiceninja/invoiceninja
-    environment:
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
       io.rancher.sidekicks: cron, db, web
