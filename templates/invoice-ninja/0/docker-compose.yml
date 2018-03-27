@@ -3,21 +3,11 @@ services:
   invoiceninja:
     image: invoiceninja/invoiceninja
     environment:
-      - APP_ENV='production'
-      - APP_DEBUG=0
-      - APP_URL=${APP_URL}
-      - APP_KEY=${APP_KEY}
-      - APP_CIPHER='AES-256-CBC'
-      - DB_TYPE='mysql'
-      - DB_STRICT='false'
-      - DB_HOST='localhost'
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
-    links:
-      - db:mysql
+      io.rancher.sidekicks: cron, db, web
+    networks:
+      - ninja-net
     restart: always
     volumes:
       - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
@@ -34,48 +24,49 @@ services:
         sleep 1h
       done
       EOF'
-    environment:
-      - APP_ENV='production'
-      - APP_DEBUG=0
-      - APP_URL=${APP_URL}
-      - APP_KEY=${APP_KEY}
-      - APP_CIPHER='AES-256-CBC'
-      - DB_TYPE='mysql'
-      - DB_STRICT='false'
-      - DB_HOST='localhost'
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-    links:
-      - db:mysql
-    volumes:
-      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
-      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
+    networks:
+      - ninja-net
+    volumes_from:
+      - invoiceninja
   db:
     image: mysql
-    environment:
-      - APP_ENV='production'
-      - APP_DEBUG=0
-      - APP_URL=${APP_URL}
-      - APP_KEY=${APP_KEY}
-      - APP_CIPHER='AES-256-CBC'
-      - DB_TYPE='mysql'
-      - DB_STRICT='false'
-      - DB_HOST='localhost'
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
     restart: always
     volumes:
       - ${VOLUME_DATA}:/var/lib/mysql:nocopy
   web:
     image: nginx
-    links:
-      - invoiceninja
+    networks:
+      - ninja-net
     ports:
       - 8000:80
     volumes:
-      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
-      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
-      - ${VOLUME_WEB}:/etc/nginx/nginx.conf:ro
+      - type: volume
+        source: ${VOLUME_WEB}
+        target: /etc/nginx/nginx.conf
+        read_only: true
+        volume:
+          nocopy: true
+    volumes_from:
+      - invoiceninja
+environment:
+  - APP_DEBUG=0
+  - APP_ENV='production'
+  - APP_URL=${APP_URL}
+  - APP_KEY=${APP_KEY}
+  - APP_CIPHER='AES-256-CBC'
+  - DB_HOST='mysql'
+  - DB_STRICT='false'
+  - DB_TYPE='mysql'
+  - DB_USERNAME='ninja'
+  - DB_PASSWORD='pwd'
+  - MAIL_HOST='mail.service.host'
+  - MAIL_DRIVER='smtp'
+  - MAIL_FROM_ADDRESS='user@mail.com'
+  - MAIL_FROM_NAME='My name'
+  - MAIL_USERNAME='username'
+  - MAIL_PASSWORD='password'
+  - MYSQL_DATABASE='ninja'
+  - MYSQL_ROOT_PASSWORD='pwd'
+networks:
+  ninja-net:
 volumes_driver: rancher-nfs
