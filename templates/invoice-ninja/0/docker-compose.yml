@@ -39,7 +39,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - type: volume
+      - type: 'volume'
         source: ${VOLUME_WEB}
         target: '/etc/nginx/nginx.conf'
         read_only: true
