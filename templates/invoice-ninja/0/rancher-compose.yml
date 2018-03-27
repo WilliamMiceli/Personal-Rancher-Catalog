@@ -81,5 +81,5 @@ catalog:
       default: "SomeRandomStringSomeRandomString"
       required: true
       type: string
-invoiceninja:
+app:
   scale: 1

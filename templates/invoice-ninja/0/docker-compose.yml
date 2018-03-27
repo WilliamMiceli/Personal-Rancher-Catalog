@@ -1,6 +1,6 @@
 version: '2'
 services:
-  invoiceninja:
+  app:
     image: invoiceninja/invoiceninja
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
@@ -26,7 +26,7 @@ services:
     networks:
       - ninja-net
     volumes_from:
-      - invoiceninja
+      - app
   db:
     image: mysql
     restart: always
@@ -37,16 +37,16 @@ services:
     networks:
       - ninja-net
     ports:
-      - "8000:80"
-    # volumes:
-    #   - type: volume
-    #     source: ${VOLUME_WEB}
-    #     target: /etc/nginx/nginx.conf
-    #     read_only: true
-    #     volume:
-    #       nocopy: true
+      - 8000:80
+    volumes:
+      - type: 'volume'
+        source: ${VOLUME_WEB}
+        target: /etc/nginx/nginx.conf
+        read_only: true
+        volume:
+          nocopy: true
     volumes_from:
-      - invoiceninja
+      - app
 environment:
   - APP_DEBUG=0
   - APP_ENV='production'
