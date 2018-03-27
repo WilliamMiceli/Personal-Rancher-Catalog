@@ -39,16 +39,16 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - type: 'volume'
+      - type: volume
         source: ${VOLUME_WEB}
-        target: '/etc/nginx/nginx.conf'
+        target: /etc/nginx/nginx.conf
         read_only: true
         volume:
           nocopy: true
     volumes_from:
       - app
 environment:
-  - APP_DEBUG=0
+  - APP_DEBUG='0'
   - APP_ENV='production'
   - APP_URL=${APP_URL}
   - APP_KEY=${APP_KEY}
