@@ -38,13 +38,13 @@ services:
       - ninja-net
     ports:
       - "8000:80"
-    volumes:
-      - type: volume
-        source: ${VOLUME_WEB}
-        target: /etc/nginx/nginx.conf
-        read_only: true
-        volume:
-          nocopy: true
+    # volumes:
+    #   - type: volume
+    #     source: ${VOLUME_WEB}
+    #     target: /etc/nginx/nginx.conf
+    #     read_only: true
+    #     volume:
+    #       nocopy: true
     volumes_from:
       - invoiceninja
 environment:
