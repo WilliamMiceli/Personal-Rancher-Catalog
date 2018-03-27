@@ -39,7 +39,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ${VOLUME_WEB}:/etc/nginx/nginx.conf:nocopy
+      - ${VOLUME_WEB}:/etc/nginx:nocopy
     volumes_from:
       - app
 environment:
