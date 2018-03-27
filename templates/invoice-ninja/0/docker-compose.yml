@@ -39,12 +39,12 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - type: 'volume'
+      - type: volume
         source: ${VOLUME_WEB}
-        target: '/etc/nginx/nginx.conf'
-        read_only: 'true'
+        target: /etc/nginx/nginx.conf
+        read_only: true
         volume:
-          nocopy: 'true'
+          nocopy: true
     volumes_from:
       - app
 environment:
@@ -68,4 +68,6 @@ environment:
   - MYSQL_ROOT_PASSWORD='pwd'
 networks:
   ninja-net:
+volumes:
+  ${VOLUME_WEB}:
 volumes_driver: rancher-nfs
