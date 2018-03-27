@@ -43,8 +43,6 @@ services:
         source: ${VOLUME_WEB}
         target: /etc/nginx/nginx.conf
         read_only: true
-        volume:
-          nocopy: true
     volumes_from:
       - app
 environment:
@@ -70,4 +68,5 @@ networks:
   ninja-net:
 volumes:
   ${VOLUME_WEB}:
+    nocopy: true
 volumes_driver: rancher-nfs
