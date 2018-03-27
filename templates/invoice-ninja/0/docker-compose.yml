@@ -37,7 +37,7 @@ services:
     networks:
       - ninja-net
     ports:
-      - 8000:80
+      - "8000:80"
     volumes:
       - type: volume
         source: ${VOLUME_WEB}
