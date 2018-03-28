@@ -1,0 +1,15 @@
+version: '2'
+services:
+  che-server:
+    image: eclipse/che-server:latest
+    container_name: che
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_VOLUME}:/data:nocopy
+      - ${REPO_VOLUME}:/repo:nocopy
+volumes_driver: rancher-nfs

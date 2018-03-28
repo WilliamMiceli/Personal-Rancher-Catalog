@@ -1,0 +1,34 @@
+version: '2'
+catalog:
+  name: "Eclipse Che (Single-User)"
+  version: "latest"
+  description: A new awesome web IDE
+  questions:
+    - variable: "HOST_LABEL_KEY"
+      label: "Host Label Key"
+      description: |
+        The Label Key on the host which Eclipse Che should be deployed
+      default: "host.id"
+      required: true
+      type: string
+    - variable: "HOST_LABEL_VALUE"
+      label: "Host Label Value"
+      description: |
+        The Label Value on the host which Eclipse Che should be deployed
+      default: "0000"
+      required: true
+      type: string
+    - variable: "DATA_VOLUME"
+      label: "Persistent Storage Volume"
+      description: |
+        The Volume Name that Eclipse Che should use for it's persistent data storage
+      default: "Eclipse-Data"
+      required: true
+      type: string
+    - variable: "REPO_VOLUME"
+      label: "Persistent Storage Volume"
+      description: |
+        The Volume Name that Eclipse Che should use for it's persistent repo storage
+      default: "Eclipse-Repo"
+      required: true
+      type: string
