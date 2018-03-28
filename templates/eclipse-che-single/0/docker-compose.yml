@@ -4,7 +4,6 @@ services:
     image: eclipse/che-server:latest
     environment:
       - CHE_HOST=${HOST_IP}
-      - CHE_DOCKER_PRIVILEGED=true
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     ports:
