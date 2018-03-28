@@ -2,6 +2,8 @@ version: '2'
 services:
   app:
     image: invoiceninja/invoiceninja
+    depends_on:
+      - db
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
       io.rancher.sidekicks: cron, db, web
@@ -23,17 +25,25 @@ services:
         sleep 1h
       done
       EOF'
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     networks:
       - ninja-net
     volumes_from:
       - app
   db:
     image: mysql
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     restart: always
     volumes:
       - ${VOLUME_DATA}:/var/lib/mysql:nocopy
   web:
     image: nginx
+    depends_on:
+      - app
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     networks:
       - ninja-net
     ports:
