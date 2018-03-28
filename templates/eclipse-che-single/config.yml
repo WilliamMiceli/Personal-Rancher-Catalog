@@ -1,0 +1,8 @@
+name: Eclipse Che (Single-User)
+description: |
+  Will put in description later.
+version: latest
+category: Development
+maintainer: WilliamMiceli
+license:
+projectURL: https://www.eclipse.org/che/
