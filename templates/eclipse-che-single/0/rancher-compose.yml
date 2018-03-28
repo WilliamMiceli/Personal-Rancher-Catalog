@@ -32,3 +32,10 @@ catalog:
       default: "Eclipse-Repo"
       required: true
       type: string
+    - variable: "HOST_IP"
+      label: "IP of the host system"
+      description: |
+        Host IP
+      default: "10.0.0.0"
+      required: true
+      type: string
