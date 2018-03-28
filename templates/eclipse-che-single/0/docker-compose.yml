@@ -5,7 +5,7 @@ services:
     container_name: che
     environment:
       - CHE_HOST=${HOST_IP}
-      - CHE_USER=0:0
+      - CHE_DOCKER_PRIVILEGED=true
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     ports:
