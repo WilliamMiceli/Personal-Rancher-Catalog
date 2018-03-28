@@ -2,6 +2,7 @@ version: '2'
 services:
   che-server:
     image: eclipse/che-server:latest
+    contianer_name: che #Testing
     environment:
       - CHE_HOST=${HOST_IP}
     labels:
