@@ -52,7 +52,7 @@ services:
       - ninja-net
     ports:
       - "8000:8000"
-    retart: on-failure
+    restart: on-failure
     volumes:
       - ${VOLUME_WEB}:/etc/nginx:nocopy
     volumes_from:
