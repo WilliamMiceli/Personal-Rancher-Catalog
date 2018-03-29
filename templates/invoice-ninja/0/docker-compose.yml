@@ -35,8 +35,8 @@ services:
   db:
     image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD='test123456'
-      - MYSQL_DATABASE='ninja'
+      - MYSQL_ROOT_PASSWORD=test123456
+      - MYSQL_DATABASE=ninja
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     restart: on-failure
