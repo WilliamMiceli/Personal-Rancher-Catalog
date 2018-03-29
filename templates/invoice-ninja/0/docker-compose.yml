@@ -6,7 +6,7 @@ services:
       - db
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
-      io.rancher.sidekicks: cron
+      io.rancher.sidekicks: cron, web
     networks:
       - ninja-net
     restart: on-failure
