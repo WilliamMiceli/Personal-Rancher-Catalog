@@ -32,11 +32,11 @@ catalog:
       default: "InvoiceNinja-Storage"
       required: true
       type: string
-    - variable: "VOLUME_DATA"
+    - variable: "VOLUME_DB"
       label: "Persistent Data Volume"
       description: |
         The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Data"
+      default: "InvoiceNinja-DB"
       required: true
       type: string
     - variable: "VOLUME_WEB"

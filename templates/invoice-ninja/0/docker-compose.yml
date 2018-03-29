@@ -6,10 +6,10 @@ services:
       - db
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
-      io.rancher.sidekicks: cron, db, web
+      io.rancher.sidekicks: cron
     networks:
       - ninja-net
-    restart: always
+    restart: on-failure
     volumes:
       - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
       - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
@@ -29,15 +29,19 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     networks:
       - ninja-net
+    restart: on-failure
     volumes_from:
       - app
   db:
     image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD='test123456'
+      - MYSQL_DATABASE='ninja'
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
-    restart: always
+    restart: on-failure
     volumes:
-      - ${VOLUME_DATA}:/var/lib/mysql:nocopy
+      - ${VOLUME_DB}:/var/lib/mysql:nocopy
   web:
     image: nginx
     depends_on:
@@ -47,7 +51,8 @@ services:
     networks:
       - ninja-net
     ports:
-      - "8000:80"
+      - "8000:8000"
+    retart: on-failure
     volumes:
       - ${VOLUME_WEB}:/etc/nginx:nocopy
     volumes_from:
@@ -58,19 +63,11 @@ environment:
   - APP_URL=${APP_URL}
   - APP_KEY=${APP_KEY}
   - APP_CIPHER='AES-256-CBC'
-  - DB_HOST='mysql'
+  - DB_HOST='db'
   - DB_STRICT='false'
   - DB_TYPE='mysql'
-  - DB_USERNAME='ninja'
-  - DB_PASSWORD='pwd'
-  - MAIL_HOST='mail.service.host'
-  - MAIL_DRIVER='smtp'
-  - MAIL_FROM_ADDRESS='user@mail.com'
-  - MAIL_FROM_NAME='My name'
-  - MAIL_USERNAME='username'
-  - MAIL_PASSWORD='password'
-  - MYSQL_DATABASE='ninja'
-  - MYSQL_ROOT_PASSWORD='pwd'
+  - DB_USERNAME='root'
+  - DB_PASSWORD='test123456'
 networks:
   ninja-net:
 volumes_driver: rancher-nfs
