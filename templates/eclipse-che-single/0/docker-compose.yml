@@ -2,7 +2,6 @@ version: '2'
 services:
   che-server:
     image: eclipse/che-server:latest
-    container_name: eclipse-che
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -11,6 +10,7 @@ services:
       - CHE_PORT=${CHE_PORT}
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.container.hostname_override: eclipse-che
     ports:
       - "${CHE_PORT}:8080"
     restart: on-failure
