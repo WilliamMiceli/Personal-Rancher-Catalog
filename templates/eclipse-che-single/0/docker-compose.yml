@@ -8,7 +8,6 @@ services:
     environment:
       - CHE_HOST=${HOST_IP}
       - CHE_PORT=${CHE_PORT}
-      - CHE_USER=${UID_GID}
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.container.hostname_override: eclipse-che
