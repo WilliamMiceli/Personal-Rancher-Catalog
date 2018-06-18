@@ -9,29 +9,10 @@
 
 
 
-
-
-
-
 ##### CLI Reference
 
 USAGE:
 `  docker run -it --rm *<DOCKER_PARAMETERS>* eclipse/che-cli:*<version>* *[COMMAND]*`
-
-MANDATORY DOCKER PARAMETERS:
-```  -v *<LOCAL_PATH>*:/data```            Where user, instance, and log data saved
-
-OPTIONAL DOCKER PARAMETERS:
-`  -e CHE_HOST=*<YOUR_HOST>*`              IP address or hostname where che will serve its users
-`  -e CHE_PORT=*<YOUR_PORT>*`              Port where che will bind itself to
-`  -e CHE_CONTAINER=*<YOUR_NAME>*`         Prefix name for the che container
-`  -v *<LOCAL_PATH>*:/data/instance`       Where instance, user, log data will be saved
-`  -v *<LOCAL_PATH>*:/data/backup`         Where backup files will be saved
-`  -v *<LOCAL_PATH>*:/repo`                che git repo - uses local binaries and manifests
-`  -v *<LOCAL_PATH>*:/assembly`            che assembly - uses local binaries
-`  -v *<LOCAL_PATH>*:/sync`                Where remote ws files will be copied with sync command
-`  -v *<LOCAL_PATH>*:/unison`              Where unison profile for optimizing sync command resides
-`  -v *<LOCAL_PATH>*:/chedir`              Soure repository to convert into workspace with Chedir utility
 
 COMMANDS:
 `  action *<action-name>*`                 Start action on che instance
