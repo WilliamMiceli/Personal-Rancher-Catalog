@@ -25,6 +25,13 @@ catalog:
       default: "8080"
       required: true
       type: string
+    - variable: "UID_GID"
+      label: "UID:GID"
+      description: |
+        The User ID and Group ID that Eclipse Che should run as
+      default: "1000:1000"
+      required: true
+      type: string
     - variable: "STORAGE_BASE_DIR"
       label: "Base Storage Directory"
       description: |
