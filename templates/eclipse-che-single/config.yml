@@ -1,7 +1,7 @@
 name: Eclipse Che (Single-User)
 description: |
-  Still doesn't work. Either a rancher-nfs issue, or eclipse-che issue.
-  Might try again some other time.
+  Not yet operational.
+  Permissions issues, but almost there...
 version: latest
 category: Development
 maintainer: WilliamMiceli
