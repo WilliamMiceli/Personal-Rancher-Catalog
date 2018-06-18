@@ -12,7 +12,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     ports:
-      - ${CHE_PORT}":8080"
+      - "${CHE_PORT}:8080"
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
