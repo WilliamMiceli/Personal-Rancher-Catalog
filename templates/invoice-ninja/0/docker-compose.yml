@@ -5,14 +5,14 @@ services:
     depends_on:
       - db
     labels:
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
     networks:
       - ninja-net
     restart: on-failure
     volumes:
-      - ${VOLUME_LOGO}:/var/www/app/public/logo:nocopy
-      - ${VOLUME_STORAGE}:/var/www/app/storage:nocopy
+      - ${STORAGE_BASE_DIR}${LOGO_DIR}:/var/www/app/public/logo
+      - ${STORAGE_BASE_DIR}${STORAGE_DIR}:/var/www/app/storage
   cron:
     image: invoiceninja/invoiceninja
     entrypoint: |
@@ -26,35 +26,32 @@ services:
       done
       EOF'
     labels:
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     networks:
       - ninja-net
     restart: on-failure
     volumes_from:
       - app
   db:
-    image: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=test123456
-      - MYSQL_DATABASE=ninja
+    image: mysql:5
     labels:
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure
     volumes:
-      - ${VOLUME_DB}:/var/lib/mysql:nocopy
+      - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
   web:
     image: nginx
     depends_on:
       - app
     labels:
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     networks:
       - ninja-net
     ports:
-      - "8000:8000"
+      - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - ${VOLUME_WEB}:/etc/nginx:nocopy
+      - ${STORAGE_BASE_DIR}${WEB_DIR}:/etc/nginx
     volumes_from:
       - app
 environment:
@@ -66,8 +63,9 @@ environment:
   - DB_HOST='db'
   - DB_STRICT='false'
   - DB_TYPE='mysql'
-  - DB_USERNAME='root'
-  - DB_PASSWORD='test123456'
+  - DB_USERNAME='ninja'
+  - DB_PASSWORD='ninja'
+  - MYSQL_ROOT_PASSWORD='ninja'
+  - MYSQL_DATABASE='ninja'
 networks:
   ninja-net:
-volumes_driver: rancher-nfs

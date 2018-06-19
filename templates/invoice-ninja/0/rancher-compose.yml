@@ -4,67 +4,53 @@ catalog:
   version: "latest"
   description: Invoicing
   questions:
-    - variable: "HOST_LABEL_KEY"
-      label: "Host Label Key"
+    - variable: "LABEL_KEY_VALUE"
+      label: "Host Label Key/Value Pair"
       description: |
-        The Label Key on the host which InvoiceNinja should be deployed
-      default: "host.id"
+        The Label Key/Value pair on the host which Eclipse Che should be deployed
+      default: "host.id=0000"
       required: true
       type: string
-    - variable: "HOST_LABEL_VALUE"
-      label: "Host Label Value"
+    - variable: "WEB_PORT"
+      label: "Port Number"
       description: |
-        The Label Value on the host which InvoiceNinja should be deployed
-      default: "0000"
+        Port to access the web interface on
+      default: "8000"
       required: true
       type: string
-    - variable: "VOLUME_LOGO"
-      label: "Persistent Logo Volume"
+    - variable: "STORAGE_BASE_DIR"
+      label: "Base Storage Directory"
       description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Logo"
+        The base path of where persistent storage should be kept at.
+      default: "/RancherNetworkStorage/ContainerStorage/InvoiceNinja"
       required: true
       type: string
-    - variable: "VOLUME_STORAGE"
-      label: "Persistent Storage Volume"
+    - variable: "LOGO_DIR"
+      label: "Logo Directory"
       description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Storage"
+        The
+      default: "/Logo"
       required: true
       type: string
-    - variable: "VOLUME_DB"
-      label: "Persistent Data Volume"
+    - variable: "STORAGE_DIR"
+      label: "Storage Directory"
       description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-DB"
+        The
+      default: "/Storage"
       required: true
       type: string
-    - variable: "VOLUME_WEB"
-      label: "Persistent Web Server Storage Volume"
+    - variable: "DB_DIR"
+      label: "Database Directory"
       description: |
-        The volume name that should be used for persistent storage
-      default: "InvoiceNinja-Web"
+        The
+      default: "/Database"
       required: true
       type: string
-    - variable: "DB_DATABASE"
-      label: "Name of the database"
+    - variable: "WEB_DIR"
+      label: "Web Server Data Directory"
       description: |
-        The volume name that should be used for persistent storage
-      default: "ninja"
-      required: true
-      type: string
-    - variable: "DB_USERNAME"
-      label: "Username for the database"
-      description: |
-        The volume name that should be used for persistent storage
-      default: "ninja"
-      required: true
-      type: string
-    - variable: "DB_PASSWORD"
-      label: "Password for the database user"
-      description: |
-        The volume name that should be used for persistent storage
-      default: "ninja"
+        The
+      default: "/Web"
       required: true
       type: string
     - variable: "APP_URL"
