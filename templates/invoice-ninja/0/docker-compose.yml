@@ -59,13 +59,8 @@ services:
     volumes_from:
       - app
   db:
-    image: mysql:5
+    image: mysql
     environment:
-      - DB_HOST='db'
-      - DB_STRICT='false'
-      - DB_TYPE='mysql'
-      - DB_USERNAME='ninja'
-      - DB_PASSWORD='ninja'
       - MYSQL_ROOT_PASSWORD='ninja'
       - MYSQL_DATABASE='ninja'
     labels:
