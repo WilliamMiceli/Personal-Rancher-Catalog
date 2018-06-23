@@ -29,7 +29,7 @@ catalog:
       label: "Base Storage Directory"
       description: |
         The base path of where persistent storage should be kept at.
-      default: "/RancherNetworkStorage/ContainerStorage/EclipseChe-SingleUser"
+      default: "/RancherStorage/EclipseChe-SingleUser"
       required: true
       type: string
     - variable: "DATA_DIR"
