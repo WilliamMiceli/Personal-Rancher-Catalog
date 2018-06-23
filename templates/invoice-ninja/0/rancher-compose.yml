@@ -22,7 +22,7 @@ catalog:
       label: "Base Storage Directory"
       description: |
         The base path of where persistent storage should be kept at.
-      default: "/RancherNetworkStorage/ContainerStorage/InvoiceNinja"
+      default: "/RancherStorage/InvoiceNinja"
       required: true
       type: string
     - variable: "LOGO_DIR"
