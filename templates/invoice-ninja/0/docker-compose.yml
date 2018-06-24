@@ -7,7 +7,6 @@ services:
     environment:
       - APP_DEBUG=0
       - APP_ENV='production'
-      - APP_URL=${APP_URL}
       - APP_KEY=${APP_KEY}
       - APP_CIPHER='AES-256-CBC'
       - DB_HOST='db'
@@ -15,8 +14,6 @@ services:
       - DB_TYPE='mysql'
       - DB_USERNAME='ninja'
       - DB_PASSWORD='ninja'
-      - MYSQL_ROOT_PASSWORD='ninja'
-      - MYSQL_DATABASE='ninja'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
@@ -41,7 +38,6 @@ services:
     environment:
       - APP_DEBUG=0
       - APP_ENV='production'
-      - APP_URL=${APP_URL}
       - APP_KEY=${APP_KEY}
       - APP_CIPHER='AES-256-CBC'
       - DB_HOST='db'
@@ -49,8 +45,6 @@ services:
       - DB_TYPE='mysql'
       - DB_USERNAME='ninja'
       - DB_PASSWORD='ninja'
-      - MYSQL_ROOT_PASSWORD='ninja'
-      - MYSQL_DATABASE='ninja'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     networks:
@@ -80,7 +74,7 @@ services:
       - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${WEB_DIR}:/etc/nginx
+      - ${STORAGE_BASE_DIR}${CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
 networks:

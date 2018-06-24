@@ -46,11 +46,11 @@ catalog:
       default: "/Database"
       required: true
       type: string
-    - variable: "WEB_DIR"
-      label: "Web Server Data Directory"
+    - variable: "CONFIG_DIR"
+      label: "Configuration Directory"
       description: |
         The
-      default: "/Web"
+      default: "/Config"
       required: true
       type: string
     - variable: "APP_URL"
