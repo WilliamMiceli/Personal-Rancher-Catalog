@@ -2,7 +2,7 @@ version: '2'
 services:
   app:
     image: invoiceninja/invoiceninja
-    env_file: .env
+    env_file: ${STORAGE_BASE_DIR}${CONFIG_DIR}/.env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
@@ -25,7 +25,7 @@ services:
         sleep 1h
       done
       EOF'
-    env_file: .env
+    env_file: ${STORAGE_BASE_DIR}${CONFIG_DIR}/.env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
@@ -35,7 +35,7 @@ services:
       - app
   db:
     image: mysql
-    env_file: .env
+    env_file: ${STORAGE_BASE_DIR}${CONFIG_DIR}/.env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure
