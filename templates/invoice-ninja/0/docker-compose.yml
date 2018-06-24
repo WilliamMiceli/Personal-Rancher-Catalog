@@ -2,16 +2,7 @@ version: '2'
 services:
   app:
     image: invoiceninja/invoiceninja
-    environment:
-      - APP_DEBUG=0
-      - APP_ENV='production'
-      - APP_KEY=${APP_KEY}
-      - APP_CIPHER='AES-256-CBC'
-      - APP_URL='http://localhost:${WEB_PORT}'
-      - DB_HOST='mysql'
-      - DB_DATABASE='ninja'
-      - DB_USERNAME='root'
-      - DB_PASSWORD='ninjaPass'
+    env_file: .env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
@@ -21,6 +12,7 @@ services:
     volumes:
       - ${STORAGE_BASE_DIR}${LOGO_DIR}:/var/www/app/public/logo
       - ${STORAGE_BASE_DIR}${STORAGE_DIR}:/var/www/app/storage
+      - ${STORAGE_BASE_DIR}${CONFIG_DIR}/.env:/var/www/app/.env
   cron:
     image: invoiceninja/invoiceninja
     entrypoint: |
@@ -33,16 +25,7 @@ services:
         sleep 1h
       done
       EOF'
-    environment:
-      - APP_DEBUG=0
-      - APP_ENV='production'
-      - APP_KEY=${APP_KEY}
-      - APP_CIPHER='AES-256-CBC'
-      - APP_URL='http://localhost:${WEB_PORT}'
-      - DB_HOST='mysql'
-      - DB_DATABASE='ninja'
-      - DB_USERNAME='root'
-      - DB_PASSWORD='ninjaPass'
+    env_file: .env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
@@ -52,9 +35,7 @@ services:
       - app
   db:
     image: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD='ninjaPass'
-      - MYSQL_DATABASE='ninja'
+    env_file: .env
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure

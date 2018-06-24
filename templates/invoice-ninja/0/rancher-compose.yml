@@ -11,13 +11,6 @@ catalog:
       default: "host.id=0000"
       required: true
       type: string
-    - variable: "WEB_PORT"
-      label: "Port Number"
-      description: |
-        The port to access the web interface on.
-      default: "8000"
-      required: true
-      type: string
     - variable: "STORAGE_BASE_DIR"
       label: "Base Storage Directory"
       description: |
@@ -51,13 +44,6 @@ catalog:
       description: |
         The folder which configuration files should be in.
       default: "/Config"
-      required: true
-      type: string
-    - variable: "APP_KEY"
-      label: "Random string"
-      description: |
-        A random string
-      default: "SomeRandomStringSomeRandomString"
       required: true
       type: string
 app:
