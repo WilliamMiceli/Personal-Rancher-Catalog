@@ -2,23 +2,20 @@ version: '2'
 services:
   app:
     image: invoiceninja/invoiceninja
-    depends_on:
-      - db
     environment:
       - APP_DEBUG=0
       - APP_ENV='production'
       - APP_KEY=${APP_KEY}
       - APP_CIPHER='AES-256-CBC'
-      - DB_HOST='db'
-      - DB_STRICT='false'
-      - DB_TYPE='mysql'
-      - DB_USERNAME='ninja'
-      - DB_PASSWORD='ninja'
+      - APP_URL='http://localhost:${WEB_PORT}'
+      - DB_HOST='mysql'
+      - DB_DATABASE='ninja'
+      - DB_USERNAME='root'
+      - DB_PASSWORD='ninjaPass'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
-      io.rancher.sidekicks: cron, web
-    networks:
-      - ninja-net
+    links:
+      - db:mysql
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${LOGO_DIR}:/var/www/app/public/logo
@@ -40,22 +37,22 @@ services:
       - APP_ENV='production'
       - APP_KEY=${APP_KEY}
       - APP_CIPHER='AES-256-CBC'
-      - DB_HOST='db'
-      - DB_STRICT='false'
-      - DB_TYPE='mysql'
-      - DB_USERNAME='ninja'
-      - DB_PASSWORD='ninja'
+      - APP_URL='http://localhost:${WEB_PORT}'
+      - DB_HOST='mysql'
+      - DB_DATABASE='ninja'
+      - DB_USERNAME='root'
+      - DB_PASSWORD='ninjaPass'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
-    networks:
-      - ninja-net
+    links:
+      - db:mysql
     restart: on-failure
     volumes_from:
       - app
   db:
     image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD='ninja'
+      - MYSQL_ROOT_PASSWORD='ninjaPass'
       - MYSQL_DATABASE='ninja'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
@@ -64,12 +61,10 @@ services:
       - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
   web:
     image: nginx
-    depends_on:
-      - app
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
-    networks:
-      - ninja-net
+    links:
+      - app
     ports:
       - "${WEB_PORT}:80"
     restart: on-failure
@@ -77,5 +72,3 @@ services:
       - ${STORAGE_BASE_DIR}${CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
-networks:
-  ninja-net:

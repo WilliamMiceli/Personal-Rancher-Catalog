@@ -14,7 +14,7 @@ catalog:
     - variable: "WEB_PORT"
       label: "Port Number"
       description: |
-        Port to access the web interface on
+        The port to access the web interface on.
       default: "8000"
       required: true
       type: string
@@ -35,21 +35,21 @@ catalog:
     - variable: "STORAGE_DIR"
       label: "Storage Directory"
       description: |
-        The
+        The folder for persistent storage files.
       default: "/Storage"
       required: true
       type: string
     - variable: "DB_DIR"
       label: "Database Directory"
       description: |
-        The
+        The folder which will store the persistent database files.
       default: "/Database"
       required: true
       type: string
     - variable: "CONFIG_DIR"
       label: "Configuration Directory"
       description: |
-        The
+        The folder which configuration files should be in.
       default: "/Config"
       required: true
       type: string
