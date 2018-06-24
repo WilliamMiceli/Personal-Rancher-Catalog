@@ -14,6 +14,7 @@ services:
       - DB_PASSWORD='ninjaPass'
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.sidekicks: cron, web
     links:
       - db:mysql
     restart: on-failure
