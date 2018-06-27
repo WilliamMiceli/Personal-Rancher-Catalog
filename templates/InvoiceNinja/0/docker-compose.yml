@@ -14,7 +14,6 @@ services:
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
     links:
@@ -47,7 +46,6 @@ services:
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
       - db:ninja-mysql
@@ -62,7 +60,6 @@ services:
       MYSQL_USER: ninja
       MYSQL_PASSWORD: ninjaPass
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure
     volumes:
@@ -70,7 +67,6 @@ services:
   web:
     image: nginx
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
       - app
