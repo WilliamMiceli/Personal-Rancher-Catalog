@@ -11,8 +11,8 @@ services:
       DB_STRICT: false
       DB_HOST: ninja-mysql
       DB_DATABASE: ninja_db
-      DB_USERNAME: ninja
-      DB_PASSWORD: ninjaPass
+      DB_USERNAME: root
+      DB_PASSWORD: rootPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
@@ -43,8 +43,8 @@ services:
       DB_STRICT: false
       DB_HOST: ninja-mysql
       DB_DATABASE: ninja_db
-      DB_USERNAME: ninja
-      DB_PASSWORD: ninjaPass
+      DB_USERNAME: root
+      DB_PASSWORD: rootPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
@@ -53,12 +53,10 @@ services:
     volumes_from:
       - app
   db:
-    image: mysql:5
+    image: mariadb
     environment:
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: rootPass
-      MYSQL_USER: ninja
-      MYSQL_PASSWORD: ninjaPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure
