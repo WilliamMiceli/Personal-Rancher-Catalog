@@ -9,8 +9,8 @@
 
 ## From Website
 
-> Free Open-Source Invoicing
-> Expenses & time-tracking built with Laravel
+Free Open-Source Invoicing
+Expenses & time-tracking built with Laravel
 
 
 ### Pre-Installation:
