@@ -59,5 +59,3 @@ catalog:
         A randomly generated 32-Character string which will be used for encryption.
       required: true
       type: string
-app:
-  scale: 1
