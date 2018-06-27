@@ -53,5 +53,11 @@ catalog:
       default: "/Config"
       required: true
       type: string
+    - variable: "APP_KEY"
+      label: "Encryption Key"
+      description: |
+        A randomly generated 32-Character string which will be used for encryption.
+      required: true
+      type: string
 app:
   scale: 1
