@@ -9,7 +9,7 @@ services:
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_HOST: ninja-mysql
-      DB_DATABASE: ninja-db
+      DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
@@ -40,7 +40,7 @@ services:
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_HOST: ninja-mysql
-      DB_DATABASE: ninja-db
+      DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
@@ -53,7 +53,7 @@ services:
   db:
     image: mysql
     environment:
-      MYSQL_DATABASE: ninja-db
+      MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: rootPass
       MYSQL_USER: ninja
       MYSQL_PASSWORD: ninjaPass
