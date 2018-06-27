@@ -51,7 +51,7 @@ services:
     volumes_from:
       - app
   db:
-    image: mysql
+    image: mysql:5
     environment:
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: rootPass
