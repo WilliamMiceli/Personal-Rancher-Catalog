@@ -8,15 +8,15 @@ services:
       APP_URL: http://localhost:${WEB_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
-      DB_HOST: mysql
-      DB_DATABASE: ninja
-      DB_USERNAME: root
+      DB_HOST: ninja-mysql
+      DB_DATABASE: ninja-db
+      DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.sidekicks: cron, web
     links:
-      - db:mysql
+      - db:ninja-mysql
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${LOGO_DIR}:/var/www/app/public/logo
@@ -39,22 +39,24 @@ services:
       APP_URL: http://localhost:${WEB_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
-      DB_HOST: mysql
-      DB_DATABASE: ninja
-      DB_USERNAME: root
+      DB_HOST: ninja-mysql
+      DB_DATABASE: ninja-db
+      DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     links:
-      - db:mysql
+      - db:ninja-mysql
     restart: on-failure
     volumes_from:
       - app
   db:
     image: mysql
     environment:
-      MYSQL_DATABASE: ninja
-      MYSQL_ROOT_PASSWORD: ninjaPass
+      MYSQL_DATABASE: ninja-db
+      MYSQL_ROOT_PASSWORD: rootPass
+      MYSQL_USER: ninja
+      MYSQL_PASSWORD: ninjaPass
     labels:
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
     restart: on-failure
