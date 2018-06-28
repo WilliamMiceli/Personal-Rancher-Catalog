@@ -10,7 +10,6 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     restart: always
     volumes:
-      - ${CONFIG_VOLUME}:/etc/gitlab:nocopy
-      - ${LOGS_VOLUME}:/var/lob/gitlab:nocopy
-      - ${DATA_VOLUME}:/var/opt/gitlab:nocopy
-volumes_driver: rancher-nfs
+      - ${CONFIG_DIR}:/etc/gitlab
+      - ${LOG_DIR}:/var/log/gitlab
+      - ${DATA_DIR}:/var/opt/gitlab
