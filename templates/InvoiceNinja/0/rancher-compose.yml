@@ -70,3 +70,20 @@ catalog:
         A randomly generated 32-Character string which will be used for encryption.
       required: true
       type: string
+
+#    - variable: "GOOGLE_MAPS_KEY"
+#      label: "Google Maps API Key"
+#      description: |
+#        Temp
+#      required: false
+#      type: password
+
+#    - variable: "SSL_CERT"
+#      label: "SSL Certificate"
+#      description: |
+#        Please select which certificate you'd like to use from the environment (if any).
+#      required: false
+#      type: certificate
+
+services:
+  app:
