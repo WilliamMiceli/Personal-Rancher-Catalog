@@ -69,7 +69,7 @@ catalog:
       description: |
         A randomly generated 32-Character string which will be used for encryption.
       required: true
-      type: string
+      type: password
 
 #    - variable: "GOOGLE_MAPS_KEY"
 #      label: "Google Maps API Key"
