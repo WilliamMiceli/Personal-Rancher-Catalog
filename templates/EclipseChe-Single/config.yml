@@ -1,9 +1,8 @@
 name: Eclipse Che (Single-User)
 description: |
-  Not yet operational.
-  Permissions issues, but almost there...
-version: latest
-category: Development
+  Status: NOT READY
+# version:
+# category:
 maintainer: WilliamMiceli
-license:
+# license:
 projectURL: https://www.eclipse.org/che/
