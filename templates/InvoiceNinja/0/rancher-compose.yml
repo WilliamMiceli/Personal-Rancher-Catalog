@@ -67,10 +67,17 @@ catalog:
     - variable: "APP_KEY"
       label: "Encryption Key"
       description: |
-        A randomly generated 32-Character string which will be used for encryption.
+        A random 32-Character string which will be used for encryption.
       required: true
       type: password
 
+    - variable: "MOBILE_APP_SECRET"
+      label: "Mobile App Secret"
+      description: |
+        A random alphanumeric string required for allowing mobile app access.
+      required: false
+      type: password
+ 
     - variable: "GMAPS_KEY"
       label: "Google Maps API Key"
       description: |
