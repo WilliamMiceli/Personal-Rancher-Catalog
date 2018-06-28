@@ -5,7 +5,7 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: http://localhost:${WEB_PORT}
+      APP_URL: http://localhost:${HTTP_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
@@ -39,7 +39,7 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: http://localhost:${WEB_PORT}
+      APP_URL: http://localhost:${HTTP_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
@@ -79,7 +79,7 @@ services:
     links:
       - app
     ports:
-      - "${WEB_PORT}:80"
+      - "${HTTP_PORT}:80"
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
