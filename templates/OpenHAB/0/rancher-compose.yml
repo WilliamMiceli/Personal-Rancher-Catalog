@@ -1,8 +1,11 @@
 version: '2'
 catalog:
-  name: "openHAB"
-  version: "2.4.0-SNAPSHOT"
-  description: "An open source, technology agnostic home automation platform"
+  name: OpenHAB
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: "IMAGE_ARCHITECTURE"

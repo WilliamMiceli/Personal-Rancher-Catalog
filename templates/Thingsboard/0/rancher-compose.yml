@@ -1,8 +1,11 @@
 version: '2'
 catalog:
-  name: "Thingsboard"
-  version: "v0.1"
-  description: "An open source IoT platform"
+  name: Thingsboard
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   uuid: Thingsboard-1
   questions:
 

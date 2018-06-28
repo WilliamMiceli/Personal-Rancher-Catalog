@@ -1,9 +1,11 @@
 version: '2'
-.catalog:
-  name: "apache-guacamole"
-  version: "0.1-rancher1"
-  description: " Apache Guacamole is a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH."
-  minimum_rancher_version: v0.46.0
+catalog:
+  name: Guacamole
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: "guacamole_db"

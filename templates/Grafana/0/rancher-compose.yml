@@ -1,6 +1,11 @@
-.catalog:
-  name: "Grafana"
-  version: "4.2.0-rancher2"
+version: '2'
+catalog:
+  name: Grafana
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: http_port

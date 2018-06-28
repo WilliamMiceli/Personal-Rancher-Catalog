@@ -1,6 +1,11 @@
-.catalog:
-  name: netdata
-  version: v1.8.0
+version: '2'
+catalog:
+  name: Netdata
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: NETDATA_PORT

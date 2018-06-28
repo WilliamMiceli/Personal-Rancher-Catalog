@@ -1,9 +1,13 @@
 version: '2'
 catalog:
-  name: "Eclipse Che (Single-User)"
-  version: "latest"
-  description: A new awesome web IDE
+  name: Eclipse Che (Single-User)
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
+
     - variable: "LABEL_KEY_VALUE"
       label: "Host Label Key/Value Pair"
       description: |
@@ -11,6 +15,7 @@ catalog:
       default: "host.id=0000"
       required: true
       type: string
+
     - variable: "HOST_IP"
       label: "Host IP Address"
       description: |
@@ -18,6 +23,7 @@ catalog:
       default: "0.0.0.0"
       required: true
       type: string
+
     - variable: "CHE_PORT"
       label: "Port Number"
       description: |
@@ -25,6 +31,7 @@ catalog:
       default: "8080"
       required: true
       type: string
+
     - variable: "STORAGE_BASE_DIR"
       label: "Base Storage Directory"
       description: |
@@ -32,6 +39,7 @@ catalog:
       default: "/RancherStorage/EclipseChe-SingleUser"
       required: true
       type: string
+
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
@@ -39,6 +47,7 @@ catalog:
       default: "/Data"
       required: true
       type: string
+
     - variable: "REPO_DIR"
       label: "Persistent Storage Volume"
       description: |

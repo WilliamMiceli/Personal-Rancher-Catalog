@@ -1,0 +1,9 @@
+version: '2'
+catalog:
+  name: Gitlab-CE
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # questions:

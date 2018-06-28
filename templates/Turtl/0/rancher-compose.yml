@@ -1,6 +1,11 @@
-.catalog:
-  name: "turtl"
-  version: 1.0.1
+version: '2'
+catalog:
+  name: Turtl
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: "DISPLAY_ERRORS"

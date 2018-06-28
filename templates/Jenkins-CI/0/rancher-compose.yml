@@ -1,6 +1,11 @@
-.catalog:
+version: '2'
+catalog:
   name: Jenkins
-  version: 2.92-rancher1
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
   - variable: "PORT"

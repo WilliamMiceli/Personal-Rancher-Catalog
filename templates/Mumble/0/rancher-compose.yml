@@ -1,7 +1,13 @@
-.catalog:
-  name: mumble
-  version: v1.2.17
+version: '2'
+catalog:
+  name: Mumble
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   uuid: mumble-0
+  # questions:
 
 mumble:
   scale: 1

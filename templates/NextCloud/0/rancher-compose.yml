@@ -1,7 +1,11 @@
 version: '2'
 catalog:
-  name: nextcloud
-  version: 0.0.1
+  name: NextCloud
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: NEXTCLOUD_PORT

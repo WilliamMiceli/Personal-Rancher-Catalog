@@ -1,11 +1,11 @@
 version: '2'
 catalog:
   name: traefik
-  version: v1.6.4-rancher1
-  description: |
-    Traefik load balancer.
-  minimum_rancher_version: v0.59.0
-  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   uuid: traefik-0
   questions:
 

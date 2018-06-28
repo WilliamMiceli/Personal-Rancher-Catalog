@@ -1,8 +1,11 @@
 version: '2'
 catalog:
-  name: openproject
-  version: 0.0.1
-  description: Project planning and scheduling
+  name: OpenProject
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
   questions:
 
     - variable: OPENPROJECT_PORT
