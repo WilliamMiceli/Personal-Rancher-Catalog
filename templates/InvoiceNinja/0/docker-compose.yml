@@ -13,6 +13,9 @@ services:
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
+{{- if (.Values.GMAPS_KEY)}}
+      GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
+{{- end}}
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
@@ -47,6 +50,9 @@ services:
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ninjaPass
+{{- if (.Values.GMAPS_KEY)}}
+      GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
+{{- end}}
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}

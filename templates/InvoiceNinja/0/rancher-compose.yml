@@ -71,12 +71,12 @@ catalog:
       required: true
       type: password
 
-#    - variable: "GOOGLE_MAPS_KEY"
-#      label: "Google Maps API Key"
-#      description: |
-#        Temp
-#      required: false
-#      type: password
+    - variable: "GMAPS_KEY"
+      label: "Google Maps API Key"
+      description: |
+        Allows for the use of showing relavent location data for the "Javascript, Geocoding and Embed APIs".
+      required: false
+      type: password
 
 #    - variable: "SSL_CERT"
 #      label: "SSL Certificate"
