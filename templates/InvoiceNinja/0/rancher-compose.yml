@@ -1,7 +1,7 @@
 version: '2'
 catalog:
-  name: "InvoiceNinja"
-  version: "latest"
+  name: InvoiceNinja
+  version: latest
   # description:
   # minimum_rancher_version:
   # maximum_rancher_version:
