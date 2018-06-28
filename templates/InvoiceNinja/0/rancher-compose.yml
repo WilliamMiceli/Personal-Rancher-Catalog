@@ -9,7 +9,7 @@ catalog:
       description: |
         The Label Key/Value pair on the host which InvoiceNinja should be deployed
       default: "host.id=0000"
-      required: true
+      required: false
       type: string
     - variable: "WEB_PORT"
       label: "Web Port"
