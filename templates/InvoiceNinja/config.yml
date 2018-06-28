@@ -1,7 +1,7 @@
 name: Invoice Ninja
 description: |
   Status: Functional
-# version: latest
+version: latest
 category: Invoicing
 maintainer: WilliamMiceli
 # license:
