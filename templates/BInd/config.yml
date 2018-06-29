@@ -1,6 +1,6 @@
 name: Bind
 description: |
-  Status: NOT READY
+  BIND DNS server with Webmin admin interface
 version: latest
 category: Networking
 maintainer: WilliamMiceli
