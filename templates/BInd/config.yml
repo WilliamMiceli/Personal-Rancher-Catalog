@@ -1,7 +1,7 @@
-name: Bind9
+name: Bind
 description: |
   Status: NOT READY
-# version:
+version: latest
 category: Networking
 maintainer: WilliamMiceli
 # license:
