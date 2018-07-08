@@ -5,14 +5,14 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: http://localhost:${HTTP_PORT}
+      APP_URL: ${URL}:${HOST_HTTP_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
       DB_HOST: ninja-mysql
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
-      DB_PASSWORD: ninjaPass
+      DB_PASSWORD: ${DB_USER_PASS}
 {{- if (.Values.GMAPS_KEY)}}
       API_SECRET: ${MOBILE_APP_SECRET}
 {{- end}}
@@ -21,7 +21,7 @@ services:
 {{- end}}
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
-      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
       io.rancher.sidekicks: cron, web
     links:
@@ -45,14 +45,14 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: http://localhost:${HTTP_PORT}
+      APP_URL: ${URL}:${HOST_HTTP_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
       DB_HOST: ninja-mysql
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
-      DB_PASSWORD: ninjaPass
+      DB_PASSWORD: ${DB_USER_PASS}
 {{- if (.Values.GMAPS_KEY)}}
       API_SECRET: ${MOBILE_APP_SECRET}
 {{- end}}
@@ -61,7 +61,7 @@ services:
 {{- end}}
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
-      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
     links:
       - db:ninja-mysql
@@ -72,12 +72,12 @@ services:
     image: mysql:5
     environment:
       MYSQL_DATABASE: ninja_db
-      MYSQL_ROOT_PASSWORD: rootPass
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
       MYSQL_USER: ninja
-      MYSQL_PASSWORD: ninjaPass
+      MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
-      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
     restart: on-failure
     volumes:
@@ -86,12 +86,12 @@ services:
     image: nginx
     labels:
 {{- if (.Values.LABEL_KEY_VALUE)}}
-      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
     links:
       - app
     ports:
-      - "${HTTP_PORT}:80"
+      - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
