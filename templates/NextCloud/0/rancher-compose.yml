@@ -70,6 +70,20 @@ catalog:
       required: true
       type: password
 
+    - variable: NC_ADMIN
+      label: "Nextcloud Admin Username"
+      description: |
+        The username of the Nextcloud admin user.
+      required: true
+      type: password
+
+    - variable: NC_ADMIN_PASS
+      label: "Nextcloud Admin Password"
+      description: |
+        A secure password for the Nextcloud admin user.
+      required: true
+      type: password
+
 services:
   nextcloud:
     scale: 1
