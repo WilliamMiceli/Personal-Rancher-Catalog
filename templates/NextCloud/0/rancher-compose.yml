@@ -75,7 +75,7 @@ catalog:
       description: |
         The username of the Nextcloud admin user.
       required: true
-      type: password
+      type: string
 
     - variable: NC_ADMIN_PASS
       label: "Nextcloud Admin Password"
