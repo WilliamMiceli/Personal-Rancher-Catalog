@@ -36,7 +36,7 @@ catalog:
       label: "Application Files Directory"
       description: |
         The folder for persistent logo files.
-      default: "/Nextcloud"
+      default: "/Application"
       required: true
       type: string
 
