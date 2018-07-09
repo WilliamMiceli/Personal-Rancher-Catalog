@@ -5,6 +5,9 @@ services:
     image: nextcloud:stable-apache
     depends_on:
       - mysql
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     environment:
       MYSQL_HOST: mysql
       MYSQL_DATABASE: nextcloud
@@ -45,4 +48,4 @@ services:
 
 networks:
   nextcloud-net:
-    driver: overlay
+    driver: bridge
