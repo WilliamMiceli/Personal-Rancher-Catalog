@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   nextcloud:
     image: nextcloud:stable-apache
     environment:
@@ -22,6 +23,7 @@ services:
     volumes:
       - ${STORAGE_BASE_DIR}${APP_DIR}:/var/www/html
       - ${STORAGE_BASE_DIR}${DATA_DIR}:/var/www/html/data
+
   mysql:
     image: mysql:5
     environment:
@@ -38,3 +40,7 @@ services:
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
+
+networks:
+  nextcloud-net:
+    driver: bridge
