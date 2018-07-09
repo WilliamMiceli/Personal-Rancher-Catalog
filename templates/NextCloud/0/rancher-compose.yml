@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: NextCloud
+  name: Nextcloud
   version: latest
   # description:
   # minimum_rancher_version:
@@ -8,44 +8,70 @@ catalog:
   # upgrade_from:
   questions:
 
-    - variable: NEXTCLOUD_PORT
-      label: Port
-      default: 80
-      required: true
-      type: int
+    - variable: HOST_LABEL
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair on the host which containers should be deployed
+      default: "host.id=0000"
+      required: false
+      type: string
 
-    - variable: MYSQL_ROOT_PASS
-      label: MySQL root password
+    - variable: HOST_HTTP_PORT
+      label: Port
+      description: |
+        The HTTP port to access the web interface on.
+      default: "9000"
+      required: true
+      type: string
+
+    - variable: STORAGE_BASE_DIR
+      label: "Base Storage Directory"
+      description: |
+        The base path of where persistent storage should be kept at.
+      default: "/RancherStorage/Nextcloud"
+      required: true
+      type: string
+
+    - variable: APP_DIR
+      label: "Application Files Directory"
+      description: |
+        The folder for persistent logo files.
+      default: "/Nextcloud"
+      required: true
+      type: string
+
+    - variable: DATA_DIR
+      label: "User Data Directory"
+      description: |
+        The folder for persistent user data.
+      default: "/UserData"
+      required: true
+      type: string
+
+    - variable: DB_DIR
+      label: "Database Directory"
+      description: |
+        The folder for persistent database files.
+      default: "/Database"
+      required: true
+      type: string
+
+    - variable: DB_ROOT_PASS
+      label: "MySQL Root Password"
+      description: |
+        A secure password to be used by the "root" MySQL user.
       required: true
       type: password
 
-    - variable: MYSQL_DATABASE
-      default: nextcloud
-      label: MySQL Database
-      required: true
-      type: string
-
-    - variable: MYSQL_USER
-      default: nextcloud
-      label: MySQL User
-      required: true
-      type: string
-
-    - variable: MYSQL_PASS
-      label: MySQL Pass
+    - variable: DB_USER_PASS
+      label: "MySQL User Password"
+      description: |
+        A secure password to be used by the "nextcloud_user" MySQL user.
       required: true
       type: password
 
 services:
   nextcloud:
     scale: 1
-    start_on_create: true
-  nextcloud-data:
+  mysql:
     scale: 1
-    start_on_create: true
-  mariadb:
-    scale: 1
-    start_on_create: true
-  mariadb-data:
-    scale: 1
-    start_on_create: true
