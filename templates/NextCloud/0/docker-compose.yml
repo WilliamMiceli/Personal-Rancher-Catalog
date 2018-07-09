@@ -23,7 +23,7 @@ services:
       - ${STORAGE_BASE_DIR}${APP_DIR}:/var/www/html
       - ${STORAGE_BASE_DIR}${DATA_DIR}:/var/www/html/data
   mysql:
-    image: mysql
+    image: mysql:5
     environment:
       MYSQL_DATABASE: nextcloud
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
