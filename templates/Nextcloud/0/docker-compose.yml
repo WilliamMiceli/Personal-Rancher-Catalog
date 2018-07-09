@@ -45,4 +45,4 @@ services:
 
 networks:
   nextcloud-net:
-    driver: bridge
+    driver: overlay
