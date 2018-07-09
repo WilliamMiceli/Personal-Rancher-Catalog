@@ -3,6 +3,8 @@ services:
 
   nextcloud:
     image: nextcloud:stable-apache
+    depends_on:
+      - mysql
     environment:
       MYSQL_HOST: mysql
       MYSQL_DATABASE: nextcloud
