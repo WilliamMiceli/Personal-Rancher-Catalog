@@ -2,6 +2,8 @@ version: '2'
 services:
   app:
     image: invoiceninja/invoiceninja
+    dns:
+      - 10.0.0.1
     environment:
       APP_ENV: production
       APP_DEBUG: false
@@ -32,6 +34,8 @@ services:
       - ${STORAGE_BASE_DIR}${STORAGE_DIR}:/var/www/app/storage
   cron:
     image: invoiceninja/invoiceninja
+    dns:
+      - 10.0.0.1
     entrypoint: |
       bash -c 'bash -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
@@ -70,6 +74,8 @@ services:
       - app
   db:
     image: mysql:5
+    dns:
+      - 10.0.0.1
     environment:
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
@@ -84,6 +90,8 @@ services:
       - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
   web:
     image: nginx
+    dns:
+      - 10.0.0.1
     labels:
 {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
