@@ -7,4 +7,12 @@ catalog:
   # maximum_rancher_version:
   # upgrade_from:
   # uuid: traefik-0
-  # questions:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair on the host which the stack should be deployed.
+      default: "host.id=Proxy1"
+      required: false
+      type: string

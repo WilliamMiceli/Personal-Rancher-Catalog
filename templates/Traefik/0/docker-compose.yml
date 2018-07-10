@@ -3,10 +3,14 @@ services:
 
   traefik:
     image: traefik:latest
-    restart: always
+    labels:
+{{- if (.Values.HOST_LABEL)}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+{{- end}}
     ports:
       - 80:80
       - 443:443
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherStorage/Traefik/traefik.toml:/traefik.toml
