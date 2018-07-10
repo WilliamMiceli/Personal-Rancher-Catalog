@@ -3,7 +3,8 @@ services:
   bind:
     image: sameersbn/bind
     dns:
-      - localhost
+      - 1.1.1.1
+      - 1.0.0.1
     environment:
       WEBMIN_ENABLED: ${WEBMIN_ENABLED}
 {{- if eq .Values.WEBMIN_ENABLED "true"}}

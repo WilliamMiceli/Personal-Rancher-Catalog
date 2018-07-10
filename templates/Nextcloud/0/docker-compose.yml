@@ -6,7 +6,8 @@ services:
     depends_on:
       - mysql
     dns:
-      - 10.0.0.1
+      - 1.1.1.1
+      - 1.0.0.1
     environment:
       MYSQL_HOST: mysql
       MYSQL_DATABASE: nextcloud
@@ -31,7 +32,8 @@ services:
   mysql:
     image: mysql:5
     dns:
-      - 10.0.0.1
+      - 1.1.1.1
+      - 1.0.0.1
     environment:
       MYSQL_DATABASE: nextcloud
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
