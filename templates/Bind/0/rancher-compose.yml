@@ -45,7 +45,7 @@ catalog:
       label: "Base Storage Directory"
       description: |
         The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/Bind"
+      default: "/RancherNetworkStorage/Bind"
       required: true
       type: string
     
