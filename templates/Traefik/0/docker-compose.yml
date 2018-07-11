@@ -8,8 +8,8 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
