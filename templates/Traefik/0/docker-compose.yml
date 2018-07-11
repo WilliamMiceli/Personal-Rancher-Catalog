@@ -3,6 +3,7 @@ services:
 
   traefik:
     image: traefik:latest
+    command: --api --docker
     labels:
 {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
@@ -10,6 +11,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
