@@ -28,7 +28,7 @@ catalog:
       label: "Host HTTP Port"
       description: |
         The HTTP port to access the web interface on.
-      default: "6000"
+      default: "12000"
       required: true
       type: string
 
@@ -36,7 +36,7 @@ catalog:
       label: "Host HTTPS Port"
       description: |
         The HTTPS port to access the web interface on.
-      default: "6500"
+      default: "12500"
       required: true
       type: string
 
