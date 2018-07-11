@@ -20,6 +20,10 @@ services:
 {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
+      traefik.enable: true
+      traefik.domain: "testcloud.williammiceli.systems"
+      traefik.port: "9000"
+      traefik.frontend.headers.SSLRedirect: false
     networks:
       - nextcloud-net
     ports:
