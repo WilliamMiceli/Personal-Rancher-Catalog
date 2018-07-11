@@ -7,3 +7,80 @@ catalog:
   # maximum_rancher_version:
   # upgrade_from:
   questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair on the host which InvoiceNinja should be deployed
+      default: "host.id=0000"
+      required: false
+      type: string
+
+    - variable: "URL"
+      label: "URL"
+      description: |
+        The domain or hostname the service can be accessed at.
+      default: "http://localhost"
+      required: true
+      type: string
+
+    - variable: "HOST_HTTP_PORT"
+      label: "Host HTTP Port"
+      description: |
+        The HTTP port to access the web interface on.
+      default: "6000"
+      required: true
+      type: string
+
+    - variable: "HOST_HTTPS_PORT"
+      label: "Host HTTPS Port"
+      description: |
+        The HTTPS port to access the web interface on.
+      default: "6500"
+      required: true
+      type: string
+
+    - variable: "STORAGE_BASE_DIR"
+      label: "Base Storage Directory"
+      description: |
+        The base path of where persistent storage should be kept at.
+      default: "/RancherStorage/InvoiceNinja"
+      required: true
+      type: string
+
+    - variable: "APP_DIR"
+      label: "Application Directory"
+      description: |
+        The folder for persistent application files.
+      default: "/Application"
+      required: true
+      type: string
+
+    - variable: "DB_DIR"
+      label: "Database Directory"
+      description: |
+        The folder for persistent database files.
+      default: "/Database"
+      required: true
+      type: string
+
+    - variable: "DB_ROOT_PASS"
+      label: "MySQL Root Password"
+      description: |
+        A secure password to be used by the "root" MySQL user.
+      required: true
+      type: password
+
+    - variable: "DB_USER_PASS"
+      label: "MySQL User Password"
+      description: |
+        A secure password to be used by the "snipe_user" MySQL user.
+      required: true
+      type: password
+
+    - variable: "APP_KEY"
+      label: "Encryption Key"
+      description: |
+        A random 32-Character string which will be used for encryption.
+      required: true
+      type: password
