@@ -15,6 +15,4 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /RancherStorage/Traefik/traefik.toml:/traefik.toml
-      - /RancherStorage/Traefik/acme.json:/acme.json
     # container_name: traefik
