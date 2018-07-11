@@ -44,7 +44,7 @@ catalog:
       label: "Base Storage Directory"
       description: |
         The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/InvoiceNinja"
+      default: "/RancherStorage/SnipeIT"
       required: true
       type: string
 
