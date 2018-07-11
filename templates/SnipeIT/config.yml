@@ -1,7 +1,7 @@
 name: Snipe-IT
 description: |
   Status: NOT READY
-# version:
+version: latest
 category: Asset Management
 maintainer: WilliamMiceli
 # license:
