@@ -24,38 +24,6 @@ catalog:
       required: true
       type: string
 
-    - variable: STORAGE_BASE_DIR
-      label: "Base Storage Directory"
-      description: |
-        The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/Nextcloud"
-      required: true
-      type: string
-
-    - variable: APP_DIR
-      label: "Application Files Directory"
-      description: |
-        The folder for persistent logo files.
-      default: "/Application"
-      required: true
-      type: string
-
-    - variable: DATA_DIR
-      label: "User Data Directory"
-      description: |
-        The folder for persistent user data.
-      default: "/UserData"
-      required: true
-      type: string
-
-    - variable: DB_DIR
-      label: "Database Directory"
-      description: |
-        The folder for persistent database files.
-      default: "/Database"
-      required: true
-      type: string
-
     - variable: DB_ROOT_PASS
       label: "MySQL Root Password"
       description: |

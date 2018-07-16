@@ -35,8 +35,8 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${APP_DIR}:/var/www/html
-      - ${STORAGE_BASE_DIR}${DATA_DIR}:/var/www/html/data
+      - nextcloud_app:/var/www/html
+      - nextcloud_data:/var/www/html/data
 
   mysql:
     image: mysql:5
@@ -56,10 +56,23 @@ services:
       - nextcloud-net
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
+      - nextcloud_db:/var/lib/mysql
 
 networks:
   nextcloud-net:
     driver: bridge
   public:
     external: true
+volumes:
+  nextcloud_app:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
+  nextcloud_data:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
+  nextcloud_db:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
