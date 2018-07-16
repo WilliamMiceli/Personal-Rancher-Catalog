@@ -17,9 +17,9 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
     labels:
       # io.rancher.container.hostname_override: container_name
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
       traefik.enable: true
       traefik.alias: cloudtest
       traefik.domain: williammiceli.systems
@@ -35,8 +35,8 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - nextcloud_app:/var/www/html
-      - nextcloud_data:/var/www/html/data
+      - /RancherStorage/Nextcloud/Application:/var/www/html
+      - /RancherStorage/Nextcloud/UserData:/var/www/html/data
 
   mysql:
     image: mysql:5
@@ -49,30 +49,17 @@ services:
       MYSQL_USER: nextcloud_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     networks:
       - nextcloud-net
     restart: on-failure
     volumes:
-      - nextcloud_db:/var/lib/mysql
+      - /RancherStorage/Nextcloud/Database:/var/lib/mysql
 
 networks:
   nextcloud-net:
     driver: bridge
   public:
     external: true
-volumes:
-  nextcloud_app:
-    driver: rancher-nfs
-    driver_opts:
-      onRemove: retain
-  nextcloud_data:
-    driver: rancher-nfs
-    driver_opts:
-      onRemove: retain
-  nextcloud_db:
-    driver: rancher-nfs
-    driver_opts:
-      onRemove: retain
