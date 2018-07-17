@@ -57,7 +57,7 @@ services:
     scale: 1
     health_check:
       port: ${HOST_HTTP_PORT}
-      request_line: GET /healthcheck HTTP/1.1
+      request_line: GET /healthcheck HTTP/1.0
       interval: 5000
       response_timeout: 2000
       healthy_threshold: 2
