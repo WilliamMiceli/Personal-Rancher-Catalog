@@ -60,7 +60,6 @@ services:
       request_line: GET /healthcheck HTTP/1.1
       interval: 5000
       response_timeout: 2000
-      initializing_timeout: 30000
       healthy_threshold: 2
       unhealthy_threshold: 3
       strategy: none
