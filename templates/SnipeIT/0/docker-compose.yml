@@ -19,10 +19,11 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASS}
       APP_ENV:
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     networks:
+      - default
       - snipe-net
     ports:
       - "${HOST_HTTP_PORT}:80"
@@ -42,9 +43,9 @@ services:
       MYSQL_USER: snipe_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     networks:
       - snipe-net
     restart: on-failure
@@ -53,4 +54,3 @@ services:
 
 networks:
   snipe-net:
-    driver: bridge
