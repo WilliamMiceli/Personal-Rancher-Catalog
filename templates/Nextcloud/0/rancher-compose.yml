@@ -59,8 +59,6 @@ services:
       port: ${HOST_HTTP_PORT}
       interval: 5000
       response_timeout: 2000
-      initializing_timeout: 30000
-      reinitializing_timeout: 30000
       healthy_threshold: 2
       unhealthy_theshold: 3
       strategy: none
