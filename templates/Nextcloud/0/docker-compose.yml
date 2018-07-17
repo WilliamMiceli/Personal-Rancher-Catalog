@@ -21,8 +21,7 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-      traefik.alias: cloudtest
-      traefik.domain: williammiceli.systems
+      traefik.alias: cloudtest.williammiceli.systems
       traefik.port: 9000
       traefik.acme: true
       traefik.backend: Nextcloud
