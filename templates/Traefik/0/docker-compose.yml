@@ -5,9 +5,12 @@ services:
     image: traefik:latest
     command: --api --docker
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      io.rancher.container.hostname_override: traefik
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
+    networks:
+      - public
     ports:
       - "80:80"
       - "443:443"
@@ -15,4 +18,8 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    # container_name: traefik
+      - /opt/traefik/traefik.toml:/traefik.toml
+      - /opt/traefik/acme.json:/acme.json
+
+networks:
+  public:
