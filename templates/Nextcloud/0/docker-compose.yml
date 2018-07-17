@@ -59,6 +59,5 @@ services:
 
 networks:
   nextcloud-net:
-    driver: bridge
   public:
     external: true
