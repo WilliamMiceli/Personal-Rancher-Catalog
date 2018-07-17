@@ -22,12 +22,14 @@ services:
       {{- end}}
       traefik.enable: true
       traefik.alias: cloudtest.williammiceli.systems
+      traefik.frontend.rule: Host:cloudtest.williammiceli.systems
       traefik.port: 9000
       traefik.acme: true
       traefik.backend: Nextcloud
       traefik.frontend.entryPoints: http,https
       traefik.docker.network: public
     networks:
+      - default
       - nextcloud-net
       - public
     ports:
