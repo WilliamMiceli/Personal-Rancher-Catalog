@@ -30,7 +30,7 @@ services:
       traefik.docker.network: public
     networks:
       - default
-      - nextcloud-net
+      - nextcloud-nfs-net
       - public
     ports:
       - "${HOST_HTTP_PORT}:80"
@@ -54,7 +54,7 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     networks:
-      - nextcloud-net
+      - nextcloud-nfs-net
     restart: on-failure
     volumes:
       - Nextcloud-Database:/var/lib/mysql
