@@ -4,7 +4,7 @@ services:
   nextcloudnfs:
     image: nextcloud:stable-apache
     depends_on:
-      - mysql
+      - mysqlnfs
     dns:
       - 1.1.1.1
       - 1.0.0.1
