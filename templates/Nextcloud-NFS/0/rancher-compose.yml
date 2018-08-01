@@ -1,0 +1,67 @@
+version: '2'
+catalog:
+  name: Nextcloud
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  questions:
+
+    - variable: HOST_LABEL
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair on the host which containers should be deployed
+      default: "host.id=0000"
+      required: false
+      type: string
+
+    - variable: HOST_HTTP_PORT
+      label: Port
+      description: |
+        The HTTP port to access the web interface on.
+      default: "9500"
+      required: true
+      type: string
+
+    - variable: DB_ROOT_PASS
+      label: "MySQL Root Password"
+      description: |
+        A secure password to be used by the "root" MySQL user.
+      required: true
+      type: password
+
+    - variable: DB_USER_PASS
+      label: "MySQL User Password"
+      description: |
+        A secure password to be used by the "nextcloud_user" MySQL user.
+      required: true
+      type: password
+
+    - variable: NC_ADMIN
+      label: "Nextcloud Admin Username"
+      description: |
+        The username of the Nextcloud admin user.
+      required: true
+      type: string
+
+    - variable: NC_ADMIN_PASS
+      label: "Nextcloud Admin Password"
+      description: |
+        A secure password for the Nextcloud admin user.
+      required: true
+      type: password
+
+services:
+  nextcloud:
+    scale: 1
+#    health_check:
+#      port: ${HOST_HTTP_PORT}
+#      request_line: GET /healthcheck HTTP/1.0
+#      interval: 5000
+#      response_timeout: 2000
+#      healthy_threshold: 2
+#      unhealthy_threshold: 3
+#      strategy: none
+  mysql:
+    scale: 1
