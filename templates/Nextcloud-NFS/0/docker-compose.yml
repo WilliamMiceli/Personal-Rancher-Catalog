@@ -1,7 +1,7 @@
 version: '2'
 services:
 
-  nextcloud-nfs:
+  nextcloudnfs:
     image: nextcloud:stable-apache
     depends_on:
       - mysql
@@ -9,7 +9,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_HOST: mysql-nfs
+      MYSQL_HOST: mysqlnfs
       MYSQL_DATABASE: nextcloud
       MYSQL_USER: nextcloud_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
@@ -39,7 +39,7 @@ services:
       - Nextcloud-Application:/var/www/html
       - Nextcloud-UserData:/var/www/html/data
 
-  mysql-nfs:
+  mysqlnfs:
     image: mysql:5
     dns:
       - 1.1.1.1
