@@ -20,7 +20,7 @@ catalog:
       label: Port
       description: |
         The HTTP port to access the web interface on.
-      default: "9500"
+      default: "10100"
       required: true
       type: string
 
