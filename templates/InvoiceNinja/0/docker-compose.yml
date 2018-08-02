@@ -31,8 +31,8 @@ services:
       - db:ninja-mysql
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${LOGO_DIR}:/var/www/app/public/logo
-      - ${STORAGE_BASE_DIR}${STORAGE_DIR}:/var/www/app/storage
+      - Logo:/var/www/app/public/logo
+      - Storage:/var/www/app/storage
   cron:
     image: invoiceninja/invoiceninja
     dns:
@@ -90,7 +90,7 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
+      - Database:/var/lib/mysql
   web:
     image: nginx
     dns:
@@ -106,6 +106,32 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
+      - Web:/etc/nginx:ro
     volumes_from:
       - app
+
+volumes:
+  Database:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Database
+      onRemove: retain
+  Logo:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Logo
+      onRemove: retain
+  Storage:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Storage
+      onRemove: retain
+  Web:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Web
+      onRemove: retain
