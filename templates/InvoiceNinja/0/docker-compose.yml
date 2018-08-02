@@ -16,16 +16,16 @@ services:
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ${DB_USER_PASS}
-{{- if (.Values.GMAPS_KEY)}}
+      {{- if (.Values.GMAPS_KEY)}}
       API_SECRET: ${MOBILE_APP_SECRET}
-{{- end}}
-{{- if (.Values.GMAPS_KEY)}}
+      {{- end}}
+      {{- if (.Values.GMAPS_KEY)}}
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
-{{- end}}
+      {{- end}}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
       io.rancher.sidekicks: cron, web
     links:
       - db:ninja-mysql
@@ -59,16 +59,16 @@ services:
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ${DB_USER_PASS}
-{{- if (.Values.GMAPS_KEY)}}
+      {{- if (.Values.GMAPS_KEY)}}
       API_SECRET: ${MOBILE_APP_SECRET}
-{{- end}}
-{{- if (.Values.GMAPS_KEY)}}
+      {{- end}}
+      {{- if (.Values.GMAPS_KEY)}}
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
-{{- end}}
+      {{- end}}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     links:
       - db:ninja-mysql
     restart: on-failure
@@ -85,9 +85,9 @@ services:
       MYSQL_USER: ninja
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
@@ -97,9 +97,9 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     links:
       - app
     ports:
