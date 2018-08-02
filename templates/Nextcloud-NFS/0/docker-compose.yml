@@ -68,20 +68,17 @@ volumes:
     driver: rancher-nfs
     driver_opts:
       host: 10.0.10.21
-      # export: /${DATA_DIR}/Application
-      exportBase: /RancherCattleData/Nextcloud
+      export: /RancherCattleData/${DATA_DIR}/Application
       onRemove: retain
   Nextcloud-UserData:
     driver: rancher-nfs
     driver_opts:
       host: 10.0.10.21
-      # export: /${DATA_DIR}/UserData
-      exportBase: /RancherCattleData/Nextcloud
+      export: /RancherCattleData/${DATA_DIR}/UserData
       onRemove: retain
   Nextcloud-Database:
     driver: rancher-nfs
     driver_opts:
       host: 10.0.10.21
-      # export: ${DATA_DIR}/Database
-      exportBase: /RancherCattleData/Nextcloud
+      export: /RancherCattleData/${DATA_DIR}/Database
       onRemove: retain
