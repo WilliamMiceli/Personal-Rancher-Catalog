@@ -3,7 +3,7 @@ services:
 
   nextcloud:
     image: nextcloud:stable-apache
-    depends_on:
+    depends_on: # Hopefully one day I'll upgrade to a rancher version that actually makes use of this. Here just for a future reminder.
       - mysql
     dns:
       - 1.1.1.1
@@ -23,21 +23,21 @@ services:
       traefik.enable: true
       traefik.alias: cloudtest.williammiceli.systems
       traefik.frontend.rule: Host:cloudtest.williammiceli.systems
-      traefik.port: 9000
+      traefik.port: 9500
       traefik.acme: true
       traefik.backend: Nextcloud
       traefik.frontend.entryPoints: http,https
       traefik.docker.network: public
     networks:
       - default
-      - nextcloud-net
+      - nextcloud-nfs-net
       - public
     ports:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - /RancherStorage/Nextcloud/Application:/var/www/html
-      - /RancherStorage/Nextcloud/UserData:/var/www/html/data
+      - Nextcloud-Application:/var/www/html
+      - Nextcloud-UserData:/var/www/html/data
 
   mysql:
     image: mysql:5
@@ -54,12 +54,25 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     networks:
-      - nextcloud-net
+      - nextcloud-nfs-net
     restart: on-failure
     volumes:
-      - /RancherStorage/Nextcloud/Database:/var/lib/mysql
+      - Nextcloud-Database:/var/lib/mysql
 
 networks:
-  nextcloud-net:
+  nextcloud-nfs-net:
   public:
     external: true
+volumes:
+  Nextcloud-Application:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
+  Nextcloud-UserData:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain
+  Nextcloud-Database:
+    driver: rancher-nfs
+    driver_opts:
+      onRemove: retain

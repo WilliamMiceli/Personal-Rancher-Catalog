@@ -1,6 +1,6 @@
-name: Nextcloud
+name: Nextcloud-NFS
 description: |
-  Status: Functional
+  Status: EXPERIMENTAL
 version: latest
 # category:
 maintainer: WilliamMiceli
