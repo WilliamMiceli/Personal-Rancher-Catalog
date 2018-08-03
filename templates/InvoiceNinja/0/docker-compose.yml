@@ -96,6 +96,7 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+    environment:
     labels:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
@@ -106,7 +107,7 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - Web:/etc/nginx
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
 
@@ -129,9 +130,9 @@ volumes:
       host: 10.0.10.21
       export: /RancherCattleData/${DATA_DIR}/Storage
       onRemove: retain
-  Web:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Web
-      onRemove: retain
+#  Web:
+#    driver: rancher-nfs
+#    driver_opts:
+#      host: 10.0.10.21
+#      export: /RancherCattleData/${DATA_DIR}/Web
+#      onRemove: retain
