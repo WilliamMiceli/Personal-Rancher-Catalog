@@ -106,7 +106,7 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /RancherCattleFiles/InvoiceNinja/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
 
