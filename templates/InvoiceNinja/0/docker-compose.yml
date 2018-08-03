@@ -96,7 +96,6 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    environment:
     labels:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
