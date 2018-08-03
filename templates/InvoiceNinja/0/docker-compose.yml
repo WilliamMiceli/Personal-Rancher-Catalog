@@ -106,7 +106,7 @@ services:
       - "${HOST_HTTP_PORT}:80"
     restart: on-failure
     volumes:
-      - Web:/etc/nginx:ro
+      - Web:/etc/nginx
     volumes_from:
       - app
 
