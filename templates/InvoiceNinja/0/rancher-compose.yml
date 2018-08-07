@@ -71,7 +71,7 @@ catalog:
       label: "Data Directory"
       description: |
         The directory within the stack directory to store data
-      default: "InvoiceNinja/Personal"
+      default: "Personal/InvoiceNinja"
       required: true
       type: string
 

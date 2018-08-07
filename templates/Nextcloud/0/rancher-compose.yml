@@ -60,7 +60,7 @@ catalog:
       label: "Data Directory"
       description: |
         The directory within the stack directory to store data
-      default: "Nextcloud/Personal"
+      default: "Personal/Nextcloud"
       required: true
       type: string
 
