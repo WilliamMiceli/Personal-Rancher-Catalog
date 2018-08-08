@@ -28,7 +28,7 @@ catalog:
       label: "Port Number"
       description: |
         Port to access the web interface on
-      default: "8080"
+      default: "20100"
       required: true
       type: string
 
