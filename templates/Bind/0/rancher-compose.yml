@@ -37,23 +37,15 @@ catalog:
       label: "Webmin Port"
       description: |
         The port that the Webmin interface will be accessible on.
-      default: "10000"
+      default: "1100"
       required: false
       type: string
     
-    - variable: "STORAGE_BASE_DIR"
-      label: "Base Storage Directory"
-      description: |
-        The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/Bind"
-      required: true
-      type: string
-    
-    - variable: "DATA_DIR"
+    - variable: DATA_DIR
       label: "Data Directory"
       description: |
-        The path of where persistent data should be kept at.
-      default: "/Data"
+        The directory within the stack directory to store data
+      default: "Personal/Bind"
       required: true
       type: string
 
