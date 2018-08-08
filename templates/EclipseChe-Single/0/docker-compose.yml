@@ -6,17 +6,32 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      - CHE_HOST=${HOST_IP}
-      - CHE_PORT=${CHE_PORT}
+      CHE_HOST: ${HOST_IP}
+      CHE_PORT: ${CHE_PORT}
+      CHE_IN_VM: true
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
-      io.rancher.container.hostname_override: eclipse-che
+      {{- if (.Values.HOST_LABEL)}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
     ports:
       - "${CHE_PORT}:8080"
-    privileged: true
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${STORAGE_BASE_DIR}${DATA_DIR}:/data
-      - ${STORAGE_BASE_DIR}${REPO_DIR}:/repo
+      - Data:/data
+      - Repo:/repo
+
+volumes:
+  Data:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Data
+      onRemove: retain
+  Repo:
+    driver: rancher-nfs
+    driver_opts:
+      host: 10.0.10.21
+      export: /RancherCattleData/${DATA_DIR}/Repo
+      onRemove: retain

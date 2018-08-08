@@ -8,12 +8,12 @@ catalog:
   # upgrade_from:
   questions:
 
-    - variable: "LABEL_KEY_VALUE"
+    - variable: HOST_LABEL
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which Eclipse Che should be deployed
+        The Label Key/Value pair on the host which containers should be deployed
       default: "host.id=0000"
-      required: true
+      required: false
       type: string
 
     - variable: "HOST_IP"
@@ -32,26 +32,10 @@ catalog:
       required: true
       type: string
 
-    - variable: "STORAGE_BASE_DIR"
-      label: "Base Storage Directory"
-      description: |
-        The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/EclipseChe-SingleUser"
-      required: true
-      type: string
-
-    - variable: "DATA_DIR"
+    - variable: DATA_DIR
       label: "Data Directory"
       description: |
-        The directory Eclipse Che should use for it's persistent data storage
-      default: "/Data"
-      required: true
-      type: string
-
-    - variable: "REPO_DIR"
-      label: "Persistent Storage Volume"
-      description: |
-        The directory Eclipse Che should use for it's persistent repo storage
-      default: "/Repo"
+        The directory to store persistent data
+      default: "Personal/EclipseChe-Single"
       required: true
       type: string
