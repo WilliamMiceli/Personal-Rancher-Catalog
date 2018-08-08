@@ -129,9 +129,3 @@ volumes:
       host: 10.0.10.21
       export: /RancherCattleData/${DATA_DIR}/Storage
       onRemove: retain
-#  Web:
-#    driver: rancher-nfs
-#    driver_opts:
-#      host: 10.0.10.21
-#      export: /RancherCattleData/${DATA_DIR}/Web
-#      onRemove: retain
