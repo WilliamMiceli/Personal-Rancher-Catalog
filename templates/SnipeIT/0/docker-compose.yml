@@ -19,6 +19,7 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASS}
       APP_ENV:
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
@@ -43,6 +44,7 @@ services:
       MYSQL_USER: snipe_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}

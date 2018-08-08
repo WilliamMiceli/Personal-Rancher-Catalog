@@ -9,6 +9,7 @@ services:
       - CHE_HOST=${HOST_IP}
       - CHE_PORT=${CHE_PORT}
     labels:
+      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${LABEL_KEY_VALUE}
       io.rancher.container.hostname_override: eclipse-che
     ports:

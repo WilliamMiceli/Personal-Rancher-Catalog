@@ -28,6 +28,7 @@ turtl-api:
   stdin_open: true
   tty: true
   labels:
+    io.rancher.container.pull_image: always
     io.rancher.sidekicks: turtl-api-data
   volumes_from:
     - turtl-api-data

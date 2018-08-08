@@ -97,6 +97,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
