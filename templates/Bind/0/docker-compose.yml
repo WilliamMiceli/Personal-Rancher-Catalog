@@ -7,19 +7,19 @@ services:
       - 1.0.0.1
     environment:
       WEBMIN_ENABLED: ${WEBMIN_ENABLED}
-{{- if eq .Values.WEBMIN_ENABLED "true"}}
+      {{- if eq .Values.WEBMIN_ENABLED "true"}}
       ROOT_PASSWORD: ${WEBMIN_ROOT_PASS}
-{{- end}}
+      {{- end}}
     labels:
-{{- if (.Values.HOST_LABEL)}}
+      {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-{{- end}}
+      {{- end}}
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-{{- if eq .Values.WEBMIN_ENABLED "true"}}
+      {{- if eq .Values.WEBMIN_ENABLED "true"}}
       - "${WEBMIN_PORT}:10000"
-{{- end}}
+      {{- end}}
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${DATA_DIR}:/data
