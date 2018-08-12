@@ -7,7 +7,7 @@ services:
       - 1.0.0.1
     environment:
       APP_ENV: production
-      APP_DEBUG: false
+      APP_DEBUG: true
       APP_URL: ${URL}:${HOST_HTTP_PORT}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
