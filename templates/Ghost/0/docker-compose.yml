@@ -1,4 +1,6 @@
 ghost:
   image: ghost
+  labels:
+    io.rancher.container.pull_image: always
   ports:
     - ${public_port}:2368

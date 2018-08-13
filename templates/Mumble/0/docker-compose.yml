@@ -1,5 +1,7 @@
 mumble:
   image: ranchercb/murmur:latest
+  labels:
+    io.rancher.container.pull_image: always
   ports:
   - 64738:64738
   - 64738:64738/udp

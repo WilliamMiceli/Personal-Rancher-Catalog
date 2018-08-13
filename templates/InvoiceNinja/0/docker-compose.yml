@@ -23,6 +23,7 @@ services:
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
       {{- end}}
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
@@ -66,6 +67,7 @@ services:
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
       {{- end}}
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
@@ -85,6 +87,7 @@ services:
       MYSQL_USER: ninja
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}

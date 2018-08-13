@@ -11,6 +11,7 @@ services:
       ROOT_PASSWORD: ${WEBMIN_ROOT_PASS}
       {{- end}}
     labels:
+      io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}

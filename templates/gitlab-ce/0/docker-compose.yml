@@ -7,6 +7,7 @@ services:
         external_url ${EXTERNAL_URL}
     hostname: ${HOSTNAME}
     labels:
+      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_KEY}=${HOST_LABEL_VALUE}
     restart: always
     volumes:
