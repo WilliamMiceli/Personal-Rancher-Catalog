@@ -25,8 +25,8 @@ services:
       traefik.frontend.entryPoints: http
     links:
       - mysql
-#    networks:
-#      - public-proxy
+    networks:
+      - public-proxy
     ports:
       - "${WEB_PORT}:80"
     restart: on-failure
@@ -52,9 +52,9 @@ services:
     volumes:
       - Database:/var/lib/mysql
 
-#networks:
-#  public-proxy:
-#    external: true
+networks:
+  public-proxy:
+    external: true
 
 volumes:
   Application:
