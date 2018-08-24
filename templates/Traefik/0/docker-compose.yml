@@ -10,9 +10,8 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      - default
-      - public
+#    networks:
+#      - public-proxy
     ports:
       - "80:80"
       - "443:443"
@@ -23,5 +22,5 @@ services:
       - /RancherConfig/Personal/Traefik/traefik.toml:/traefik.toml:ro
 #      - /opt/traefik/acme.json:/acme.json
 
-networks:
-  public-proxy:
+#networks:
+#  public-proxy:
