@@ -16,10 +16,10 @@ catalog:
       required: false
       type: string
 
-    - variable: HOST_HTTP_PORT
+    - variable: WEB_PORT
       label: Port
       description: |
-        The HTTP port to access the web interface on.
+        The port to access the web interface on.
       default: "10100"
       required: true
       type: string
