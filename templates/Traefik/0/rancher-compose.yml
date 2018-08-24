@@ -16,3 +16,11 @@ catalog:
       default: "host.id=Proxy1"
       required: false
       type: string
+
+    - variable: DASHBOARD_PORT
+      label: Port
+      description: |
+        The port to access the dashboard interface on.
+      default: "1200"
+      required: true
+      type: string
