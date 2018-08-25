@@ -24,7 +24,7 @@ services:
       traefik.frontend.rule: Host:cloudtest.williammiceli.systems
       traefik.port: "80"
       traefik.backend: Nextcloud
-      traefik.frontend.entryPoints: http
+      traefik.frontend.entryPoints: http,https
     links:
       - mysql
     networks:
