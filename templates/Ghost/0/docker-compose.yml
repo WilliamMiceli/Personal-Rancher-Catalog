@@ -8,8 +8,8 @@ services:
       - 1.0.0.1
     environment:
       {{- if .Values.TRAEFIK_HOST}}
-      NODE_ENV: production
-      URL: https://${TRAEFIK_HOST}
+      node_env: production
+      url: https://${TRAEFIK_HOST}
       {{- end}}
     labels:
       io.rancher.container.pull_image: always
