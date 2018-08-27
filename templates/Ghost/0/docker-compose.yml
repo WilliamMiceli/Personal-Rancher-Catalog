@@ -8,5 +8,9 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: true
+      traefik.frontend.rule: Host:blog.williammiceli.me
+      traefik.port: "2368"
+      traefik.frontend.entryPoints: https
     ports:
       - "${WEB_PORT}:2368"
