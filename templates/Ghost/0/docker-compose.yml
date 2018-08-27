@@ -8,13 +8,17 @@ services:
       - 1.0.0.1
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
-      traefik.frontend.rule: Host:blog.williammiceli.me
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.port: "2368"
       traefik.frontend.entryPoints: https
+      {{- else}}
+      traefik.enable: false
+      {{- end}}
     networks:
       - public-proxy
     ports:
