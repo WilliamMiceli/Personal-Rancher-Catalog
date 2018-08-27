@@ -6,14 +6,31 @@ catalog:
   # minimum_rancher_version:
   # maximum_rancher_version:
   # upgrade_from:
-  uuid: ghost-0
+  # uuid: ghost-0
   questions:
 
-    - variable: public_port
-      description: "public port to access the blog"
-      label: "Public Port"
+    - variable: HOST_LABEL
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair on the host which the stack should be deployed.
+      default: "host.id=0000"
+      required: false
+      type: string
+
+    - variable: WEB_PORT
+      label: "Web Port"
+      description: |
+        The port to access the web interface on.
+      default: "10400"
       required: true
-      default: "80"
-      type: "int"
+      type: string
+
+    - variable: DATA_DIR
+      label: "Data Directory"
+      description: |
+        The persistent data directory
+      default: "Personal/Ghost"
+      required: true
+      type: string
 
 ghost:
