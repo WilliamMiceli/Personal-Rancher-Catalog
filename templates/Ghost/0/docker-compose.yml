@@ -12,5 +12,11 @@ services:
       traefik.frontend.rule: Host:blog.williammiceli.me
       traefik.port: "2368"
       traefik.frontend.entryPoints: https
+    networks:
+      - public-proxy
     ports:
       - "${WEB_PORT}:2368"
+
+networks:
+  public-proxy:
+    external: true
