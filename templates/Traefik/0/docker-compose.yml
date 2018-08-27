@@ -1,6 +1,6 @@
 version: '2'
-services:
 
+services:
   traefik:
     image: traefik:latest
     command: --api --docker
@@ -20,8 +20,8 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /RancherConfig/Personal/Traefik/traefik.toml:/traefik.toml
-      - /RancherConfig/Personal/Traefik/acme.json:/acme.json
+      - /RancherConfig/${DATA_DIR}/traefik.toml:/traefik.toml
+      - /RancherConfig/${DATA_DIR}/acme.json:/acme.json
 
 networks:
   public-proxy:

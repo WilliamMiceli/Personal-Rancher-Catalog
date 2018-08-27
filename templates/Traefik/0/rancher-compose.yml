@@ -24,3 +24,11 @@ catalog:
       default: "1200"
       required: true
       type: string
+
+    - variable: DATA_DIR
+      label: "Data Directory"
+      description: |
+        The persistent data directory
+      default: "Personal/Traefik"
+      required: true
+      type: string
