@@ -1,6 +1,12 @@
-ghost:
-  image: ghost
-  labels:
-    io.rancher.container.pull_image: always
-  ports:
-    - ${public_port}:2368
+version: '2'
+
+services:
+  ghost:
+    image: ghost:latest
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if (.Values.HOST_LABEL)}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    ports:
+      - "${WEB_PORT}:2368"
