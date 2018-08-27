@@ -1,7 +1,7 @@
 name: Ghost
 description: |
   Status: NOT READY
-# version:
+version: latest
 # category:
 maintainer: WilliamMiceli
 # license:
