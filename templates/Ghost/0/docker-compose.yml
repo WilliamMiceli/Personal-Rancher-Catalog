@@ -8,6 +8,7 @@ services:
       - 1.0.0.1
     environment:
       {{- if .Values.TRAEFIK_HOST}}
+      NODE_ENV: production
       URL: https://${TRAEFIK_HOST}
       {{- end}}
     labels:
