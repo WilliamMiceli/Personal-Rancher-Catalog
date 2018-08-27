@@ -9,7 +9,7 @@ catalog:
   # uuid: traefik-0
   questions:
 
-    - variable: "HOST_LABEL"
+    - variable: HOST_LABEL
       label: "Host Label Key/Value Pair"
       description: |
         The Key/Value pair on the host which the stack should be deployed.
@@ -28,7 +28,7 @@ catalog:
     - variable: DATA_DIR
       label: "Data Directory"
       description: |
-        The persistent data directory
+        The persistent data directory.
       default: "Personal/Traefik"
       required: true
       type: string
