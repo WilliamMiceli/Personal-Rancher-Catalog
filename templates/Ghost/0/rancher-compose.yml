@@ -9,7 +9,7 @@ catalog:
   # uuid: ghost-0
   questions:
 
-    - variable: HOST_LABEL
+    - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
         The Key/Value pair on the host which the stack should be deployed.
@@ -17,7 +17,7 @@ catalog:
       required: false
       type: string
 
-    - variable: TRAEFIK_HOST
+    - variable: "TRAEFIK_HOST"
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
@@ -26,7 +26,7 @@ catalog:
       required: false
       type: string
 
-    - variable: WEB_PORT
+    - variable: "WEB_PORT"
       label: "Web Port"
       description: |
         The port to access the web interface on.
@@ -34,7 +34,7 @@ catalog:
       required: true
       type: string
 
-    - variable: DATA_DIR
+    - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
         The persistent data directory
