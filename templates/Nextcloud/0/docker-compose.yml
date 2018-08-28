@@ -15,7 +15,7 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       {{- if .Values.TRAEFIK_HOST}}
@@ -48,7 +48,7 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     restart: on-failure
