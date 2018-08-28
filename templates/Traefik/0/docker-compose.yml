@@ -3,7 +3,7 @@ version: '2'
 services:
   traefik:
     image: traefik:latest
-    command: --api --docker
+    command: --api #--docker
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: true
