@@ -1,6 +1,6 @@
 name: Traefik
 description: |
-  Status: NOT READY
+  Status: Functional
 version: latest
 category: Networking
 maintainer: WilliamMiceli
