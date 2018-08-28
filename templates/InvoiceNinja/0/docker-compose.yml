@@ -1,22 +1,22 @@
 version: '2'
 services:
   app:
-    image: invoiceninja/invoiceninja
+    image: invoiceninja/invoiceninja:latest
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: ${URL}:${HOST_HTTP_PORT}
+      APP_URL: https://${TRAEFIK_HOST}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
-      DB_HOST: ninja-mysql
+      DB_HOST: mysql
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ${DB_USER_PASS}
-      {{- if (.Values.GMAPS_KEY)}}
+      {{- if (.Values.MOBILE_APP_SECRET)}}
       API_SECRET: ${MOBILE_APP_SECRET}
       {{- end}}
       {{- if (.Values.GMAPS_KEY)}}
@@ -29,7 +29,7 @@ services:
       {{- end}}
       io.rancher.sidekicks: cron, web
     links:
-      - db:ninja-mysql
+      - mysql
     restart: on-failure
     volumes:
       - Logo:/var/www/app/public/logo
@@ -52,31 +52,31 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: ${URL}:${HOST_HTTP_PORT}
+      APP_URL: https://${TRAEFIK_HOST}
       APP_CIPHER: AES-256-CBC
       APP_KEY: ${APP_KEY}
       DB_STRICT: false
-      DB_HOST: ninja-mysql
+      DB_HOST: mysql
       DB_DATABASE: ninja_db
       DB_USERNAME: ninja
       DB_PASSWORD: ${DB_USER_PASS}
-      {{- if (.Values.GMAPS_KEY)}}
+      {{- if .Values.MOBILE_APP_SECRET}}
       API_SECRET: ${MOBILE_APP_SECRET}
       {{- end}}
-      {{- if (.Values.GMAPS_KEY)}}
+      {{- if .Values.GMAPS_KEY}}
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
       {{- end}}
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     links:
-      - db:ninja-mysql
+      - mysql
     restart: on-failure
     volumes_from:
       - app
-  db:
+  mysql:
     image: mysql:5
     dns:
       - 1.1.1.1
@@ -88,7 +88,7 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     restart: on-failure
@@ -101,18 +101,32 @@ services:
       - 1.0.0.1
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      {{- if .Values.TRAEFIK_HOST}}
+      traefik.enable: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      traefik.frontend.entryPoints: https
+      {{- else}}
+      traefik.enable: false
       {{- end}}
     links:
       - app
+    networks:
+      - public-proxy
     ports:
-      - "${HOST_HTTP_PORT}:80"
+      - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
       - /RancherConfig/${DATA_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
+
+networks:
+  public-proxy:
+    external: true
 
 volumes:
   Database:
