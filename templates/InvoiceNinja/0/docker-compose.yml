@@ -22,14 +22,26 @@ services:
       {{- if (.Values.GMAPS_KEY)}}
       GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
       {{- end}}
+    expose:
+      - "80"
     labels:
       io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       io.rancher.sidekicks: cron, web
+      {{- if .Values.TRAEFIK_HOST}}
+      traefik.enable: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      traefik.frontend.entryPoints: https
+      {{- else}}
+      traefik.enable: false
+      {{- end}}
     links:
       - mysql
+    networks:
+      - public-proxy
     restart: on-failure
     volumes:
       - Logo:/var/www/app/public/logo
@@ -103,14 +115,6 @@ services:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-      {{- end}}
-      {{- if .Values.TRAEFIK_HOST}}
-      traefik.enable: true
-      traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
-      traefik.frontend.entryPoints: https
-      {{- else}}
-      traefik.enable: false
       {{- end}}
     links:
       - app
