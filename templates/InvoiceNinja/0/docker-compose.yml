@@ -6,6 +6,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
+      TZ: America/New_York
       APP_ENV: production
       APP_DEBUG: false
       APP_URL: https://${TRAEFIK_HOST}
@@ -50,6 +51,7 @@ services:
       done
       EOF'
     environment:
+      TZ: America/New_York
       APP_ENV: production
       APP_DEBUG: false
       APP_URL: https://${TRAEFIK_HOST}
@@ -82,6 +84,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
+      TZ: America/New_York
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
       MYSQL_USER: ninja
@@ -99,6 +102,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+    environment:
+      TZ: America/New_York
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
