@@ -35,7 +35,7 @@ services:
       - Logo:/var/www/app/public/logo
       - Storage:/var/www/app/storage
   cron:
-    image: invoiceninja/invoiceninja
+    image: invoiceninja/invoiceninja:latest
     dns:
       - 1.1.1.1
       - 1.0.0.1
