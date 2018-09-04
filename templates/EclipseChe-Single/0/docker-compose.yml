@@ -7,7 +7,7 @@ services:
       - 1.0.0.1
     environment:
       CHE_HOST: ${HOST_IP}
-      CHE_PORT: ${CHE_PORT}
+      # CHE_PORT: ${CHE_PORT}
       # CHE_IN_VM: true
     labels:
       io.rancher.container.pull_image: always
