@@ -6,7 +6,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      CHE_DOCKER_IP_EXTERNAL: 127.0.0.1
+      # CHE_DOCKER_IP_EXTERNAL: 127.0.0.1
       CHE_HOST: ${HOST_IP}
       CHE_IN_VM: true
     labels:
