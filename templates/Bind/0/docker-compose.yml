@@ -24,8 +24,6 @@ services:
     restart: on-failure
     volumes:
       - Data:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
 
 volumes:
   Data:

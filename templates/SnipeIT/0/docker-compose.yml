@@ -32,8 +32,6 @@ services:
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${APP_DIR}:/var/lib/snipeit
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
   mysql:
     image: mysql:5
     dns:
@@ -54,8 +52,6 @@ services:
     restart: on-failure
     volumes:
       - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
 
 networks:
   snipe-net:

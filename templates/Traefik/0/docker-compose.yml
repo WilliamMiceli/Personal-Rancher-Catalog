@@ -25,8 +25,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherConfig/${DATA_DIR}/traefik.toml:/traefik.toml
       - /RancherConfig/${DATA_DIR}/acme.json:/acme.json
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
 
 networks:
   public-proxy:
