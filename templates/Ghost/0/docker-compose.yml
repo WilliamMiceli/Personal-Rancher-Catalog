@@ -31,6 +31,8 @@ services:
     restart: on-failure
     volumes:
       - Content:/var/lib/ghost/content
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
 
 networks:
   public-proxy:

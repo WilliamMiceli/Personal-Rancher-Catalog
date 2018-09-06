@@ -34,6 +34,8 @@ services:
     volumes:
       - Logo:/var/www/app/public/logo
       - Storage:/var/www/app/storage
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
   cron:
     image: invoiceninja/invoiceninja:latest
     dns:
@@ -94,6 +96,8 @@ services:
     restart: on-failure
     volumes:
       - Database:/var/lib/mysql
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
   web:
     image: nginx
     command: [nginx-debug, '-g', 'daemon off;']
