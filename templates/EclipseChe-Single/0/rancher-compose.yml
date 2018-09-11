@@ -16,13 +16,22 @@ catalog:
       required: false
       type: string
 
-    - variable: "HOST_IP"
-      label: "Host IP Address"
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
       description: |
-        IP of the host system
-      default: "0.0.0.0"
-      required: true
+        The host that Traefik will use to provide public access.
+        Leaving this empty will disable Traefik on this stack.
+      default: "subdomain.domain.tld"
+      required: false
       type: string
+
+#    - variable: "HOST_IP"
+#      label: "Host IP Address"
+#      description: |
+#        IP of the host system
+#      default: "0.0.0.0"
+#      required: true
+#      type: string
 
     - variable: "CHE_PORT"
       label: "Port Number"
@@ -30,6 +39,15 @@ catalog:
         Port to access the web interface on
       default: "20100"
       required: true
+      type: string
+
+    - variable: "TRAEFIK_BASIC_AUTH"
+      label: "Basic Authentication Expression"
+      description: |
+        Sets basic authentication for that frontend in CSV format "User:Hash,User:Hash".
+        Leaving this empty will disable Traefik's Basic Authentication functionality
+      default: ""
+      required: false
       type: string
 
     - variable: DATA_DIR
