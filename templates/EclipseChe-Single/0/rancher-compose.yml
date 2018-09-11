@@ -46,7 +46,7 @@ catalog:
       description: |
         Sets basic authentication for that frontend in CSV format "User:Hash,User:Hash".
         Leaving this empty will disable Traefik's Basic Authentication functionality
-      default: ""
+      #default: ""
       required: false
       type: string
 
