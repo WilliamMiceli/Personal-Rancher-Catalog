@@ -6,7 +6,6 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      CHE_DNS_RESOLVERS: 1.1.1.1,1.0.0.1
       CHE_DOCKER_IP_EXTERNAL: ${TRAEFIK_HOST}
       CHE_HOST: ${TRAEFIK_HOST}
       CHE_IN_VM: true
