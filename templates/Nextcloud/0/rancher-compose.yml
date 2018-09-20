@@ -12,7 +12,7 @@ catalog:
       label: "Host Label Key/Value Pair"
       description: |
         The Label Key/Value pair on the host which containers should be deployed
-      default: "host.id=0001"
+      default: "host.id=Host1"
       required: false
       type: string
 

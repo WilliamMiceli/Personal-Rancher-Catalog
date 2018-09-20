@@ -13,7 +13,7 @@ catalog:
       label: "Host Label Key/Value Pair"
       description: |
         The Key/Value pair on the host which the stack should be deployed.
-      default: "host.id=0000"
+      default: "host.id=Host1"
       required: false
       type: string
 
