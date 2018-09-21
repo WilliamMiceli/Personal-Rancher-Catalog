@@ -1,8 +1,0 @@
-name: Bind
-description: |
-  BIND DNS server with Webmin admin interface
-version: latest
-category: Networking
-maintainer: WilliamMiceli
-# license:
-# projectURL:
