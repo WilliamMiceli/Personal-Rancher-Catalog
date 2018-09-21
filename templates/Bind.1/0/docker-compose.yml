@@ -1,0 +1,26 @@
+version: '2'
+services:
+  bind:
+    image: sameersbn/bind
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      WEBMIN_ENABLED: ${WEBMIN_ENABLED}
+      {{- if eq .Values.WEBMIN_ENABLED "true"}}
+      ROOT_PASSWORD: ${WEBMIN_ROOT_PASS}
+      {{- end}}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if (.Values.HOST_LABEL)}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      {{- if eq .Values.WEBMIN_ENABLED "true"}}
+      - "${WEBMIN_PORT}:10000"
+      {{- end}}
+    restart: on-failure
+    volumes:
+      - /RancherCattleData/${DATA_DIR}/Data:/data

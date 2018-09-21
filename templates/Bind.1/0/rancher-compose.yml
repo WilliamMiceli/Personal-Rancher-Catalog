@@ -1,0 +1,61 @@
+version: '2'
+catalog:
+  name: Bind
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair on the host which Bind should be deployed.
+      default: "host.id=Controller"
+      required: false
+      type: string
+
+    - variable: "WEBMIN_ENABLED"
+      label: "Enable Webmin"
+      description: |
+        Enable or Disable Webmin.
+      default: true
+      required: true
+      type: boolean
+
+    - variable: "WEBMIN_ROOT_PASS"
+      label: "Webmin Password"
+      description: |
+        The password for the Webmin "root" user. If unset, it will be "password".
+        If Webmin is disabled, this will not have any effect.
+      # default:
+      required: false
+      type: password
+
+    - variable: "WEBMIN_PORT"
+      label: "Webmin Port"
+      description: |
+        The port that the Webmin interface will be accessible on.
+      default: "1100"
+      required: false
+      type: string
+    
+    - variable: DATA_DIR
+      label: "Data Directory"
+      description: |
+        The directory within the stack directory to store data
+      default: "Personal/Bind"
+      required: true
+      type: string
+
+bind:
+  scale: 1
+  health_check:
+    port: 53
+    interval: 2000
+    initializing_timeout: 20000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000
