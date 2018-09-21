@@ -32,8 +32,8 @@ services:
       - mysql
     restart: on-failure
     volumes:
-      - Logo:/var/www/app/public/logo
-      - Storage:/var/www/app/storage
+      - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
+      - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
   cron:
     image: invoiceninja/invoiceninja:latest
     dns:
@@ -93,7 +93,7 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      - Database:/var/lib/mysql
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   web:
     image: nginx
     command: [nginx-debug, '-g', 'daemon off;']
@@ -129,23 +129,3 @@ services:
 networks:
   public-proxy:
     external: true
-
-volumes:
-  Database:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Database
-      onRemove: retain
-  Logo:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Logo
-      onRemove: retain
-  Storage:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Storage
-      onRemove: retain

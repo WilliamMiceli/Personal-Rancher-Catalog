@@ -30,16 +30,8 @@ services:
       - "${WEB_PORT}:2368"
     restart: on-failure
     volumes:
-      - Content:/var/lib/ghost/content
+      - /RancherCattleData/${DATA_DIR}/Content:/var/lib/ghost/content
 
 networks:
   public-proxy:
     external: true
-
-volumes:
-  Content:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Content
-      onRemove: retain

@@ -36,8 +36,8 @@ services:
       - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - Application:/var/www/html
-      - UserData:/var/www/html/data
+      - /RancherCattleData/${DATA_DIR}/Application:/var/www/html
+      - /RancherCattleData/${DATA_DIR}/UserData:/var/www/html/data
   mysql:
     image: mysql:5
     dns:
@@ -55,28 +55,8 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      - Database:/var/lib/mysql
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
 
 networks:
   public-proxy:
     external: true
-
-volumes:
-  Application:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Application
-      onRemove: retain
-  Database:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Database
-      onRemove: retain
-  UserData:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/UserData
-      onRemove: retain

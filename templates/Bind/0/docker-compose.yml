@@ -23,12 +23,4 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      - Data:/data
-
-volumes:
-  Data:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Data
-      onRemove: retain
+      - /RancherCattleData/${DATA_DIR}/Data:/data

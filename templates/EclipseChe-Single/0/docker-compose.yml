@@ -33,19 +33,5 @@ services:
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - Data:/data
-      - Repo:/repo
-
-volumes:
-  Data:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Data
-      onRemove: retain
-  Repo:
-    driver: rancher-nfs
-    driver_opts:
-      host: 10.0.10.21
-      export: /RancherCattleData/${DATA_DIR}/Repo
-      onRemove: retain
+      - /RancherCattleData/${DATA_DIR}/Data:/data
+      - /RancherCattleData/${DATA_DIR}/Repo:/repo
