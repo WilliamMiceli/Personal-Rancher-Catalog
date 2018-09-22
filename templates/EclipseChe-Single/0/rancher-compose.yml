@@ -25,13 +25,13 @@ catalog:
       required: false
       type: string
 
-#    - variable: "HOST_IP"
-#      label: "Host IP Address"
-#      description: |
-#        IP of the host system
-#      default: "0.0.0.0"
-#      required: true
-#      type: string
+    - variable: "EXTERNAL_IP"
+      label: "External IP Address"
+      description: |
+        The IP address that the container will be accessible through for the websocket.
+      #default: ""
+      required: false
+      type: string
 
     - variable: "CHE_PORT"
       label: "Port Number"
@@ -44,7 +44,7 @@ catalog:
     - variable: "TRAEFIK_BASIC_AUTH"
       label: "Basic Authentication Expression"
       description: |
-        Sets basic authentication for that frontend in CSV format "User:Hash,User:Hash".
+        Sets basic authentication for that frontend in CSV format "User:MD5_Hash,User:MD5_Hash".
         Leaving this empty will disable Traefik's Basic Authentication functionality
       #default: ""
       required: false
