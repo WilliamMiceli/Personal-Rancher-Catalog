@@ -25,6 +25,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattleConfig/${DATA_DIR}/traefik.toml:/traefik.toml
       - /RancherCattleConfig/${DATA_DIR}/acme:/etc/traefik/acme
+      - /RancherCattleConfig/${DATA_DIR}/logs:/external/logs
 
 networks:
   public-proxy:
