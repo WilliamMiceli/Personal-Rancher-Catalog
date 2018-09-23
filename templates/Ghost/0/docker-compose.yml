@@ -21,6 +21,10 @@ services:
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.port: "2368"
       traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
       traefik.frontend.redirect.entryPoint: https
       traefik.frontend.redirect.permanent: true
       {{- else}}

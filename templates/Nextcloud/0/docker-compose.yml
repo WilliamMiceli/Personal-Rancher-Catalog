@@ -24,6 +24,7 @@ services:
       traefik.port: "80"
       traefik.frontend.entryPoints: http,https
       traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
       traefik.frontend.redirect.entryPoint: https
