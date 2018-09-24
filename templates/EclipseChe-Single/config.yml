@@ -1,7 +1,7 @@
 name: Eclipse Che (Single-User)
 description: |
   Status: NOT READY
-# version:
+version: latest
 # category:
 maintainer: WilliamMiceli
 # license:
