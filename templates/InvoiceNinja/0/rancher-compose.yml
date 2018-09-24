@@ -33,43 +33,6 @@ catalog:
       required: true
       type: string
 
-    - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
-      description: |
-        A secure password to be used by the "root" MySQL user.
-      #default:
-      required: true
-      type: password
-
-    - variable: "DB_USER_PASS"
-      label: "MySQL User Password"
-      description: |
-        A secure password to be used by the "ninja" MySQL user.
-      #default:
-      required: true
-      type: password
-
-    - variable: "APP_KEY"
-      label: "Encryption Key"
-      description: |
-        A random 32-Character string which will be used for encryption.
-      required: true
-      type: password
-
-    - variable: "MOBILE_APP_SECRET"
-      label: "Mobile App Secret"
-      description: |
-        A random alphanumeric string required for allowing mobile app access.
-      required: false
-      type: password
- 
-    - variable: "GMAPS_KEY"
-      label: "Google Maps API Key"
-      description: |
-        Allows for the use of showing relavent location data for the "Javascript, Geocoding and Embed APIs".
-      required: false
-      type: password
-
     - variable: DATA_DIR
       label: "Data Directory"
       description: |
