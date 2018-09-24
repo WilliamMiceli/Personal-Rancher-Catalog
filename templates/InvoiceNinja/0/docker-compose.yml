@@ -5,23 +5,6 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    environment:
-      APP_ENV: production
-      APP_DEBUG: false
-      APP_URL: https://${TRAEFIK_HOST}
-      APP_CIPHER: AES-256-CBC
-      APP_KEY: ${APP_KEY}
-      DB_STRICT: false
-      DB_HOST: mysql
-      DB_DATABASE: ninja_db
-      DB_USERNAME: ninja
-      DB_PASSWORD: ${DB_USER_PASS}
-      {{- if (.Values.MOBILE_APP_SECRET)}}
-      API_SECRET: ${MOBILE_APP_SECRET}
-      {{- end}}
-      {{- if (.Values.GMAPS_KEY)}}
-      GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
-      {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
@@ -50,23 +33,6 @@ services:
         sleep 1h
       done
       EOF'
-    environment:
-      APP_ENV: production
-      APP_DEBUG: false
-      APP_URL: https://${TRAEFIK_HOST}
-      APP_CIPHER: AES-256-CBC
-      APP_KEY: ${APP_KEY}
-      DB_STRICT: false
-      DB_HOST: mysql
-      DB_DATABASE: ninja_db
-      DB_USERNAME: ninja
-      DB_PASSWORD: ${DB_USER_PASS}
-      {{- if .Values.MOBILE_APP_SECRET}}
-      API_SECRET: ${MOBILE_APP_SECRET}
-      {{- end}}
-      {{- if .Values.GMAPS_KEY}}
-      GOOGLE_MAPS_API_KEY: ${GMAPS_KEY}
-      {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
