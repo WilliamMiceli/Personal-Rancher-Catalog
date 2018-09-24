@@ -7,7 +7,7 @@ services:
       - 1.0.0.1
     environment:
       CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
-      CHE_HOST: ${TRAEFIK_HOST}
+      CHE_HOST: ${EXTERNAL_IP}
       CHE_IN_VM: true
     labels:
       io.rancher.container.pull_image: always
