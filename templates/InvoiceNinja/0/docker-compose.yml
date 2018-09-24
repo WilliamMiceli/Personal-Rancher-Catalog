@@ -32,6 +32,7 @@ services:
       - mysql
     restart: on-failure
     volumes:
+      - /RancherCattleConfig/${DATA_DIR}/.env:/var/www/app/.env
       - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
       - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
   cron:
