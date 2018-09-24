@@ -9,6 +9,8 @@ services:
       CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
       CHE_HOST: ${EXTERNAL_IP}
       CHE_IN_VM: true
+    expose:
+      - "80"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
