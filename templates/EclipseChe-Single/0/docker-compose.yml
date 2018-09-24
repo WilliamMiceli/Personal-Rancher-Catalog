@@ -9,8 +9,6 @@ services:
       CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
       CHE_HOST: ${EXTERNAL_IP}
       CHE_IN_VM: true
-    expose:
-      - "80"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -18,7 +16,7 @@ services:
       {{- end}}
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
-      traefik.port: "80"
+      traefik.port: "8080"
       {{- if .Values.TRAEFIK_BASIC_AUTH}}
       traefik.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
       {{- end}}
