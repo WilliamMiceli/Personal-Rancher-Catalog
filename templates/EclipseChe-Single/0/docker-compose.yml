@@ -22,8 +22,6 @@ services:
       {{- end}}
       traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.entryPoints: http,https
-      traefik.frontend.redirect.entryPoint: https
-      traefik.frontend.redirect.permanent: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       {{- else}}
       traefik.enable: false
