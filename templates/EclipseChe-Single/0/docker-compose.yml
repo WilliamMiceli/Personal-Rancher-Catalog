@@ -21,7 +21,6 @@ services:
       {{- if .Values.TRAEFIK_BASIC_AUTH}}
       traefik.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
       {{- end}}
-      traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.entryPoints: http,https
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       {{- else}}
