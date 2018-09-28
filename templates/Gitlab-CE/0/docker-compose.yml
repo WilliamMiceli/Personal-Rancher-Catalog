@@ -17,7 +17,7 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
+      traefik.port: "443"
       traefik.frontend.entryPoints: http,https
       traefik.frontend.headers.forceSTSHeader: true
       traefik.frontend.headers.SSLRedirect: true
