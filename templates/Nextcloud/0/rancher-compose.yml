@@ -65,6 +65,14 @@ catalog:
       required: true
       type: password
 
+    - variable: "REDIS"
+      label: "Enable Redis container"
+      description: |
+        Add a Redis container for memory caching. Must be setup manually.
+      default: true
+      required: true
+      type: boolean
+
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
