@@ -74,8 +74,6 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     restart: on-failure
-    volumes:
-      - /RancherCattleData/${DATA_DIR}/Redis:/data
   {{- end}}
 
 networks:
