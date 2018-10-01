@@ -7,7 +7,7 @@ services:
       - 1.0.0.1
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://${TRAEFIK_HOST}'
+        external_url 'https://${TRAEFIK_HOST}:${WEB_PORT}'
     hostname: ${TRAEFIK_HOST}
     labels:
       io.rancher.container.pull_image: always
