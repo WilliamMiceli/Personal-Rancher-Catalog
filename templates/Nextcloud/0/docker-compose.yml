@@ -27,8 +27,6 @@ services:
       traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
-      traefik.frontend.redirect.entryPoint: https
-      traefik.frontend.redirect.permanent: true
       {{- else}}
       traefik.enable: false
       {{- end}}
