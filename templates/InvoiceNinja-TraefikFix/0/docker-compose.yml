@@ -57,6 +57,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
     restart: on-failure
     volumes:
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
