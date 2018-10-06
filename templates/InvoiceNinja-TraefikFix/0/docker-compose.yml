@@ -75,8 +75,8 @@ services:
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.browserXSSFilter: false
       traefik.frontend.headers.forceSTSHeader: false
+      traefik.frontend.headers.SSLProxyHeaders: "X-Forwarded-Proto:https"
       traefik.frontend.headers.SSLRedirect: false
       traefik.frontend.passHostHeader: true
       traefik.port: "80"
