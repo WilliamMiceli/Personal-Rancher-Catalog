@@ -10,6 +10,7 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      io.rancher.sidekicks: cron
     links:
       - mysql
     restart: on-failure
@@ -40,10 +41,8 @@ services:
     links:
       - mysql
     restart: on-failure
-    volumes:
-      - /RancherCattleConfig/${DATA_DIR}/.env:/var/www/app/.env
-      - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
-      - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
+    volumes_from:
+      - app
   mysql:
     image: mysql:5
     dns:
