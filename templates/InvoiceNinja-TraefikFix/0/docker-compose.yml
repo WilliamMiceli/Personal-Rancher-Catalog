@@ -63,7 +63,6 @@ services:
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   web:
     image: nginx
-    command: [nginx-debug, '-g', 'daemon off;']
     dns:
       - 1.1.1.1
       - 1.0.0.1
