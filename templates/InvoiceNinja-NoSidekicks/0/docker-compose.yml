@@ -10,7 +10,6 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      io.rancher.sidekicks: cron
     links:
       - mysql
     restart: on-failure
@@ -30,7 +29,7 @@ services:
       while /bin/true; do
         ./artisan ninja:send-invoices
         ./artisan ninja:send-reminders
-        sleep 1h
+        sleep 1d
       done
       EOF'
     labels:
@@ -82,6 +81,7 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
+      io.rancher.sidekicks: app, cron
     links:
       - app
     networks:
@@ -90,10 +90,9 @@ services:
       - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - /RancherCattleConfig/${DATA_DIR}/.env:/var/www/app/.env
-      - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
-      - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
       - /RancherCattleConfig/${DATA_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - app
 
 networks:
   public-proxy:
