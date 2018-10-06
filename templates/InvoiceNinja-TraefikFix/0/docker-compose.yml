@@ -74,9 +74,9 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.frontend.auth.forward.trustForwardHeader: true
+      traefik.frontend.auth.forward.trustForwardHeader: false
       traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.forceSTSHeader: false
       traefik.frontend.headers.SSLRedirect: false
       traefik.frontend.passHostHeader: true
       traefik.port: "80"
