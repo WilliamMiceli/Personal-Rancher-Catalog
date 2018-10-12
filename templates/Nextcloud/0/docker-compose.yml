@@ -21,12 +21,12 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
       traefik.frontend.entryPoints: http,https
       traefik.frontend.headers.forceSTSHeader: true
       traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
+      traefik.port: "80"
       {{- else}}
       traefik.enable: false
       {{- end}}
