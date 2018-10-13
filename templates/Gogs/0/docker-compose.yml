@@ -18,10 +18,10 @@ services:
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.frontend.entryPoints: http,https
-#      traefik.frontend.headers.forceSTSHeader: true
-#      traefik.frontend.headers.SSLRedirect: true
-#      traefik.frontend.headers.STSPreload: true
-#      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
       traefik.port: "3000"
       {{- else}}
       traefik.enable: false
