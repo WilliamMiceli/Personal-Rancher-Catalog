@@ -10,6 +10,7 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      io.rancher.sidekicks: cron
     links:
       - mysql
     restart: on-failure
@@ -83,7 +84,6 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
-      io.rancher.sidekicks: app, cron
     links:
       - app
     networks:
