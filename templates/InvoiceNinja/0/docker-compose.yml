@@ -1,6 +1,6 @@
 version: '2'
 services:
-  app:
+  invoiceninja:
     image: invoiceninja/invoiceninja:latest
     dns:
       - 1.1.1.1
@@ -41,7 +41,7 @@ services:
       - mysql
     restart: on-failure
     volumes_from:
-      - app
+      - invoiceninja
   mysql:
     image: mysql:5
     dns:
@@ -61,7 +61,7 @@ services:
     restart: on-failure
     volumes:
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
-  web:
+  nginx:
     image: nginx
     dns:
       - 1.1.1.1
@@ -83,7 +83,7 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
-      io.rancher.sidekicks: app,cron
+      io.rancher.sidekicks: invoiceninja,cron
     links:
       - app
     networks:
@@ -94,7 +94,7 @@ services:
     volumes:
       - /RancherCattleConfig/${DATA_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
-      - app
+      - invoiceninja
 
 networks:
   public-proxy:
