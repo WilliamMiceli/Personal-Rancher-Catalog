@@ -10,7 +10,6 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      io.rancher.sidekicks: cron
     links:
       - mysql
     restart: on-failure
@@ -84,6 +83,7 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
+      io.rancher.sidekicks: app,cron
     links:
       - app
     networks:
@@ -93,8 +93,8 @@ services:
     restart: on-failure
     volumes:
       - /RancherCattleConfig/${DATA_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
-      - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
+    volumes_from:
+      - app
 
 networks:
   public-proxy:
