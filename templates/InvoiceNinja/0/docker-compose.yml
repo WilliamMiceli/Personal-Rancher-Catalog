@@ -10,7 +10,6 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      io.rancher.sidekicks: cron, web
     links:
       - mysql
     restart: on-failure
@@ -58,12 +57,12 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
     restart: on-failure
     volumes:
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   web:
     image: nginx
-    command: [nginx-debug, '-g', 'daemon off;']
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -75,13 +74,16 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
       traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
       traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.passHostHeader: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.port: "80"
       {{- else}}
       traefik.enable: false
       {{- end}}
+      io.rancher.sidekicks: app,cron
     links:
       - app
     networks:

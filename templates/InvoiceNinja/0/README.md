@@ -21,3 +21,5 @@ You may need to "chmod -R 777 storage" in the "App" container.
 Google Maps:
 Get an API Key [Here](https://developers.google.com/maps/documentation/javascript/get-api-key) first.
 Then add GOOGLE_MAPS_API_KEY=<your key> in your .env file.
+
+If using without HTTPS (like using the direct IP instead of through Traefik), please take out the line: "fastcgi_param HTTPS 1;" from your nginx.conf

@@ -1,8 +1,0 @@
-name: Invoice Ninja (Traefik Fix)
-description: |
-  Status: Functional
-version: latest
-category: Invoicing
-maintainer: WilliamMiceli
-# license:
-projectURL: https://hub.docker.com/r/invoiceninja/invoiceninja/
