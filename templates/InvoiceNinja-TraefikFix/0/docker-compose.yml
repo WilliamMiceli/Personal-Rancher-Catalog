@@ -93,8 +93,8 @@ services:
     restart: on-failure
     volumes:
       - /RancherCattleConfig/${DATA_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
-    volumes_from:
-      - app
+      - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
+      - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
 
 networks:
   public-proxy:
