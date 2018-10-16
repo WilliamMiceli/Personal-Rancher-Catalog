@@ -85,7 +85,7 @@ services:
       {{- end}}
       io.rancher.sidekicks: invoiceninja,cron
     links:
-      - app
+      - invoiceninja
     networks:
       - public-proxy
     ports:
