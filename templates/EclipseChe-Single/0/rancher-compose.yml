@@ -25,22 +25,6 @@ catalog:
       required: false
       type: string
 
-    - variable: "EXTERNAL_IP"
-      label: "External IP Address"
-      description: |
-        The IP address that the container will be accessible through for the websocket.
-      #default: ""
-      required: false
-      type: string
-
-    - variable: "CHE_PORT"
-      label: "Port Number"
-      description: |
-        Port to access the web interface on
-      default: "20100"
-      required: true
-      type: string
-
     - variable: "TRAEFIK_BASIC_AUTH"
       label: "Basic Authentication Expression"
       description: |

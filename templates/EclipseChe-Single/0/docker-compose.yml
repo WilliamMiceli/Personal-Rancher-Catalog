@@ -6,10 +6,9 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
-      CHE_HOST: ${TRAEFIK_HOST}
       CHE_IN_VM: true
-      CHE_SINGLE_PORT: true
+    expose:
+      - "8080"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -26,8 +25,6 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
-    ports:
-      - "${CHE_PORT}:8080"
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
