@@ -25,6 +25,20 @@ catalog:
       required: false
       type: string
 
+    - variable: "EXTERNAL_IP"
+      label: "EXTERNAL_IP"
+      #description:
+      #default: ""
+      required: false
+      type: string
+
+    - variable: "WILDCARD_DNS"
+      label: "WILDCARD_DNS"
+      #description:
+      #default: ""
+      required: false
+      type: string
+
     - variable: "TRAEFIK_BASIC_AUTH"
       label: "Basic Authentication Expression"
       description: |
