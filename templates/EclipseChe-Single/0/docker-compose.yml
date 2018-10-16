@@ -21,7 +21,8 @@ services:
       traefik.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
       {{- end}}
       traefik.frontend.entryPoints: http,https
-      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.frontend.rule: Host:${TRAEFIK_HOST},Host:*.${TRAEFIK_HOST}
+      traefik.frontend.passHostHeader: true
       {{- else}}
       traefik.enable: false
       {{- end}}
