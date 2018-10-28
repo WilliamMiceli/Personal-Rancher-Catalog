@@ -1,3 +1,3 @@
 # WilliamMiceli's Personal Rancher Catalog
 
-I like working on things that allow me to be more lazy.
+My personal rancher catalog to make my own life just a little bit easier.
