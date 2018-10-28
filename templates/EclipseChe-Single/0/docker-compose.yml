@@ -27,7 +27,7 @@ services:
       {{- end}}
       traefik.frontend.entryPoints: http,https
       traefik.frontend.rule: ${TRAEFIK_HOST}
-      traefik.frontend.passHostHeader: false
+      traefik.frontend.passHostHeader: true
       {{- else}}
       traefik.enable: false
       {{- end}}
