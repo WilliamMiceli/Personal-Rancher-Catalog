@@ -16,12 +16,19 @@ catalog:
       required: false
       type: string
 
+    - variable: "CHE_HOST"
+      label: "CHE_HOST"
+      description: |
+      default: "subdomain.domain.tld"
+      required: false
+      type: string
+
     - variable: "TRAEFIK_HOST"
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
         Leaving this empty will disable Traefik on this stack.
-      default: "subdomain.domain.tld"
+      default: "Host:subdomain.domain.tld,HostRegexp:.*.subdomain.domain.tld"
       required: false
       type: string
 
