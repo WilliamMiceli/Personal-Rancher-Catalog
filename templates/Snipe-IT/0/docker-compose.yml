@@ -1,7 +1,7 @@
 version: '2'
 services:
 
-  snipe:
+  snipe-it:
     image: snipe/snipe-it:latest
     depends_on:
       - mysql
