@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: Eclipse Che (Single-User)
+  name: Eclipse Che
   version: latest
   # description:
   # minimum_rancher_version:

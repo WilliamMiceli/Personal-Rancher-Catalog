@@ -1,5 +1,6 @@
-name: Eclipse Che (Single-User)
+name: Eclipse Che
 description: |
+  (Multi-User)
   Status: NOT READY
 version: latest
 # category:
