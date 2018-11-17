@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  nextcloud:
+  wordpress:
     image: wordpress:latest
     dns:
       - 1.1.1.1
