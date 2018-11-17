@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which InvoiceNinja should be deployed
+        The Label Key/Value pair on the host which containers should be deployed
       default: "host.id=Host1"
       required: false
       type: string
@@ -24,43 +24,19 @@ catalog:
       required: true
       type: string
 
-    - variable: "HOST_HTTP_PORT"
-      label: "Host HTTP Port"
+    - variable: "WEB_PORT"
+      label: "Local Web Port"
       description: |
-        The HTTP port to locally access the web interface on.
-      default: "12000"
+        The port to locally access the web interface on.
+      default: "10300"
       required: true
       type: string
 
-    - variable: "HOST_HTTPS_PORT"
-      label: "Host HTTPS Port"
+    - variable: "DATA_DIR"
+      label: "Data Directory"
       description: |
-        The HTTPS port to access the web interface on.
-      default: "12500"
-      required: true
-      type: string
-
-    - variable: "STORAGE_BASE_DIR"
-      label: "Base Storage Directory"
-      description: |
-        The base path of where persistent storage should be kept at.
-      default: "/RancherStorage/SnipeIT"
-      required: true
-      type: string
-
-    - variable: "APP_DIR"
-      label: "Application Directory"
-      description: |
-        The folder for persistent application files.
-      default: "/Application"
-      required: true
-      type: string
-
-    - variable: "DB_DIR"
-      label: "Database Directory"
-      description: |
-        The folder for persistent database files.
-      default: "/Database"
+        The directory to store persistent data for the stack.
+      default: "Personal/Snipe-IT"
       required: true
       type: string
 
@@ -68,6 +44,7 @@ catalog:
       label: "MySQL Root Password"
       description: |
         A secure password to be used by the "root" MySQL user.
+      # default:
       required: true
       type: password
 
@@ -75,6 +52,7 @@ catalog:
       label: "MySQL User Password"
       description: |
         A secure password to be used by the "snipe_user" MySQL user.
+      # default:
       required: true
       type: password
 
