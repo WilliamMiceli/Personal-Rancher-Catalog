@@ -17,8 +17,9 @@ services:
     networks:
       - public-proxy
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "1022:22" # SSH
       - "${DASHBOARD_PORT}:8080"
     restart: always
     volumes:
