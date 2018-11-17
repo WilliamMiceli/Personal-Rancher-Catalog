@@ -38,9 +38,7 @@ services:
       - /RancherCattleData/${DATA_DIR}/Application:/usr/local/apache2/htdocs
       - /RancherCattleConfig/${DATA_DIR}/httpd:/usr/local/apache2/conf
       - /RancherCattleData/${DATA_DIR}/Application:/var/www/html
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
       - /RancherCattleData/${DATA_DIR}/UserData:/var/www/html/data
-
   nextcloud:
     image: nextcloud:fpm-alpine
     dns:
@@ -80,9 +78,7 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      
-    volumes-from:
-      - httpd
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:latest
