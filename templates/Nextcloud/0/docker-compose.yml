@@ -11,6 +11,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      io.rancher.sidekicks: nextcloud
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
