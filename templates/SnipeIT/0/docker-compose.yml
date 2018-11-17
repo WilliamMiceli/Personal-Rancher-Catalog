@@ -9,9 +9,9 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      APP_ENV: production
+      # APP_ENV: production
       APP_DEBUG: true
-      APP_URL: ${URL}:${HOST_HTTP_PORT}
+      APP_URL: ${URL}:${WEB_PORT}
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
       MYSQL_DATABASE: snipeit
@@ -20,18 +20,16 @@ services:
       APP_ENV:
     labels:
       io.rancher.container.pull_image: always
-      {{- if (.Values.HOST_LABEL)}}
+      {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      - default
-      - snipe-net
+    links:
+      - mysql
     ports:
-      - "${HOST_HTTP_PORT}:80"
-      - "${HOST_HTTPS_PORT}:443"
+      - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${APP_DIR}:/var/lib/snipeit
+      - /RancherCattleData/${DATA_DIR}/Application:/var/lib/snipeit
   mysql:
     image: mysql:5
     dns:
@@ -47,11 +45,6 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      - snipe-net
     restart: on-failure
     volumes:
-      - ${STORAGE_BASE_DIR}${DB_DIR}:/var/lib/mysql
-
-networks:
-  snipe-net:
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
