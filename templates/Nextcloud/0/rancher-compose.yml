@@ -28,7 +28,7 @@ catalog:
     - variable: "WEB_PORT"
       label: "Web Port"
       description: |
-        The port to access the web interface on.
+        The port to locally access the web interface on.
       default: "10100"
       required: true
       type: string

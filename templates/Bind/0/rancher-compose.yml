@@ -34,9 +34,9 @@ catalog:
       type: password
 
     - variable: "WEBMIN_PORT"
-      label: "Webmin Port"
+      label: "Local Webmin Port"
       description: |
-        The port that the Webmin interface will be accessible on.
+        The local port that the Webmin interface will be accessible on.
       default: "1100"
       required: false
       type: string

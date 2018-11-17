@@ -27,7 +27,7 @@ catalog:
     - variable: "HOST_HTTP_PORT"
       label: "Host HTTP Port"
       description: |
-        The HTTP port to access the web interface on.
+        The HTTP port to locally access the web interface on.
       default: "12000"
       required: true
       type: string
