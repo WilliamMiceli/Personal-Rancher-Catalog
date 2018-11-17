@@ -52,6 +52,8 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASS}
       NEXTCLOUD_ADMIN_USER: ${NC_ADMIN}
       NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
+    expose:
+      - "9000"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
