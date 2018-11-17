@@ -77,20 +77,12 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal/Nextcloud"
+      default: "Personal/Nextcloud-Experimental"
       required: true
       type: string
 
 services:
   nextcloud:
     scale: 1
-#    health_check:
-#      port: ${HOST_HTTP_PORT}
-#      request_line: GET /healthcheck HTTP/1.0
-#      interval: 5000
-#      response_timeout: 2000
-#      healthy_threshold: 2
-#      unhealthy_threshold: 3
-#      strategy: none
   mysql:
     scale: 1
