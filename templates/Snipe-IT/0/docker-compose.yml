@@ -9,15 +9,14 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      # APP_ENV: production
-      APP_DEBUG: true
+      APP_ENV: production
+      APP_DEBUG: false
       APP_URL: ${URL}:${WEB_PORT}
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
       MYSQL_DATABASE: snipeit
       MYSQL_USER: snipe_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
-      APP_ENV:
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
