@@ -20,7 +20,7 @@ services:
       # traefik.frontend.headers.SSLRedirect: true
       # traefik.frontend.headers.STSPreload: true
       # traefik.frontend.headers.STSSeconds: 15552000
-      traefik.port: "9000"
+      traefik.port: "80"
       {{- else}}
       traefik.enable: false
       {{- end}}
@@ -33,7 +33,7 @@ services:
     networks:
       - public-proxy
     ports:
-      - "${WEB_PORT}:9000"
+      - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
       - /RancherCattleData/${DATA_DIR}/Application:/usr/local/apache2/htdocs
