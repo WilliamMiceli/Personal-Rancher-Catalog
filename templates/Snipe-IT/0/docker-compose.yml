@@ -48,6 +48,7 @@ services:
     restart: on-failure
     volumes:
       - /RancherCattleData/${DATA_DIR}/Application:/var/lib/snipeit
+      - /RancherCattleData/${DATA_DIR}/Backups:/var/www/html/storage/app/backups
   mysql:
     image: mysql:5
     dns:
