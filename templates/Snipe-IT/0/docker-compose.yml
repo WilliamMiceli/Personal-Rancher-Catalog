@@ -11,7 +11,7 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: false
-      APP_URL: ${TRAEFIK_HOST}:${WEB_PORT}
+      APP_URL: ${TRAEFIK_HOST}:80
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
       MYSQL_DATABASE: snipeit
