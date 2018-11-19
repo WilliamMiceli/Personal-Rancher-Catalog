@@ -64,3 +64,11 @@ catalog:
         A random 32-Character string which will be used for encryption.
       required: true
       type: password
+
+    - variable: "HOST_TIME"
+      label: "Use Host's Date/Time"
+      description: |
+        Use the host's date and time for the container.
+      default: true
+      required: true
+      type: boolean

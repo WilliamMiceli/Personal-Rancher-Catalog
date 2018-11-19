@@ -52,6 +52,9 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
+      {{- if eq .Values.HOST_TIME "true"}}
+      - /etc/localtime:/etc/localtime:ro
+      {{- end}}
       - /RancherCattleData/${DATA_DIR}/Application:/var/lib/snipeit
       - /RancherCattleData/${DATA_DIR}/Backups:/var/www/html/storage/app/backups
   mysql:
