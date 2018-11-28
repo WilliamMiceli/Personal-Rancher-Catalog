@@ -59,6 +59,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data
-      default: "Personal/EclipseChe-Single"
+      default: "Personal/EclipseChe"
       required: true
       type: string
