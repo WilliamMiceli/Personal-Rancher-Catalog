@@ -6,7 +6,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      # CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
+      CHE_DOCKER_IP_EXTERNAL: ${EXTERNAL_IP}
       CHE_HOST: ${CHE_HOST}
       CHE_IN_VM: true
       CHE_MULTIUSER: true
@@ -14,8 +14,8 @@ services:
       CHE_SINGLEPORT_WILDCARD__DOMAIN_HOST: ${WILDCARD_DNS}
       CHE_SINGLEPORT_WILDCARD__DOMAIN_IPLESS: true
     expose:
-      - "8080" # Dashboard Interface
-      - "5050" # Multi-User requirement
+      - "8080" # Web Interface
+      - "5050" # Keycloak
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -23,21 +23,21 @@ services:
       {{- end}}
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
-      ### Start Dashboard Segment
-      traefik.dashboard.port: "8080"
+      ### Start Web Segment
+      traefik.web.port: "8080"
       {{- if .Values.TRAEFIK_BASIC_AUTH}}
       traefik.dashboard.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
       {{- end}}
-      traefik.dashboard.frontend.entryPoints: http,https
-      traefik.dashboard.frontend.rule: ${TRAEFIK_HOST}
-      traefik.dashboard.frontend.passHostHeader: true
-      ### End Dashboard Segment
-      ### Start Multi-User Segment
-      traefik.multi.port: "5050"
-      traefik.multi.frontend.entryPoints: eclipseche
-      traefik.multi.frontend.rule: ${TRAEFIK_HOST}
-      traefik.multi.frontend.passHostHeader: true
-      ### End Multi-User Segment
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.rule: ${TRAEFIK_HOST}
+      traefik.web.frontend.passHostHeader: true
+      ### End Web Segment
+      ### Start Keycloak Segment
+      traefik.keycloak.port: "5050"
+      traefik.keycloak.frontend.entryPoints: eclipseche
+      traefik.keycloak.frontend.rule: ${TRAEFIK_HOST}
+      traefik.keycloak.frontend.passHostHeader: true
+      ### End Keycloak Segment
       {{- else}}
       traefik.enable: false
       {{- end}}
