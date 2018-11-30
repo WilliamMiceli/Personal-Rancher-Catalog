@@ -28,7 +28,7 @@ catalog:
       description: |
         The host that Traefik will use to provide public access.
         Leaving this empty will disable Traefik on this stack.
-      default: "Host:subdomain.domain.tld,HostRegexp:.*.subdomain.domain.tld"
+      default: "HostRegexp:{subdomain:.*}subdomain.domain.tld"
       required: false
       type: string
 
