@@ -16,13 +16,24 @@ services:
       {{- end}}
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
-      traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.forceSTSHeader: true
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 15552000
-      traefik.port: "3000"
+      ### Start SSH Segment
+      traefik.ssh.frontend.entryPoints: ssh
+      traefik.ssh.frontend.headers.forceSTSHeader: true
+      traefik.ssh.frontend.headers.SSLRedirect: true
+      traefik.ssh.frontend.headers.STSPreload: true
+      traefik.ssh.frontend.headers.STSSeconds: 15552000
+      traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.ssh.port: "22"
+      ### End SSH Segment
+      ### Start Web Segment
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.SSLRedirect: true
+      traefik.web.frontend.headers.STSPreload: true
+      traefik.web.frontend.headers.STSSeconds: 15552000
+      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.web.port: "3000"
+      ### End Web Segment
       {{- else}}
       traefik.enable: false
       {{- end}}
