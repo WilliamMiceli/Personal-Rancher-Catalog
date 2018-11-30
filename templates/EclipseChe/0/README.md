@@ -5,3 +5,7 @@
 [Docker Page](https://hub.docker.com/r/eclipse/che/)
 
 [v6 Documentation](https://www.eclipse.org/che/docs/6/che/docs/index.html)
+
+
+
+- Port 5050 must be open for multi
