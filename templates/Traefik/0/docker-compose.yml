@@ -3,10 +3,10 @@ version: '2'
 services:
   traefik:
     image: traefik:latest
-    command: --api
+    command: --api # Using Rancher API
     dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - 1.1.1.1 # Cloudflare Public DNS 1
+      - 1.0.0.1 # Cloudflare Public DNS 2
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: true
@@ -15,17 +15,18 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     networks:
-      - public-proxy
+      - public-proxy # This is used for connecting to other containers, which need to be part of this network as well
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
       - "1022:22" # SSH
+      - "5050:5050" # Eclipse Che Multi-User Required
       - "${DASHBOARD_PORT}:8080"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattleConfig/${DATA_DIR}/traefik.toml:/traefik.toml
-      - /RancherCattleConfig/${DATA_DIR}/acme:/etc/traefik/acme
+      - /RancherCattleConfig/${DATA_DIR}/acme:/etc/traefik/acme # For Let's Encrypt certificates
       - /RancherCattleConfig/${DATA_DIR}/logs:/external/logs
 
 networks:
