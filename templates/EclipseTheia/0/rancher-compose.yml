@@ -1,0 +1,43 @@
+version: '2'
+catalog:
+  name: Eclipse Theia
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  questions:
+
+    - variable: HOST_LABEL
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair on the host which containers should be deployed
+      default: "host.id=Host2"
+      required: false
+      type: string
+
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
+      description: |
+        The host that Traefik will use to provide public access.
+        Leaving this empty will disable Traefik on this stack.
+      default: "Host:subdomain.domain.tld"
+      required: false
+      type: string
+
+    - variable: "TRAEFIK_BASIC_AUTH"
+      label: "Basic Authentication Expression"
+      description: |
+        Sets basic authentication for that frontend in CSV format "User:MD5_Hash,User:MD5_Hash".
+        Leaving this empty will disable Traefik's Basic Authentication functionality
+      #default: ""
+      required: false
+      type: string
+
+    - variable: DATA_DIR
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data
+      default: "Personal/EclipseChe"
+      required: true
+      type: string

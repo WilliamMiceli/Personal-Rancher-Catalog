@@ -1,0 +1,38 @@
+version: '2'
+services:
+  theia:
+    image: theiaide/theia:latest # Latest stable release
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    expose:
+      - "3000" # Web Interface
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      {{- if .Values.TRAEFIK_HOST}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.web.port: "3000"
+      {{- if .Values.TRAEFIK_BASIC_AUTH}}
+      traefik.dashboard.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
+      {{- end}}
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.rule: ${TRAEFIK_HOST}
+      traefik.web.frontend.passHostHeader: true
+      ### End Web Segment
+      {{- else}}
+      traefik.enable: false
+      {{- end}}
+    networks:
+      - public-proxy
+    restart: on-failure
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - /RancherCattleData/${DATA_DIR}/Project:/home/project
+
+networks:
+  public-proxy:
+    external: true
