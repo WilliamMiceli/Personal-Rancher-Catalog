@@ -1,7 +1,7 @@
 version: '2'
 services:
   theia:
-    image: theiaide/theia:latest # Latest stable release
+    image: theiaide/theia:next
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -31,7 +31,7 @@ services:
     restart: on-failure
     volumes:
       #- /var/run/docker.sock:/var/run/docker.sock
-      - /RancherCattleData/${DATA_DIR}/Project:/home/project
+      - /RancherCattleData/${DATA_DIR}/Project:/home/project:cached
 
 networks:
   public-proxy:
