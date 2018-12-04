@@ -20,7 +20,7 @@ services:
       traefik.dashboard.frontend.auth.basic: ${TRAEFIK_BASIC_AUTH}
       {{- end}}
       traefik.web.frontend.entryPoints: http,https
-      traefik.web.frontend.rule: ${TRAEFIK_HOST}
+      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.frontend.passHostHeader: true
       ### End Web Segment
       {{- else}}
