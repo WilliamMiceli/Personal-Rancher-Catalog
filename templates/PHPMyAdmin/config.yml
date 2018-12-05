@@ -1,0 +1,8 @@
+name: phpMyAdmin
+description: |
+  A free and open source administration tool for MySQL and MariaDB.
+version: latest
+category: Database Administration
+maintainer: WilliamMiceli
+# license:
+# projectURL:
