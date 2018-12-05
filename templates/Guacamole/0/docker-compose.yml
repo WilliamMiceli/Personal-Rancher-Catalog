@@ -1,49 +1,66 @@
-database-data:
-  image: busybox
-  labels:
-    io.rancher.container.start_once: 'true'
-  net: none
-  entrypoint: /bin/true
-  volumes:
-    - /var/lib/mysql
-    - /docker-entrypoint-initdb.d
-database:
-  image: mariadb
-  environment:
-    MYSQL_DATABASE: ${guacamole_db}
-    MYSQL_ONETIME_PASSWORD: 'true'
-    MYSQL_PASSWORD: ${guacamole_password}
-    MYSQL_RANDOM_ROOT_PASSWORD: 'true'
-    MYSQL_USER: ${guacamole_user}
-  volumes_from:
-    - database-data
-  labels:
-    io.rancher.sidekicks: setup-get-db-script, database-data
-setup-get-db-script:
-  image: glyptodon/guacamole:0.9.10-incubating
-  net: none
-  volumes_from:
-    - database-data
-  command:
-  - bash
-  - -c
-  - /opt/guacamole/bin/initdb.sh --mysql > /docker-entrypoint-initdb.d/initdb.sql
-  labels:
-    io.rancher.container.start_once: 'true'
-guacd:
-  image: glyptodon/guacd:0.9.10-incubating
-guacamole:
-  image: glyptodon/guacamole:0.9.10-incubating
-  environment:
-    MYSQL_DATABASE: ${guacamole_db}
-    MYSQL_HOSTNAME: database
-    MYSQL_PASSWORD: ${guacamole_password}
-    MYSQL_USER: ${guacamole_user}
-  links:
-   - guacd:guacd
-  ports:
-    - ${public_port}:8080/tcp
-  command:
-    - /bin/bash
-    - -c
-    - cd /usr/local/tomcat/webapps;rm -rf ROOT/; ln -s guacamole.war ROOT.war; /opt/guacamole/bin/start.sh;
+version: '2'
+
+services:
+  guacamole:
+    image: guacamole/guacamole
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      {{- if .Values.TRAEFIK_HOST}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.SSLRedirect: true
+      traefik.web.frontend.headers.STSPreload: true
+      traefik.web.frontend.headers.STSSeconds: 15552000
+      traefik.web.frontend.redirect.entryPoint: https
+      traefik.web.frontend.redirect.permanent: true
+      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.web.port: "8080"
+      ### End Web Segment
+      {{- else}}
+      traefik.enable: false
+      {{- end}}
+    links:
+      - guacd
+      - mysql
+    networks:
+      - public-proxy
+    ports:
+      - "${WEB_PORT}:8080"
+    restart: on-failure
+  guacd:
+    image: guacamole/guacd
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+    labels:
+    networks:
+    ports:
+    restart: on-failure
+  mysql:
+    image:
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      MYSQL_DATABASE: guacamole_db
+      MYSQL_USER: guacamole_user
+      MYSQL_PASSWORD: password
+    labels:
+    networks:
+    ports:
+    restart: on-failure
+
+networks:
+  public-proxy:
+    external: true
