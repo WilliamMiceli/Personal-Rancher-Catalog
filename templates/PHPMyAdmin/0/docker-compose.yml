@@ -7,7 +7,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      PMA_ARBITRARY: true
+      PMA_ARBITRARY: 1
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -30,7 +30,7 @@ services:
       traefik.enable: false
       {{- end}}
     networks:
-      - db-admin
+      - db-admin # Used to be able to make secure, direct connections to other services in other stacks
     ports:
       - "${WEB_PORT}:80"
     restart: on-failure
