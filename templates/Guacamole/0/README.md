@@ -7,3 +7,4 @@ Using official images only:
 
 ### To-do List
 * Allow LDAP authentication in place of MySQL authentication
+* Make database initialization automatic, or provide instructions for it
