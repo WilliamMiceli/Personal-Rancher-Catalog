@@ -52,9 +52,8 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
-      {{- if eq .Values.HOST_TIME "true"}}
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      {{- end}}
       - /RancherCattleData/${DATA_DIR}/Application:/var/lib/snipeit
       - /RancherCattleData/${DATA_DIR}/Backups:/var/www/html/storage/app/backups
   mysql:
@@ -74,6 +73,7 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
 
