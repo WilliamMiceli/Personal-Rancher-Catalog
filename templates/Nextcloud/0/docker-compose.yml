@@ -36,6 +36,8 @@ services:
       - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleData/${DATA_DIR}/Application:/usr/local/apache2/htdocs
 #      - /RancherCattleConfig/${DATA_DIR}/httpd:/usr/local/apache2/conf
       - /RancherCattleData/${DATA_DIR}/Application:/var/www/html
@@ -81,6 +83,7 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
