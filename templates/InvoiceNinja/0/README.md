@@ -23,3 +23,6 @@ Get an API Key [Here](https://developers.google.com/maps/documentation/javascrip
 Then add GOOGLE_MAPS_API_KEY=<your key> in your .env file.
 
 If using without HTTPS (like using the direct IP instead of through Traefik), please take out the line: "fastcgi_param HTTPS 1;" from your nginx.conf
+
+### To-Do List
+* Add documentation for easier adding environment variables, and see if there's a better way to do so
