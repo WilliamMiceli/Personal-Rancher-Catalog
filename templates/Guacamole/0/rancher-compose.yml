@@ -33,3 +33,27 @@ catalog:
       default: "10700"
       required: true
       type: string
+
+    - variable: "DB_ROOT_PASS"
+      label: "MySQL Root Password"
+      description: |
+        A secure password to be used by the "root" MySQL user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DB_USER_PASS"
+      label: "MySQL User Password"
+      description: |
+        A secure password to be used by the "nextcloud_user" MySQL user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data for the stack.
+      default: "Personal/Nextcloud"
+      required: true
+      type: string

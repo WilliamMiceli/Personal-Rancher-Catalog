@@ -44,23 +44,37 @@ services:
       - 1.0.0.1
     environment:
     labels:
-    networks:
-    ports:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
     restart: on-failure
   mysql:
-    image:
+    image: mysql:latest
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
       MYSQL_DATABASE: guacamole_db
       MYSQL_USER: guacamole_user
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
     networks:
-    ports:
+      db-admin:
+        aliases:
+          - guacamole
     restart: on-failure
+    volumes:
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql # MySQL Database to be persistent
 
 networks:
+  db-admin:
+    external: true
   public-proxy:
     external: true
