@@ -2,7 +2,7 @@ version: '2'
 
 services:
   guacamole:
-    image: guacamole/guacamole
+    image: guacamole/guacamole:latest
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -36,7 +36,7 @@ services:
       - "${WEB_PORT}:8080"
     restart: on-failure
   guacd:
-    image: guacamole/guacd
+    image: guacamole/guacd:latest
     dns:
       - 1.1.1.1
       - 1.0.0.1
