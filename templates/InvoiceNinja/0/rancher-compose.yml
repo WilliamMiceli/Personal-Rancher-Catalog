@@ -33,6 +33,22 @@ catalog:
       required: true
       type: string
 
+    - variable: "DB_ROOT_PASS"
+      label: "MySQL Root Password"
+      description: |
+        A secure password to be used by the "root" MySQL user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DB_USER_PASS"
+      label: "MySQL User Password"
+      description: |
+        A secure password to be used by the "ninja" MySQL user.
+      # default:
+      required: true
+      type: password
+
     - variable: DATA_DIR
       label: "Data Directory"
       description: |

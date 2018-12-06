@@ -14,6 +14,8 @@ services:
       - mysql
     restart: on-failure
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleConfig/${DATA_DIR}/.env:/var/www/app/.env
       - /RancherCattleData/${DATA_DIR}/Logo:/var/www/app/public/logo
       - /RancherCattleData/${DATA_DIR}/Storage:/var/www/app/storage
@@ -60,9 +62,11 @@ services:
       traefik.enable: false
     restart: on-failure
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   nginx:
-    image: nginx
+    image: nginx:alpine
     dns:
       - 1.1.1.1
       - 1.0.0.1
