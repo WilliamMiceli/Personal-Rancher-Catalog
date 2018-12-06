@@ -6,6 +6,11 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+    environment:
+      MYSQL_HOSTNAME: mysql
+      MYSQL_DATABASE: guacamole_db
+      MYSQL_USER: guacamole_user
+      MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
