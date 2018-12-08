@@ -14,7 +14,7 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       APP_URL: https://${TRAEFIK_HOST}
       {{- else}}
-      APP_URL: http://localhost:${WEB_PORT}
+      APP_URL: http://localhost
       {{- end}}
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
