@@ -70,6 +70,10 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+    networks:
+      db-admin:
+        aliases:
+          - snipe-it
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
@@ -77,5 +81,7 @@ services:
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
 
 networks:
+  db-admin:
+    external: true
   public-proxy:
     external: true
