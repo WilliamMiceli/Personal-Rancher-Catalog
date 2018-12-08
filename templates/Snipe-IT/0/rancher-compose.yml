@@ -61,6 +61,6 @@ catalog:
     - variable: "APP_KEY"
       label: "Encryption Key"
       description: |
-        A random 32-Character string which will be used for encryption.
+        See README.
       required: true
       type: password
