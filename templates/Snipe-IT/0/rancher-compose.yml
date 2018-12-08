@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: SnipeIT
+  name: Snipe-IT
   version: latest
   # description:
   # minimum_rancher_version:
@@ -16,20 +16,22 @@ catalog:
       required: false
       type: string
 
-    - variable: "URL"
-      label: "URL"
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
       description: |
-        The domain or hostname the service can be accessed at.
-      default: "http://localhost"
-      required: true
+        The host that Traefik will use to provide public access.
+        Leaving this empty will disable Traefik on this stack.
+      default: "subdomain.domain.tld"
+      required: false
       type: string
 
     - variable: "WEB_PORT"
       label: "Local Web Port"
       description: |
         The port to locally access the web interface on.
+        Leaving this empty will not expose a any port on the host system, disabling local access outside of it's Rancher network.
       default: "10300"
-      required: true
+      required: false
       type: string
 
     - variable: "DATA_DIR"
