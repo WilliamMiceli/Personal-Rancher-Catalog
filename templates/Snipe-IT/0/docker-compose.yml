@@ -42,7 +42,7 @@ services:
       - mysql
     networks:
       - public-proxy
-    {{- if .Values.WEB_PORT}}
+    {{- if .Values.WEB_PORT}} # Allows for local access to be disabled
     ports:
       - "${WEB_PORT}:80"
     {{- else}}
