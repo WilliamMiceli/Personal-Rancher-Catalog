@@ -73,7 +73,7 @@ services:
     networks:
       db-admin:
         aliases:
-          - snipe-it
+          - snipe-it # This should allow access from "mysql.snipe-it.rancher.internal"
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
