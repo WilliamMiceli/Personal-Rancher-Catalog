@@ -34,7 +34,6 @@ services:
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.passTLSCert: true
       traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.port: "80"
       ### End Web Segment
