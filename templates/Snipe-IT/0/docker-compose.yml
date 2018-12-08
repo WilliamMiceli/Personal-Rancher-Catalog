@@ -18,8 +18,8 @@ services:
       {{- end}}
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
-      MYSQL_DATABASE: snipeit
-      MYSQL_USER: snipe_user
+      MYSQL_DATABASE: snipeit_db
+      MYSQL_USER: snipeit_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
@@ -62,9 +62,9 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_DATABASE: snipeit
+      MYSQL_DATABASE: snipeit_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_USER: snipe_user
+      MYSQL_USER: snipeit_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
