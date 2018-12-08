@@ -12,9 +12,9 @@ services:
       APP_ENV: production
       APP_DEBUG: false
       {{- if .Values.TRAEFIK_HOST}}
-      APP_URL: ${TRAEFIK_HOST}:80
+      APP_URL: https://${TRAEFIK_HOST}:80
       {{- else}}
-      APP_URL: localhost:${WEB_PORT}
+      APP_URL: http://localhost:${WEB_PORT}
       {{- end}}
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
