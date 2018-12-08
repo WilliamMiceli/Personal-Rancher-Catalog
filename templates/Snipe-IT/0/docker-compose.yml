@@ -34,7 +34,7 @@ services:
       traefik.frontend.headers.SSLRedirect: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
-      traefik.port: "80"
+      traefik.port: "443"
       {{- else}}
       traefik.enable: false
       {{- end}}
