@@ -28,8 +28,10 @@ services:
       {{- end}}
     networks:
       - public-proxy
+    {{- if .Values.WEB_PORT}}
     ports:
       - "${WEB_PORT}:80"
+    {{- end}}
     restart: on-failure
     volumes:
       {{- if eq .Values.PERSIST_CONF "true"}}
