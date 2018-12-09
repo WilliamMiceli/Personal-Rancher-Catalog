@@ -1,6 +1,6 @@
 name: Nginx
 description: |
-  Status: NOT READY
+  A web server with a strong focus on high concurrency, performance and low memory usage.
 version: latest
 # category:
 maintainer: WilliamMiceli
