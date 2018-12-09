@@ -34,10 +34,8 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
-      {{- if eq .Values.PERSIST_CONF "true"}}
-      - /RancherCattle/${DATA_DIR}/Configuration/nginx.conf:/etc/nginx/nginx.conf
-      {{- end}}
-      - /RancherCattle/${DATA_DIR}/Public-HTML:/usr/share/nginx/html
+      - /RancherCattle/${DATA_DIR}/Configuration:/etc/nginx
+      - /RancherCattle/${DATA_DIR}/HTML:/usr/share/nginx/html
 
 networks:
   public-proxy:
