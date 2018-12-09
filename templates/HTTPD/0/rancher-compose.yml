@@ -37,6 +37,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal/httpd"
+      default: "Personal/HTTPD"
       required: true
       type: string
