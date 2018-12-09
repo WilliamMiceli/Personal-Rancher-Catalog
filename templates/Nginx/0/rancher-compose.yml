@@ -34,14 +34,6 @@ catalog:
       required: false
       type: int
 
-    - variable: "PERSIST_CONF"
-      label: "Persistent Configuration"
-      description: |
-        Have a persistent "nginx.conf" file.
-      default: true
-      required: true
-      type: boolean
-
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
