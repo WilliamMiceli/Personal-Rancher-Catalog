@@ -35,7 +35,7 @@ services:
     restart: on-failure
     volumes:
       {{- if eq .Values.PERSIST_CONF "true"}}
-      - /RancherCattle/${DATA_DIR}/Configuration/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - /RancherCattle/${DATA_DIR}/Configuration:/usr/local/apache2/conf
       {{- end}}
       - /RancherCattle/${DATA_DIR}/Public-HTML:/usr/local/apache2/htdocs/
 
