@@ -29,7 +29,7 @@ catalog:
       label: "Web Port"
       description: |
         The port to locally access the web interface on.
-      default: "10100"
+      default: "10900"
       required: true
       type: string
 
