@@ -34,7 +34,7 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
-      - /RancherCattle/${DATA_DIR}/Configuration:/etc/nginx
+#      - /RancherCattle/${DATA_DIR}/Configuration:/etc/nginx
       - /RancherCattle/${DATA_DIR}/HTML:/usr/share/nginx/html
 
 networks:
