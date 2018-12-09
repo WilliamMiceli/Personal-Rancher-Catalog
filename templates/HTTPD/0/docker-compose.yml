@@ -6,7 +6,6 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    environment:
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
