@@ -32,7 +32,7 @@ services:
       - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - /RancherCattleConfig/${DATA_DIR}/httpd.conf:/usr/local/apache2/conf/httpd.conf
+     # - /RancherCattleConfig/${DATA_DIR}/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - /RancherCattleData/${DATA_DIR}/Public-HTML:/usr/local/apache2/htdocs/
 
 networks:
