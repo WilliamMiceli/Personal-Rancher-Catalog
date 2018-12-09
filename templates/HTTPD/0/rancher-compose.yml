@@ -31,7 +31,7 @@ catalog:
         The port to locally access the web interface on.
         Leaving this blank will disable opening any port on the host system.
       default: "10900"
-      required: true
+      required: false
       type: string
 
     - variable: "PERSIST_CONF"
