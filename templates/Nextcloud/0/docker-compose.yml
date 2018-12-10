@@ -3,7 +3,7 @@ version: '2'
 services:
   nextcloud:
     image: nextcloud:fpm-alpine
-    dns:
+    dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     environment:
@@ -27,8 +27,8 @@ services:
     volumes_from:
       - nginx
   nginx:
-    image: nginx:latest # :alpine
-    dns:
+    image: nginx:latest # Can't use ":alpine" until I have a way to get the "www-data" user added automatically. (Project for another time)
+    dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     labels:
@@ -75,7 +75,7 @@ services:
       - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
   mysql:
     image: mysql:5
-    dns:
+    dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     environment:
@@ -100,7 +100,7 @@ services:
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:latest
-    dns:
+    dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     labels:
@@ -108,6 +108,9 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   {{- end}}
 
 networks:
