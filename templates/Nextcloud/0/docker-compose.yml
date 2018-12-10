@@ -68,9 +68,11 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx
-      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html 
-      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data
+      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
+      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
+      - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
+      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
+      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
   mysql:
     image: mysql:5
     dns:
