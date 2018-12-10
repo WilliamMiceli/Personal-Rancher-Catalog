@@ -27,7 +27,7 @@ services:
     volumes_from:
       - nginx
   nginx:
-    image: nginx:alpine
+    image: nginx:latest # :alpine
     dns:
       - 1.1.1.1
       - 1.0.0.1
