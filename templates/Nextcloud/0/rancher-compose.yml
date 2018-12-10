@@ -32,7 +32,7 @@ catalog:
         Leaving this empty will disable opening any port on the host system.
       default: "10100"
       required: false
-      type: int
+      type: string
 
     - variable: "DB_ROOT_PASS"
       label: "MySQL Root Password"
