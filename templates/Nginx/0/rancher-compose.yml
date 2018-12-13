@@ -25,6 +25,18 @@ catalog:
       required: false
       type: string
 
+    - variable: "IMAGE_TAG"
+      label: "Base Image"
+      description: |
+        Which base image would you like to use.
+      default: "11000"
+      required: true
+      type: enum
+      options:
+        - <No Tag>
+        - Latest (Default)
+        - Latest (Alpine)
+
     - variable: "WEB_PORT"
       label: "Web Port"
       description: |
