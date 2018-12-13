@@ -32,7 +32,7 @@ catalog:
         Leaving this empty will disable opening any port on the host system.
       default: "11000"
       required: false
-      type: int
+      type: string
 
     - variable: "PERSIST_CONF"
       label: "Persistent Configuration"
