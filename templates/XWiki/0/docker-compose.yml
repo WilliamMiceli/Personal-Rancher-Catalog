@@ -46,7 +46,7 @@ services:
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
   postgresql:
-    image: postgres:9.5
+    image: postgres:latest
     container_name: postgresql
     dns:
       - 1.1.1.1
