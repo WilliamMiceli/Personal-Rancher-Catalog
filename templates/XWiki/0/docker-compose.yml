@@ -33,7 +33,7 @@ services:
       traefik.enable: false
       {{- end}}
     links:
-      - postgresql # Using links because "depends_on" does not work in Rancher 1.6
+      - mysql # Using links because "depends_on" does not work in Rancher 1.6
     networks:
       - public-proxy
     {{- if .Values.WEB_PORT}}
