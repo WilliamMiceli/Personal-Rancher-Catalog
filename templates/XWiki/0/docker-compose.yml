@@ -1,0 +1,79 @@
+version: '2'
+
+services:
+  xwiki:
+    image: xwiki:stable-postgres-tomcat
+    container_name: xwiki
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      DB_HOST: postgresql
+      DB_DATABASE: xwiki
+      DB_USER: xwiki_user
+      DB_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      {{- if .Values.TRAEFIK_HOST}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "8080"
+      ### End Web Segment
+      {{- else}}
+      traefik.enable: false
+      {{- end}}
+    links:
+      - postgresql # Using links because "depends_on" does not work in Rancher 1.6
+    networks:
+      - public-proxy
+    {{- if .Values.WEB_PORT}}
+    ports:
+      - "${WEB_PORT}:8080"
+    {{- end}}
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
+  postgresql:
+    image: postgres:9.5
+    container_name: postgresql
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      POSTGRES_DATABASE: xwiki
+      POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      POSTGRES_USER: xwiki_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    networks:
+      db-admin:
+        aliases:
+          - xwiki
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
+
+networks:
+  db-admin:
+    external: true
+  public-proxy:
+    external: true
