@@ -44,7 +44,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
+      - /RancherCattleData/${DATA_DIR}/Application:/usr/local/xwiki
   mysql:
     image: mysql:5.7
     container_name: mysql
@@ -69,8 +69,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattleData/${DATA_DIR}/Configuration/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
+      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
 
 networks:
   db-admin:
