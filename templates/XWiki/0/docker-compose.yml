@@ -69,8 +69,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattleData/${DATA_DIR}/Configuration/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattle/${DATA_DIR}/Configuration/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattle/${DATA_DIR}/Temp:/var/run/mysqld/ # Temporary fix for socket issue
 
 networks:
   db-admin:
