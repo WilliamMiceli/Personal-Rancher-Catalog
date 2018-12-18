@@ -52,7 +52,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      POSTGRES_INITDB_ARGS: "--encoding=UTF8 -k \"\"" # UTF8 Encoding and disable listening on unix socket
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
       POSTGRES_DB: xwiki
       POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
       POSTGRES_USER: xwiki_user
