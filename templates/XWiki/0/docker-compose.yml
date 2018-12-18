@@ -72,7 +72,6 @@ services:
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
       - /RancherCattle/${DATA_DIR}/Temp1:/var/run/postgresql # Band-aid for PostgreSQL issue of being "out of space"
-      - /RancherCattle/${DATA_DIR}/Temp2:/usr/local/pgsql # Attempt to fix minor issue
 
 networks:
   db-admin:
