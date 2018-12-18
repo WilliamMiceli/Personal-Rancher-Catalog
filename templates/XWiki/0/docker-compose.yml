@@ -3,7 +3,7 @@ version: '2'
 services:
   xwiki:
     image: xwiki:latest
-    container_name: xwiki
+#    container_name: xwiki
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -47,7 +47,7 @@ services:
       - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
   mysql:
     image: mysql:5.7
-    container_name: mysql
+#    container_name: mysql
     dns:
       - 1.1.1.1
       - 1.0.0.1
