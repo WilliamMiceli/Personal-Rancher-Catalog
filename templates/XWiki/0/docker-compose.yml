@@ -46,13 +46,13 @@ services:
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
   postgresql:
-    image: postgres:latest
+    image: postgres:alpine
     container_name: postgresql
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      # POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
       POSTGRES_DB: xwiki
       POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
       POSTGRES_USER: xwiki_user
@@ -71,7 +71,7 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
-      - /RancherCattle/${DATA_DIR}/Temp:/var/run/postgresql
+      - /RancherCattle/${DATA_DIR}/Temp:/var/run/postgresql # Band-aid for PostgreSQL issue of being "out of space"
 
 networks:
   db-admin:
