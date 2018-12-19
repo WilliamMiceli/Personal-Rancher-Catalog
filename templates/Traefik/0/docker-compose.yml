@@ -25,9 +25,11 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /RancherCattleConfig/${DATA_DIR}/traefik.toml:/traefik.toml
-      - /RancherCattleConfig/${DATA_DIR}/acme:/etc/traefik/acme # For Let's Encrypt certificates
-      - /RancherCattleConfig/${DATA_DIR}/logs:/external/logs
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
+      - /RancherCattle/${DATA_DIR}/LetsEncrypt:/etc/traefik/acme # For Let's Encrypt certificates
+      - /RancherCattle/${DATA_DIR}/Logs:/external/logs
 
 networks:
   public-proxy:
