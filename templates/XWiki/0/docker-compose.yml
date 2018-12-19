@@ -2,14 +2,14 @@ version: '2'
 
 services:
   xwiki:
-    image: xwiki:latest
-#    container_name: xwiki
+    image: xwiki:stable-postgres-tomcat
+    container_name: xwiki
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      DB_HOST: mysql
-      DB_DATABASE: xwiki
+      DB_HOST: postgresql
+      DB_DATABASE: xwiki_db
       DB_USER: xwiki_user
       DB_PASSWORD: ${DB_USER_PASS}
     labels:
@@ -33,7 +33,7 @@ services:
       traefik.enable: false
       {{- end}}
     links:
-      - mysql # Using links because "depends_on" does not work in Rancher 1.6
+      - postgresql # Using links because "depends_on" does not work in Rancher 1.6
     networks:
       - public-proxy
     {{- if .Values.WEB_PORT}}
@@ -45,17 +45,18 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Application:/usr/local/xwiki
-  mysql:
-    image: mysql:5.7
-#    container_name: mysql
+  postgresql:
+    image: postgres:alpine
+    container_name: postgresql
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_DATABASE: xwiki
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_USER: xwiki_user
-      MYSQL_PASSWORD: ${DB_USER_PASS}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      POSTGRES_DB: xwiki_db
+      POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      POSTGRES_USER: xwiki_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -69,9 +70,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-#      - /RancherCattle/${DATA_DIR}/Configuration/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
-#      - /RancherCattle/${DATA_DIR}/Temp:/var/run/mysqld/ # Temporary fix for socket issue
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
 
 networks:
   db-admin:
