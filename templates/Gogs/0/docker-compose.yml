@@ -46,14 +46,16 @@ services:
       - "${WEB_PORT}:3000"
     restart: on-failure
     volumes:
-      - /RancherCattleData/${DATA_DIR}/Data:/data
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Data:/data
   mysql:
     image: mysql:5
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_DATABASE: gogs
+      MYSQL_DATABASE: gogs # Will eventually rename this to "gogs_db"
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
       MYSQL_USER: gogs_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
@@ -62,12 +64,18 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+    networks:
+      db-admin:
+        aliases:
+          - gogs
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
 
 networks:
+  db-admin:
+    external: true
   public-proxy:
     external: true
