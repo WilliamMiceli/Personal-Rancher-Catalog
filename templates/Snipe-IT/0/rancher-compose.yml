@@ -29,7 +29,7 @@ catalog:
       label: "Local Web Port"
       description: |
         The port to locally access the web interface on.
-        Leaving this empty will not expose a any port on the host system, disabling local access outside of it's Rancher network.
+        Leaving this empty will disable opening any port on the host system.
       default: "10300"
       required: false
       type: string
