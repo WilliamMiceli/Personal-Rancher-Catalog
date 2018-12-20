@@ -31,7 +31,7 @@ catalog:
         The port to locally access the web interface on.
         Leaving this empty will disable opening any port on the host system.
       default: "11100"
-      required: true
+      required: false
       type: string # "Int" sometimes causes problems, and not a huge issue
 
     - variable: "DB_ROOT_PASS"
