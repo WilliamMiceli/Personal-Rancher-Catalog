@@ -27,3 +27,5 @@ My personal rancher catalog to make my own life just a little bit easier.
 
 * Adminer
 * Apache Guacamole
+* Discourse <https://github.com/discourse/discourse_docker>
+* Eclipse Che
