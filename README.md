@@ -1,6 +1,7 @@
 # WilliamMiceli's Personal Rancher Catalog
 
 My personal rancher catalog to make my own life just a little bit easier.
+Hopefully it can also be of use to others as well!
 
 ## TODO List
 
@@ -25,7 +26,9 @@ My personal rancher catalog to make my own life just a little bit easier.
 
 ## Stacks Yet To Be Made
 
-* Adminer
+* Adminer <https://docs.docker.com/samples/library/adminer/>
 * Apache Guacamole
 * Discourse <https://github.com/discourse/discourse_docker>
 * Eclipse Che
+* Matomo <https://docs.docker.com/samples/library/matomo/>
+* MediaWiki <https://hub.docker.com/_/mediawiki/>
