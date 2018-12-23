@@ -32,3 +32,6 @@ Hopefully it can also be of use to others as well!
 * Eclipse Che
 * Matomo <https://docs.docker.com/samples/library/matomo/>
 * MediaWiki <https://hub.docker.com/_/mediawiki/>
+* Redmine <https://hub.docker.com/_/redmine>
+* Rocket.Chat <https://hub.docker.com/_/rocketchat>
+* YOURLS <https://hub.docker.com/_/yourls>
