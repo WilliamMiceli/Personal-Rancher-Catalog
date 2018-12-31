@@ -40,7 +40,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /FreeNAS/${DATA_DIR}/Application:/var/www/html
+      - /RancherCattle/${DATA_DIR}/Application:/var/www/html
   mysql:
     image: mysql:5
     dns:
@@ -64,7 +64,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /FreeNAS/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
 
 networks:
   db-admin:
