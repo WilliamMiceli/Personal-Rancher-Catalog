@@ -9,6 +9,9 @@ Hopefully it can also be of use to others as well!
 * Have DATA_DIR be optional
 * Include logos for all stacks
 * Include description for all stacks
+* Use named volumes for the bind mounts
+  * <http://blog.code4hire.com/2018/06/define-named-volume-with-host-mount-in-the-docker-compose-file/>
+  * <https://stackoverflow.com/questions/35841241/docker-compose-named-mounted-volume>
 
 ## Stacks Complete
 
