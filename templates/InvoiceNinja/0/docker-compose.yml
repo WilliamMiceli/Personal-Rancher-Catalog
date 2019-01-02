@@ -60,6 +60,8 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: false
+    networks:
+      - db-admin
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
@@ -101,5 +103,7 @@ services:
       - invoiceninja
 
 networks:
+  db-admin:
+    external: true
   public-proxy:
     external: true
