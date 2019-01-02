@@ -52,7 +52,7 @@ services:
     environment:
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_USER: ninja
+      MYSQL_USER: ninja_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
