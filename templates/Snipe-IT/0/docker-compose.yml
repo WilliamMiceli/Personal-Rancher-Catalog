@@ -9,8 +9,8 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      APP_ENV: 'development' # "development" or "production"
-      APP_DEBUG: true
+      APP_ENV: production # "development" or "production"
+      APP_DEBUG: false
       {{- if .Values.TRAEFIK_HOST}}
       APP_URL: https://${TRAEFIK_HOST} # No port number needed
       {{- else}}
