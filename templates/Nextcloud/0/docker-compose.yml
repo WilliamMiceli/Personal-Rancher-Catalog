@@ -18,23 +18,28 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      traefik.enable: true
-      ### Start Web Segment
-      traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.forceSTSHeader: true
-      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 15552000
-      traefik.frontend.rule: Host:collabora.${TRAEFIK_HOST}
-      traefik.port: "9980"
-      ### End Web Segment
-    networks:
-      - public-proxy
+      traefik.enable: false
     restart: on-failure
   {{- end}}
+  cron:
+    image: nextcloud:fpm-alpine
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    entrypoint: |
+      bash -c 'bash -s <<EOF
+      trap "break;exit" SIGHUP SIGINT SIGTERM
+      while /bin/true; do
+        /usr/local/bin/php /var/www/html/cron.php
+        sleep 900
+      done
+      EOF'
+    restart: on-failure
+    user: www-data
+    volumes_from:
+      - nginx
   nextcloud:
-    image: nextcloud:stable-apache
+    image: nextcloud:fpm-alpine
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
@@ -47,27 +52,55 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
     expose:
       - "80"
+      - "9000"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    volumes_from:
+      - nginx
+  nginx:
+    image: nginx:latest # Can't use ":alpine" until I have a way to get the "www-data" user added automatically. (Project for another time)
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      io.rancher.sidekicks: nextcloud
       traefik.enable: true
-      ### Start Web Segment
-      traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.forceSTSHeader: true
-      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 15552000
-      traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
-      ### End Web Segment
+      ### Start Nextcloud Segment
+      traefik.nextcloud.frontend.entryPoints: http,https
+      traefik.nextcloud.frontend.headers.forceSTSHeader: true
+      traefik.nextcloud.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.nextcloud.frontend.headers.SSLRedirect: true
+      traefik.nextcloud.frontend.headers.STSPreload: true
+      traefik.nextcloud.frontend.headers.STSSeconds: 15552000
+      traefik.nextcloud.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.nextcloud.port: "80"
+      ### End Nextcloud Segment
+      ### Start Collabora Segment
+      traefik.collabora.frontend.entryPoints: http,https
+      traefik.collabora.frontend.headers.forceSTSHeader: true
+      traefik.collabora.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.collabora.frontend.headers.SSLRedirect: true
+      traefik.collabora.frontend.headers.STSPreload: true
+      traefik.collabora.frontend.headers.STSSeconds: 15552000
+      traefik.collabora.frontend.rule: Host:collabora.${TRAEFIK_HOST}
+      traefik.collabora.port: "9980"
+      ### End Collabora Segment
     links:
       {{- if eq .Values.COLLABORA "true"}}
       - collabora
       {{- end}}
+      - cron
       - mysql
+      - nextcloud
       {{- if eq .Values.REDIS "true"}}
       - redis
       {{- end}}
@@ -81,7 +114,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
+      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
+      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
       - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
       - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
       - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
@@ -100,10 +134,11 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
     networks:
       db-admin:
         aliases:
-          - nextcloud # This should allow access from "mysql.nextcloud.rancher.internal"
+          - nextcloud
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
@@ -111,14 +146,16 @@ services:
       - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
-    image: redis:latest
+    image: redis:alpine
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     labels:
+      io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system

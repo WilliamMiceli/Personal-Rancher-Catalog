@@ -1,5 +1,9 @@
 # Nextcloud
 
+## Pre-Requisites
+
+* Traefik deployed
+
 ## First Run Setup
 
 ### Add Configuration For NGINX
@@ -9,10 +13,6 @@ nginx.conf and mime.types to be put in the Configuration/NGINX directory.
 Included nginx.conf has only a few minor tweaks from the one located here:
 
 https://docs.nextcloud.com/server/stable/admin_manual/installation/nginx.html#nextcloud-in-the-webroot-of-nginx
-
-??? Template 1.conf is WITHOUT Collabora
-
-??? Template 2.conf is WITH Collabora
 
 ### Add Your Domain as a Trusted Domain
 
