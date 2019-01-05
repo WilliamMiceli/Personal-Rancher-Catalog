@@ -86,7 +86,7 @@ services:
       - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
       - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
   mysql:
-    image: mysql:latest
+    image: mysql:5
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
