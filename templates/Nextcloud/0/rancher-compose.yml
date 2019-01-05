@@ -66,10 +66,18 @@ catalog:
       required: true
       type: password
 
+    - variable: "COLLABORA"
+      label: "Enable Collabora"
+      description: |
+        Add a Collabora container for office document editing and live collaboration. Additional setup required, see README.
+      default: true
+      required: true
+      type: boolean
+
     - variable: "REDIS"
       label: "Enable Redis"
       description: |
-        Add a Redis container for memory caching. Must be setup manually.
+        Add a Redis container for memory caching. Additional setup required, see README.
       default: true
       required: true
       type: boolean
@@ -78,6 +86,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal-Experimental/Nextcloud"
+      default: "Personal/Nextcloud-Experimental"
       required: true
       type: string
