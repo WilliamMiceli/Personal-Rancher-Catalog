@@ -42,6 +42,11 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: false
+    links:
+      - mysql
+      {{- if eq .Values.REDIS "true"}}
+      - redis
+      {{- end}}
     restart: on-failure
     volumes_from:
       - nginx
@@ -75,17 +80,13 @@ services:
       traefik.collabora.frontend.headers.STSPreload: true
       traefik.collabora.frontend.headers.STSSeconds: 15552000
       traefik.collabora.frontend.rule: Host:collabora.${TRAEFIK_HOST}
-      traefik.collabora.port: "9980"
+      traefik.collabora.port: "81"
       ### End Collabora Segment
     links:
       {{- if eq .Values.COLLABORA "true"}}
       - collabora
       {{- end}}
-      - mysql
       - nextcloud
-      {{- if eq .Values.REDIS "true"}}
-      - redis
-      {{- end}}
     networks:
       - public-proxy
     {{- if .Values.WEB_PORT}}
