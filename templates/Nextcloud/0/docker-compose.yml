@@ -27,7 +27,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     entrypoint: |
-      bash -c 'sh -s <<EOF
+      bash -c 'bash -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
       while /bin/true; do
         /usr/local/bin/php /var/www/html/cron.php
