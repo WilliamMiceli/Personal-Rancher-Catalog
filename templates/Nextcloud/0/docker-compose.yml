@@ -71,8 +71,6 @@ services:
       - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
       - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
       - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
-    volumes_from:
-      - nginx
   nginx:
     image: nginx:latest # Can't use ":alpine" until I have a way to get the "www-data" user added automatically. (Project for another time)
     dns: # Using Cloudflare DNS
