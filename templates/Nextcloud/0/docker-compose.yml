@@ -27,10 +27,8 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     entrypoint: |
-      #!/bin/sh
-      set -eu
-
-      exec busybox crond -f -l 0 -L /dev/stdout
+      /bin/sh 'set -eu
+      exec busybox crond -f -l 0 -L /dev/stdout'
     restart: on-failure
     user: www-data
     volumes_from:
