@@ -55,6 +55,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      io.rancher.sidekicks: cron
       traefik.enable: false
     links:
       - cron
@@ -82,7 +83,6 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      io.rancher.sidekicks: nextcloud
       traefik.enable: true
       ### Start Nextcloud Segment
       traefik.nextcloud.frontend.entryPoints: http,https
