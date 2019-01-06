@@ -162,6 +162,6 @@ services:
 
 networks:
   db-admin: 
-    external: true # Created by Adminer or phpMyAdmin stack
+    external: true # Created by administrative stack (such as Adminer or phpMyAdmin)
   public-proxy:
     external: true # Created by Traefik stack
