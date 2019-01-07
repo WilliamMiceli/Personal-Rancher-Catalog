@@ -67,7 +67,7 @@ services:
     networks:
       db-admin:
         aliases:
-          - gogs
+          - gogs-db
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
