@@ -38,5 +38,6 @@ services:
 
 networks:
   db-admin:
+    external: true
   public-proxy:
     external: true
