@@ -36,7 +36,7 @@ services:
       done
       EOF'
     restart: on-failure
-    user: 82
+    user: "82"
     volumes_from:
       - nginx
   nextcloud:
