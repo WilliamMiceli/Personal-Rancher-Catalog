@@ -26,17 +26,17 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
-    entrypoint: |
+    entrypoint: | # www-data uid: 82
       sh -c 'sh -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
       while /bin/true; do
-        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
+        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" 82
         echo $$(date) - Running cron finished
         sleep 900
       done
       EOF'
     restart: on-failure
-    user: www-data
+    user: 82
     volumes_from:
       - nginx
   nextcloud:
