@@ -27,8 +27,14 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     entrypoint: |
-      /bin/sh '/bin/sh set -eu
-      exec busybox crond -f -l 0 -L /dev/stdout'
+      sh -c 'sh -s <<EOF
+      trap "break;exit" SIGHUP SIGINT SIGTERM
+      while /bin/true; do
+        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
+        echo $$(date) - Running cron finished
+        sleep 900
+      done
+      EOF'
     restart: on-failure
     user: www-data
     volumes_from:
