@@ -21,7 +21,7 @@ catalog:
       label: "Dashboard Port"
       description: |
         The port to access the dashboard interface on.
-      default: "1200"
+      default: "10"
       required: true
       type: string
 
