@@ -38,7 +38,7 @@ services:
 #    restart: on-failure
 #    user: www-data
 #    volumes_from:
-#      - nextcloud
+#      - nginx
   nextcloud:
     image: nextcloud:fpm-alpine
     dns: # Using Cloudflare DNS
@@ -60,7 +60,6 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-#      io.rancher.sidekicks: cron
       traefik.enable: false
     links:
 #      - cron
@@ -69,13 +68,8 @@ services:
       - redis
       {{- end}}
     restart: on-failure
-    volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
-      - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
-      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
-      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
+    volumes_from:
+      - nginx
   nginx:
     image: nginx:latest # Can't use ":alpine" until I have a way to get the "www-data" user added automatically. (Project for another time)
     dns: # Using Cloudflare DNS
@@ -86,6 +80,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      io.rancher.sidekicks: nextcloud
       traefik.enable: true
       ### Start Nextcloud Segment
       traefik.nextcloud.frontend.entryPoints: http,https
@@ -122,7 +117,11 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
       - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
+      - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
+      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
+      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
