@@ -21,24 +21,24 @@ services:
       traefik.enable: false
     restart: on-failure
   {{- end}}
-#  cron:
-#    image: nextcloud:fpm-alpine
-#    dns: # Using Cloudflare DNS
-#      - 1.1.1.1
-#      - 1.0.0.1
-#    entrypoint: |
-#      sh -c 'sh -s <<EOF
-#      trap "break;exit" SIGHUP SIGINT SIGTERM
-#      while /bin/true; do
-#        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
-#        echo $$(date) - Running cron finished
-#        sleep 900
-#      done
-#      EOF'
-#    restart: on-failure
-#    user: www-data
-#    volumes_from:
-#      - nginx
+  cron:
+    image: nextcloud:fpm-alpine
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    entrypoint: |
+      sh -c 'sh -s <<EOF
+      trap "break;exit" SIGHUP SIGINT SIGTERM
+      while /bin/true; do
+        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
+        echo $$(date) - Running cron finished
+        sleep 900
+      done
+      EOF'
+    restart: on-failure
+    user: www-data
+    volumes_from:
+      - nginx
   nextcloud:
     image: nextcloud:fpm-alpine
     dns: # Using Cloudflare DNS
@@ -62,7 +62,6 @@ services:
       {{- end}}
       traefik.enable: false
     links:
-#      - cron
       - mysql
       {{- if eq .Values.REDIS "true"}}
       - redis
