@@ -38,3 +38,9 @@ Hopefully it can also be of use to others as well!
 * Redmine <https://hub.docker.com/_/redmine>
 * Rocket.Chat <https://hub.docker.com/_/rocketchat>
 * YOURLS <https://hub.docker.com/_/yourls>
+
+## Using These Templates For Non-Rancher Configurations
+
+Notable Differences:
+* Rancher provides networking for all stacks within the environment, so any declarations to `networks` and `expose` are ignored by rancher (excluding `ports`).
+  * Instead, network policies are created in order to restrict network traffic, instead of creating networks.
