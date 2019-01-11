@@ -130,6 +130,7 @@ services:
       MYSQL_USER: nextcloud_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
+      io.rancher.container.hostname_override: "nextcloud"
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
