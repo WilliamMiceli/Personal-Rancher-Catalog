@@ -30,6 +30,3 @@ services:
       - /RancherCattle/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
       - /RancherCattle/${DATA_DIR}/LetsEncrypt:/etc/traefik/acme # For Let's Encrypt certificates
       - /RancherCattle/${DATA_DIR}/Logs:/external/logs
-
-networks:
-  public-proxy:
