@@ -104,8 +104,6 @@ services:
       - collabora
       {{- end}}
       - nextcloud
-    networks:
-      - public-proxy
     {{- if .Values.WEB_PORT}}
     ports:
       - "${WEB_PORT}:80"
@@ -136,15 +134,11 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: false
-    networks:
-      db-admin:
-        aliases:
-          - nextcloud
     restart: on-failure
     volumes:
       - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - mysql:/var/lib/mysql
+      - Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:alpine
