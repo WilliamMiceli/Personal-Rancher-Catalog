@@ -121,6 +121,7 @@ services:
       #- /RancherCattle/${DATA_DIR}/Logs/NGINX
   mysql:
     image: mysql:5
+    container_name: nextcloud
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
@@ -130,7 +131,7 @@ services:
       MYSQL_USER: nextcloud_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
-      io.rancher.container.hostname_override: "nextcloud"
+      io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
