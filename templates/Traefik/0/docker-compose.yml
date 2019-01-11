@@ -14,8 +14,6 @@ services:
       {{- if (.Values.HOST_LABEL)}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      - public-proxy # This is used for connecting to other containers, which need to be part of this network as well
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
