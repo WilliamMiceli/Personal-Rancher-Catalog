@@ -19,8 +19,8 @@ services:
       traefik.enable: false
     restart: on-failure
     volumes:
-      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   {{- end}}
   cron:
     image: nextcloud:fpm-alpine
@@ -110,13 +110,15 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
-      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - Apps:/var/www/html/custom_apps # Nextcloud apps
-      - Configuration-Nextcloud:/var/www/html/config # Nextcloud configuration files
-      - Configuration-NGINX:/etc/nginx # NGINX configuration files
-      - Nextcloud:/var/www/html # Nextcloud site
-      - UserData:/var/www/html/data # Users' data file
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
+      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
+      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
+      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
+      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
+      #- /RancherCattle/${DATA_DIR}/Logs/Nextcloud
+      #- /RancherCattle/${DATA_DIR}/Logs/NGINX
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -136,9 +138,9 @@ services:
       traefik.enable: false
     restart: on-failure
     volumes:
-      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - Database:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:alpine
@@ -153,58 +155,6 @@ services:
       traefik.enable: false
     restart: on-failure
     volumes:
-      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   {{- end}}
-
-volumes:
-  Localtime:
-    driver_opts:
-      type: none
-      device: /etc/localtime
-      o: bind
-  Timezone:
-    driver_opts:
-      type: none
-      device: /etc/timezone
-      o: bind
-  Database:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Database
-      o: bind
-  Configuration-Nextcloud:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Configuration/Nextcloud
-      o: bind
-  Configuration-NGINX:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Configuration/NGINX
-      o: bind
-  Apps:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Apps
-      o: bind
-  Nextcloud:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Nextcloud
-      o: bind
-  UserData:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/UserData
-      o: bind
-  Logs-Nextcloud:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Logs/Nextcloud
-      o: bind
-  Logs-NGINX:
-    driver_opts:
-      type: none
-      device: /RancherCattle/${DATA_DIR}/Logs/NGINX
-      o: bind
