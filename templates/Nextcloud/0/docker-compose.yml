@@ -11,8 +11,6 @@ services:
       - 1.0.0.1
     environment:
       domain: collabora.${TRAEFIK_HOST}
-    expose:
-      - "9980"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -20,6 +18,9 @@ services:
       {{- end}}
       traefik.enable: false
     restart: on-failure
+    volumes:
+      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   {{- end}}
   cron:
     image: nextcloud:fpm-alpine
@@ -30,13 +31,13 @@ services:
       sh -c 'sh -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
       while /bin/true; do
-        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" 82
+        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
         echo $$(date) - Running cron finished
         sleep 900
       done
       EOF'
     restart: on-failure
-    user: "82"
+    user: "www-data"
     volumes_from:
       - nginx
   nextcloud:
@@ -52,9 +53,6 @@ services:
       NEXTCLOUD_ADMIN_USER: ${NC_ADMIN}
       NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
       NEXTCLOUD_TRUSTED_DOMAINS: ${TRAEFIK_HOST}
-    expose:
-      - "80"
-      - "9000"
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -114,13 +112,13 @@ services:
     {{- end}}
     restart: on-failure
     volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
-      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
-      - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
-      - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
-      - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
+      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - Apps:/var/www/html/custom_apps # Nextcloud apps
+      - Configuration-Nextcloud:/var/www/html/config # Nextcloud configuration files
+      - Configuration-NGINX:/etc/nginx # NGINX configuration files
+      - Nextcloud:/var/www/html # Nextcloud site
+      - UserData:/var/www/html/data # Users' data file
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -143,9 +141,9 @@ services:
           - nextcloud
     restart: on-failure
     volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - mysql:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:alpine
@@ -160,12 +158,58 @@ services:
       traefik.enable: false
     restart: on-failure
     volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - Localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - Timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   {{- end}}
 
-networks:
-  db-admin: 
-    external: true # Created by administrative stack (such as Adminer or phpMyAdmin)
-  public-proxy:
-    external: true # Created by Traefik stack
+volumes:
+  Localtime:
+    driver_opts:
+      type: none
+      device: /etc/localtime
+      o: bind
+  Timezone:
+    driver_opts:
+      type: none
+      device: /etc/timezone
+      o: bind
+  Database:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Database
+      o: bind
+  Configuration-Nextcloud:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Configuration/Nextcloud
+      o: bind
+  Configuration-NGINX:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Configuration/NGINX
+      o: bind
+  Apps:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Apps
+      o: bind
+  Nextcloud:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Nextcloud
+      o: bind
+  UserData:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/UserData
+      o: bind
+  Logs-Nextcloud:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Logs/Nextcloud
+      o: bind
+  Logs-NGINX:
+    driver_opts:
+      type: none
+      device: /RancherCattle/${DATA_DIR}/Logs/NGINX
+      o: bind
