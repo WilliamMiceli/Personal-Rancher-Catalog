@@ -29,15 +29,6 @@ services:
       {{- else}}
       traefik.enable: false
       {{- end}}
-    networks:
-      - db-admin # Used to be able to make secure, direct connections to other services in other stacks
-      - public-proxy # Used for the connection to the Traefik container for public access
     ports:
       - "${WEB_PORT}:80"
     restart: on-failure
-
-networks:
-  db-admin:
-    external: true
-  public-proxy:
-    external: true
