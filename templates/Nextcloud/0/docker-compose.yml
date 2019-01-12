@@ -1,29 +1,8 @@
 version: '2'
 
 services:
-  {{- if eq .Values.COLLABORA "true"}}
-  collabora:
-    image: collabora/code:latest
-    cap_add:
-      - MKNOD # Ability to create special files (https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
-    dns: # Using Cloudflare DNS
-      - 1.1.1.1
-      - 1.0.0.1
-    environment:
-      domain: collabora.${TRAEFIK_HOST}
-    labels:
-      io.rancher.container.pull_image: always
-      {{- if .Values.HOST_LABEL}}
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-      {{- end}}
-      traefik.enable: false
-    restart: on-failure
-    volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-  {{- end}}
   cron:
-    image: nextcloud:fpm-alpine
+    image: nextcloud:apache
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
@@ -41,7 +20,7 @@ services:
     volumes_from:
       - nginx
   nextcloud:
-    image: nextcloud:fpm-alpine
+    image: nextcloud:apache
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
@@ -58,26 +37,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      traefik.enable: false
-    links:
-      - mysql
-      {{- if eq .Values.REDIS "true"}}
-      - redis
-      {{- end}}
-    restart: on-failure
-    volumes_from:
-      - nginx
-  nginx:
-    image: nginx:latest # Can't use ":alpine" until I have a way to get the "www-data" user added automatically. (Project for another time)
-    dns: # Using Cloudflare DNS
-      - 1.1.1.1
-      - 1.0.0.1
-    labels:
-      io.rancher.container.pull_image: always
-      {{- if .Values.HOST_LABEL}}
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-      {{- end}}
-      io.rancher.sidekicks: cron, nextcloud
+      io.rancher.sidekicks: cron
       traefik.enable: true
       ### Start Nextcloud Segment
       traefik.nextcloud.frontend.entryPoints: http,https
@@ -89,21 +49,11 @@ services:
       traefik.nextcloud.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.nextcloud.port: "80"
       ### End Nextcloud Segment
-      ### Start Collabora Segment
-      traefik.collabora.frontend.entryPoints: http,https
-      traefik.collabora.frontend.headers.forceSTSHeader: true
-      traefik.collabora.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.collabora.frontend.headers.SSLRedirect: true
-      traefik.collabora.frontend.headers.STSPreload: true
-      traefik.collabora.frontend.headers.STSSeconds: 15552000
-      traefik.collabora.frontend.rule: Host:collabora.${TRAEFIK_HOST}
-      traefik.collabora.port: "81"
-      ### End Collabora Segment
     links:
-      {{- if eq .Values.COLLABORA "true"}}
-      - collabora
+      - mysql
+      {{- if eq .Values.REDIS "true"}}
+      - redis
       {{- end}}
-      - nextcloud
     {{- if .Values.WEB_PORT}}
     ports:
       - "${WEB_PORT}:80"
@@ -113,12 +63,9 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
-      - /RancherCattle/${DATA_DIR}/Configuration/Nextcloud:/var/www/html/config # Nextcloud configuration files
-      - /RancherCattle/${DATA_DIR}/Configuration/NGINX:/etc/nginx # NGINX configuration files
+      - /RancherCattle/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
       - /RancherCattle/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
       - /RancherCattle/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
-      #- /RancherCattle/${DATA_DIR}/Logs/Nextcloud
-      #- /RancherCattle/${DATA_DIR}/Logs/NGINX
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS

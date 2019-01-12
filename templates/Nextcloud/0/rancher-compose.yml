@@ -65,14 +65,6 @@ catalog:
       required: true
       type: password
 
-    - variable: "COLLABORA"
-      label: "Enable Collabora"
-      description: |
-        Add a Collabora container for office document editing and live collaboration. Additional setup required, see README.
-      default: true
-      required: true
-      type: boolean
-
     - variable: "REDIS"
       label: "Enable Redis"
       description: |
