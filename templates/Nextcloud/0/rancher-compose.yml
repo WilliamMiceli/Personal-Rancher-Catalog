@@ -20,7 +20,6 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
       required: false
       type: string
@@ -29,8 +28,9 @@ catalog:
       label: "Web Port"
       description: |
         The port to locally access the web interface on.
+        Leaving this empty will disable opening any port on the host system.
       default: "10100"
-      required: true
+      required: false
       type: string
 
     - variable: "DB_ROOT_PASS"
@@ -68,7 +68,7 @@ catalog:
     - variable: "REDIS"
       label: "Enable Redis"
       description: |
-        Add a Redis container for memory caching. Must be setup manually.
+        Add a Redis container for memory caching. Additional setup required, see README.
       default: true
       required: true
       type: boolean
@@ -80,17 +80,3 @@ catalog:
       default: "Personal/Nextcloud"
       required: true
       type: string
-
-services:
-  nextcloud:
-    scale: 1
-#    health_check:
-#      port: ${HOST_HTTP_PORT}
-#      request_line: GET /healthcheck HTTP/1.0
-#      interval: 5000
-#      response_timeout: 2000
-#      healthy_threshold: 2
-#      unhealthy_threshold: 3
-#      strategy: none
-  mysql:
-    scale: 1
