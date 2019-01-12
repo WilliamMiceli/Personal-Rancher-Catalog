@@ -1,24 +1,24 @@
 version: '2'
 
 services:
-  cron:
-    image: nextcloud:apache
-    dns: # Using Cloudflare DNS
-      - 1.1.1.1
-      - 1.0.0.1
-    entrypoint: | # www-data uid: 82
-      sh -c 'sh -s <<EOF
-      trap "break;exit" SIGHUP SIGINT SIGTERM
-      while /bin/true; do
-        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
-        echo $$(date) - Running cron finished
-        sleep 900
-      done
-      EOF'
-    restart: on-failure
-    user: "www-data"
-    volumes_from:
-      - nginx
+#  cron:
+#    image: nextcloud:apache
+#    dns: # Using Cloudflare DNS
+#      - 1.1.1.1
+#      - 1.0.0.1
+#    entrypoint: | # www-data uid: 82
+#      sh -c 'sh -s <<EOF
+#      trap "break;exit" SIGHUP SIGINT SIGTERM
+#      while /bin/true; do
+#        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
+#        echo $$(date) - Running cron finished
+#        sleep 900
+#      done
+#      EOF'
+#    restart: on-failure
+#    user: "www-data"
+#    volumes_from:
+#      - nginx
   nextcloud:
     image: nextcloud:apache
     dns: # Using Cloudflare DNS
@@ -37,7 +37,7 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      io.rancher.sidekicks: cron
+#      io.rancher.sidekicks: cron
       traefik.enable: true
       ### Start Nextcloud Segment
       traefik.nextcloud.frontend.entryPoints: http,https

@@ -11,3 +11,4 @@
 ## To-Do's
 
 * Explain how to manually setup Redis
+* Fix Cron container, does not yet properly execute yet
