@@ -2,7 +2,7 @@ version: '2'
 
 services:
 #  cron:
-#    image: nextcloud:apache
+#    image: nextcloud:stable-apache
 #    dns: # Using Cloudflare DNS
 #      - 1.1.1.1
 #      - 1.0.0.1
@@ -20,7 +20,7 @@ services:
 #    volumes_from:
 #      - nginx
   nextcloud:
-    image: nextcloud:apache
+    image: nextcloud:stable-apache
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
