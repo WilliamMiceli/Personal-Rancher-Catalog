@@ -20,19 +20,9 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "HostRegexp:{subdomain:.*}subdomain.domain.tld"
-      required: false
+      required: true
       type: string
-
-    - variable: "WEB_PORT"
-      label: "Web Port"
-      description: |
-        The port to locally access the web interface on.
-        Leaving this empty will disable opening any port on the host system.
-      default: "11100"
-      required: false
-      type: string # "Int" sometimes causes problems, and not a huge issue
 
     - variable: "DB_ROOT_PASS"
       label: "Database Root Password"
