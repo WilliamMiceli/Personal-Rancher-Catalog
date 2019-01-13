@@ -24,7 +24,7 @@ services:
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.rule: ${TRAEFIK_HOST}
+      traefik.web.frontend.rule: "HostRegexp: ${TRAEFIK_HOST}, {subdomain:.+}.${TRAEFIK_HOST}"
       traefik.web.port: "8080"
       ### End Web Segment
     links:
