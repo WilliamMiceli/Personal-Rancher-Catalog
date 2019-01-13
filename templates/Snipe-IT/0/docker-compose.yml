@@ -59,4 +59,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
