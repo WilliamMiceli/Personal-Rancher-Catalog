@@ -7,8 +7,8 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      APP_ENV: production # [ development | production ]
-      APP_DEBUG: false
+      APP_ENV: development # [ development | production ]
+      APP_DEBUG: true
       APP_URL: https://${TRAEFIK_HOST} # No port number needed
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
