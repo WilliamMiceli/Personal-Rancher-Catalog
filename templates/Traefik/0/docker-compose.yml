@@ -15,16 +15,16 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     ports:
+      - "${DASHBOARD_PORT}:8080"
       - "80:80" # HTTP
       - "443:443" # HTTPS
       - "1022:22" # SSH
       - "5050:5050" # Eclipse Che Multi-User Required
-      - "${DASHBOARD_PORT}:8080"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
-      - /RancherCattle/${DATA_DIR}/LetsEncrypt:/etc/traefik/acme # For Let's Encrypt certificates
+      - /RancherCattle/${DATA_DIR}/LetsEncrypt/acme.json:/acme.json # For Let's Encrypt certificates
       - /RancherCattle/${DATA_DIR}/Logs:/external/logs
