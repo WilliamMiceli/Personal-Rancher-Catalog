@@ -65,7 +65,7 @@ services:
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql
   nginx:
-    image: nginx:latest
+    image: nginx
     dns:
       - 1.1.1.1
       - 1.0.0.1
