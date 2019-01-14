@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+  xwiki:
+    image: xwiki:stable-postgres-tomcat
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      DB_HOST: postgresql
+      DB_DATABASE: xwiki_db
+      DB_USER: xwiki_user
+      DB_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.web.frontend.entryPoints: http, https
+      traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.referrerPolicy: no-referrer
+      traefik.web.frontend.headers.SSLRedirect: true
+      traefik.web.frontend.headers.STSPreload: true
+      traefik.web.frontend.headers.STSSeconds: 15552000
+      traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}" # HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.
+      traefik.web.port: "8080"
+      ### End Web Segment
+    links:
+      - postgresql
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/XWiki:/usr/local/xwiki
+  postgresql:
+    image: postgres:alpine
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      POSTGRES_DB: xwiki_db
+      POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      POSTGRES_USER: xwiki_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
