@@ -4,6 +4,11 @@
 
 <https://store.docker.com/_/xwiki>
 
+## Popular Configuration Articles
+* [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/Configuration/]
+* [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/Virtualization/]
+* [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/ShortURLs/]
+
 ### TODO
 
 * Fix issue with some page assets being delivered over http instead of https
