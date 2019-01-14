@@ -7,4 +7,4 @@
 ### TODO
 
 * Fix issue with some page assets being delivered over http instead of https
-* Document setting up domain DNS
+* Document setting up domain DNS for [wildcard Let's Encrypt certificates](https://docs.traefik.io/configuration/acme/#wildcard-domains)
