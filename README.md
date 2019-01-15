@@ -11,13 +11,13 @@ Hopefully it can also be of use to others as well!
 
 ## Stack Statuses
 
-- [ ] Adminer [Docker Hub](https://hub.docker.com/_/adminer) [Website](https://www.adminer.org/en/)
-- [ ] Apache Guacamole [Docker Hub](https://hub.docker.com/r/guacamole/guacamole) [Website](https://guacamole.apache.org/)
-- [x] Bind [Docker Hub](https://hub.docker.com/r/sameersbn/bind)
-- [ ] Discourse [Docker Hub](https://hub.docker.com/_/discourse) [Website](https://www.discourse.org/)
-- [ ] Drupal [Docker Hub](https://hub.docker.com/_/drupal) [Website](https://www.drupal.org/)
-- [ ] Eclipse Che [Docker Hub](https://hub.docker.com/_/eclipse-che) [Website](https://www.eclipse.org/che/)
-- [x] Ghost [Docker Hub](https://hub.docker.com/_/ghost) [Website](https://ghost.org/)
+- [ ] [ ] Adminer [Docker Hub](https://hub.docker.com/_/adminer) [Website](https://www.adminer.org/en/)
+- [ ] [ ] Apache Guacamole [Docker Hub](https://hub.docker.com/r/guacamole/guacamole) [Website](https://guacamole.apache.org/)
+- [x] [ ] Bind [Docker Hub](https://hub.docker.com/r/sameersbn/bind)
+- [ ] [ ] Discourse [Docker Hub](https://hub.docker.com/_/discourse) [Website](https://www.discourse.org/)
+- [ ] [ ] Drupal [Docker Hub](https://hub.docker.com/_/drupal) [Website](https://www.drupal.org/)
+- [ ] [ ] Eclipse Che [Docker Hub](https://hub.docker.com/_/eclipse-che) [Website](https://www.eclipse.org/che/)
+- [x] [ ] Ghost [Docker Hub](https://hub.docker.com/_/ghost) [Website](https://ghost.org/)
 - [ ] Gitea [Docker Hub](https://hub.docker.com/r/gitea/gitea) [Website](https://gitea.io/en-us/)
 - [ ] GitPitch Pro [Docker Hub](https://hub.docker.com/_/gitpitch-pro) [Website](https://gitpitch.com/)
 - [ ] Gogs [Docker Hub](https://hub.docker.com/r/gogs/gogs) [Website](https://gogs.io/)
