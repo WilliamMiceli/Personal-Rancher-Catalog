@@ -5,42 +5,50 @@ Hopefully it can also be of use to others as well!
 
 ## TODO List
 
-* Have WEB_PORT be optional
 * Have DATA_DIR be optional
 * Include logos for all stacks
-* Include description for all stacks
-* Use named volumes for the bind mounts
-  * <http://blog.code4hire.com/2018/06/define-named-volume-with-host-mount-in-the-docker-compose-file/>
-  * <https://stackoverflow.com/questions/35841241/docker-compose-named-mounted-volume>
+* Include descriptions and setup instructions for all stacks
 
-## Stacks Complete
+## Stack Statuses
 
-* Bind
-* Ghost
-* HTTPD
-* InvoiceNinja
-* Nextcloud
-* Nginx
-* OpenProject
-* PHPMyAdmin
-* Snipe-IT
-* Traefik
-* WordPress
-
-## Stacks Yet To Be Made
-
-* Adminer <https://docs.docker.com/samples/library/adminer/>
-* Apache Guacamole
-* Discourse <https://github.com/discourse/discourse_docker>
-* Eclipse Che
-* Matomo <https://docs.docker.com/samples/library/matomo/>
-* MediaWiki <https://hub.docker.com/_/mediawiki/>
-* Redmine <https://hub.docker.com/_/redmine>
-* Rocket.Chat <https://hub.docker.com/_/rocketchat>
-* YOURLS <https://hub.docker.com/_/yourls>
+- [ ] Adminer [Docker Hub](https://hub.docker.com/_/adminer) [Website](https://www.adminer.org/en/)
+- [ ] Apache Guacamole [Docker Hub](https://hub.docker.com/r/guacamole/guacamole) [Website](https://guacamole.apache.org/)
+- [x] Bind [Docker Hub](https://hub.docker.com/r/sameersbn/bind)
+- [ ] Discourse [Docker Hub](https://hub.docker.com/_/discourse) [Website](https://www.discourse.org/)
+- [ ] Drupal [Docker Hub](https://hub.docker.com/_/drupal) [Website](https://www.drupal.org/)
+- [ ] Eclipse Che [Docker Hub](https://hub.docker.com/_/eclipse-che) [Website](https://www.eclipse.org/che/)
+- [x] Ghost [Docker Hub](https://hub.docker.com/_/ghost) [Website](https://ghost.org/)
+- [ ] Gitea [Docker Hub](https://hub.docker.com/r/gitea/gitea) [Website](https://gitea.io/en-us/)
+- [ ] GitPitch Pro [Docker Hub](https://hub.docker.com/_/gitpitch-pro) [Website](https://gitpitch.com/)
+- [ ] Gogs [Docker Hub](https://hub.docker.com/r/gogs/gogs) [Website](https://gogs.io/)
+- [ ] Grafana [Docker Hub](https://hub.docker.com/r/grafana/grafana) [Website](https://grafana.com/)
+- [x] HTTPD [Docker Hub](https://hub.docker.com/_/httpd) [Website](http://httpd.apache.org/)
+- [x] InvoiceNinja [Docker Hub](https://hub.docker.com/r/invoiceninja/invoiceninja) [Website](https://www.invoiceninja.org/)
+- [ ] Joomla [Docker Hub](https://hub.docker.com/_/joomla) [Website](https://www.joomla.org/)
+- [ ] Logstash [Docker Hub](https://hub.docker.com/_/logstash) [Website](https://www.elastic.co/products/logstash)
+- [ ] Matomo [Docker Hub](https://hub.docker.com/_/matomo) [Website](https://matomo.org/)
+- [ ] MediaWiki [Docker Hub](https://hub.docker.com/_/mediawiki) [Website](https://www.mediawiki.org/)
+- [ ] Memcached [Docker Hub](https://hub.docker.com/_/memcached) [Website](https://www.memcached.org/)
+- [ ] MySQL [Docker Hub](https://hub.docker.com/_/mysql) [Website](https://www.mysql.com/)
+- [x] Nextcloud [Docker Hub](https://hub.docker.com/_/nextcloud) [Website](https://nextcloud.com/)
+- [ ] Nginx [Docker Hub](https://hub.docker.com/_/nginx) [Website](https://www.nginx.com/)
+- [x] OpenProject [Docker Hub](https://hub.docker.com/r/openproject/community) [Website](https://www.openproject.org/)
+- [x] PHPMyAdmin [Docker Hub](https://hub.docker.com/r/phpmyadmin/phpmyadmin) [Website](https://www.phpmyadmin.net/)
+- [ ] PostgreSQL [Docker Hub](https://hub.docker.com/_/postgres) [Website](https://www.postgresql.org/)
+- [ ] ProjectSend [Docker Hub](https://hub.docker.com/r/linuxserver/projectsend) [Website](https://www.projectsend.org/)
+- [ ] Pydio Cells [Docker Hub](https://hub.docker.com/r/pydio/cells/) [Website](https://pydio.com/en/)
+- [ ] Redis [Docker Hub](https://hub.docker.com/_/redis) [Website](https://redis.io/)
+- [ ] Redmine [Docker Hub](https://hub.docker.com/_/redmine) [Website](http://www.redmine.org/)
+- [ ] Rocket.Chat [Docker Hub](https://hub.docker.com/_/rocketchat) [Website](https://rocket.chat/)
+- [x] Snipe-IT [Docker Hub](https://hub.docker.com/r/snipe/snipe-it) [Website](https://snipeitapp.com/)
+- [x] Traefik [Docker Hub](https://hub.docker.com/_/traefik) [Website](https://traefik.io/)
+- [ ] Transmission [Docker Hub](https://hub.docker.com/r/linuxserver/transmission) [Website](https://transmissionbt.com/)
+- [x] WordPress [Docker Hub](https://hub.docker.com/_/wordpress) [Website](https://wordpress.com/)
+- [x] XWiki [Docker Hub](https://hub.docker.com/_/xwiki) [Website](https://www.xwiki.org/)
+- [ ] YOURLS [Docker Hub](https://hub.docker.com/_/yourls) [Website](http://yourls.org/)
 
 ## Using These Templates For Non-Rancher Configurations
 
 Notable Differences:
-* Rancher provides networking for all stacks within the environment, so any declarations to `networks` and `expose` are ignored by rancher (excluding `ports`).
-  * Instead, network policies are created in order to restrict network traffic, instead of creating networks.
+* Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`) on creation.
+  * Instead, network policies can be created within Rancher's "Environments"
