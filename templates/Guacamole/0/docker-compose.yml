@@ -7,39 +7,33 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_HOSTNAME: mysql
-      MYSQL_DATABASE: guacamole_db
-      MYSQL_USER: guacamole_user
-      MYSQL_PASSWORD: ${DB_USER_PASS}
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_DATABASE: guacamole_db
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http,https
       traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.redirect.entryPoint: https
-      traefik.web.frontend.redirect.permanent: true
       traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.port: "8080"
       ### End Web Segment
-      {{- else}}
-      traefik.enable: false
-      {{- end}}
     links:
       - guacd
-      - mysql
-    networks:
-      - public-proxy
-    ports:
-      - "${WEB_PORT}:8080"
+      - postgres
     restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   guacd:
     image: guacamole/guacd:latest
     dns:
@@ -50,34 +44,29 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
+      traefik.enable: false
     restart: on-failure
-  mysql:
-    image: mysql:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+  postgres:
+    image: postgres:alpine
     dns:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_DATABASE: guacamole_db
-      MYSQL_USER: guacamole_user
-      MYSQL_PASSWORD: ${DB_USER_PASS}
+      POSTGRES_DB: guacamole_db
+      POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      db-admin:
-        aliases:
-          - guacamole
+      traefik.enable: false
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/mysql # MySQL Database to be persistent
-
-networks:
-  db-admin:
-    external: true
-  public-proxy:
-    external: true
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
