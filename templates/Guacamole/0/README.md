@@ -3,7 +3,7 @@
 ## Initial Setup
 
 On the "guacamole" container, run:
-``
+`/opt/guacamole/bin/initdb.sh --mysql > /setup/initdb.sql`
 
 On the "mysql" container, run:
 `cat /setup/initdb.sql | mysql -u root -p guacamole_db`
