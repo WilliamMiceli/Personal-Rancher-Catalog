@@ -25,7 +25,7 @@ services:
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.rule: Host:${TRAEFIK_HOSTNAME}
+      traefik.web.frontend.rule: "Host:${TRAEFIK_HOSTNAME}; AddPrefix:/guacamole"
       traefik.web.port: "8080"
       ### End Web Segment
     links:
