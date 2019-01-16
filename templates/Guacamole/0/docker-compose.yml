@@ -21,6 +21,7 @@ services:
       ### Start HTTP Segment
       traefik.http.frontend.entryPoints: http
       traefik.http.frontend.headers.SSLRedirect: true
+      traefik.http.frontend.rule: Host:${TRAEFIK_HOSTNAME}
       ### End HTTP Segment
       ### Start HTTPS Segment
       traefik.https.frontend.entryPoints: https
