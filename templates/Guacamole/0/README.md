@@ -11,3 +11,6 @@ On the "mysql" container, run:
 ## Post-Installation
 
 Make sure you create your own user account and delete the "guacadmin" user (or at very least change the password)
+
+## TODO
+* Allow adding extensions
