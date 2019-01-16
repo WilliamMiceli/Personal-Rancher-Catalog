@@ -18,7 +18,7 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-      ### Start HTTP Segment
+      ### Start HTTP Segment (Each EntryPoint has it's own segment, that way on initial HTTP connection, the prefix isn't added twice)
       traefik.http.frontend.entryPoints: http
       traefik.http.frontend.headers.SSLRedirect: true
       traefik.http.frontend.rule: Host:${TRAEFIK_HOSTNAME}
@@ -40,7 +40,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Setup:/setup
+      - /RancherCattle/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
   guacd:
     image: guacamole/guacd:latest
     dns:
@@ -77,4 +77,4 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
-      - /RancherCattle/${DATA_DIR}/Setup:/setup
+      - /RancherCattle/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
