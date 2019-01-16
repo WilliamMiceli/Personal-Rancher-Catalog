@@ -17,35 +17,26 @@ catalog:
       required: false
       type: string
 
-    - variable: "TRAEFIK_HOST"
-      label: "Public Host Domain"
+    - variable: "TRAEFIK_HOSTNAME"
+      label: "Public Hostname"
       description: |
-        The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
+        The FQDN which Traefik should use to provide public access.
       default: "subdomain.domain.tld"
-      required: false
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Local Web Port"
-      description: |
-        The port to locally access the web interface on.
-      default: "10700"
       required: true
       type: string
 
     - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
+      label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" user.
       # default:
       required: true
       type: password
 
     - variable: "DB_USER_PASS"
-      label: "MySQL User Password"
+      label: "Database User Password"
       description: |
-        A secure password to be used by the "guacamole_user" MySQL user.
+        A secure password to be used by the "guacamole_user" user.
       # default:
       required: true
       type: password
