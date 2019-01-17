@@ -11,8 +11,12 @@ services:
     {{- if .Values.SERVICE_LINK_1}}
     external_links:
       - ${SERVICE_LINK_1}{{- if .Values.SERVICE_LINK_1_ALIAS}}:${SERVICE_LINK_1_ALIAS}{{- end}}
+      {{- if .Values.SERVICE_LINK_2}}
       - ${SERVICE_LINK_2}{{- if .Values.SERVICE_LINK_2_ALIAS}}:${SERVICE_LINK_2_ALIAS}{{- end}}
+      {{- end}}
+      {{- if .Values.SERVICE_LINK_3}}
       - ${SERVICE_LINK_3}{{- if .Values.SERVICE_LINK_3_ALIAS}}:${SERVICE_LINK_3_ALIAS}{{- end}}
+      {{- end}}
     {{- end}}
     labels:
       io.rancher.container.pull_image: always
