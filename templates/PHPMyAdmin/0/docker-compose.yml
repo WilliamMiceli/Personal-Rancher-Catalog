@@ -8,12 +8,21 @@ services:
       - 1.0.0.1
     environment:
       PMA_ARBITRARY: 1 # Allows the user to specify any arbitrary server using address/hostname and port
+    {{- if .Values.SERVICE_LINK_1}}
+    external_links:
+      - ${SERVICE_LINK_1}{{- if .Values.SERVICE_LINK_1_ALIAS}}:${SERVICE_LINK_1_ALIAS}{{- end}}
+      {{- if .Values.SERVICE_LINK_2}}
+      - ${SERVICE_LINK_2}{{- if .Values.SERVICE_LINK_2_ALIAS}}:${SERVICE_LINK_2_ALIAS}{{- end}}
+      {{- end}}
+      {{- if .Values.SERVICE_LINK_3}}
+      - ${SERVICE_LINK_3}{{- if .Values.SERVICE_LINK_3_ALIAS}}:${SERVICE_LINK_3_ALIAS}{{- end}}
+      {{- end}}
+    {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http,https
@@ -26,9 +35,4 @@ services:
       traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.port: "80"
       ### End Web Segment
-      {{- else}}
-      traefik.enable: false
-      {{- end}}
-    ports:
-      - "${WEB_PORT}:80"
     restart: on-failure
