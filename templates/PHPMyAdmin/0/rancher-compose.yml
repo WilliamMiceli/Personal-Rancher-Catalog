@@ -38,7 +38,7 @@ catalog:
         (Optional) Create an alias for the service
       # default:
       required: false
-      type: service
+      type: string
 
     - variable: "SERVICE_LINK_2"
       label: "Service 2"
@@ -53,7 +53,7 @@ catalog:
         (Optional) Create an alias for the service
       # default:
       required: false
-      type: service
+      type: string
 
     - variable: "SERVICE_LINK_3"
       label: "Service 3"
@@ -68,4 +68,4 @@ catalog:
         (Optional) Create an alias for the service
       # default:
       required: false
-      type: service
+      type: string
