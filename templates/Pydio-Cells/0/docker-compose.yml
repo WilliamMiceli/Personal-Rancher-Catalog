@@ -8,7 +8,7 @@ services:
       - 1.0.0.1
     environment:
       CELLS_BIND: ${TRAEFIK_HOST}:80
-      CELLS_EXTERNAL: ${TRAEFIK_HOST}
+      CELLS_EXTERNAL: ${TRAEFIK_HOST}:443
       CELLS_NO_SSL: 0
     labels:
       io.rancher.container.pull_image: always
@@ -32,7 +32,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}:/root/.config/pydio/cells # Cells data
+      - /RancherCattle/${DATA_DIR}/Data:/root/.config/pydio/cells/data # Cells users' data files
+      - /RancherCattle/${DATA_DIR}/Logs:/root/.config/pydio/cells/logs # Cells logs
+      - /RancherCattle/${DATA_DIR}/Services:/root/.config/pydio/cells/services # Cells services information
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
