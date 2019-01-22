@@ -11,7 +11,7 @@ services:
       YOURLS_DB_NAME: yourls_db
       YOURLS_DB_USER: yourls_user
       YOURLS_DB_PASS: ${DB_USER_PASS}
-      YOURLS_SITE: ${TRAEFIK_HOST}
+      YOURLS_SITE: https://${TRAEFIK_HOST}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
