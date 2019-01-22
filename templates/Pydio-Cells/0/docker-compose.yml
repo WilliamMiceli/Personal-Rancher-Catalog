@@ -9,7 +9,7 @@ services:
     environment:
       CELLS_BIND: ${TRAEFIK_HOST}:80
       CELLS_EXTERNAL: ${TRAEFIK_HOST}
-      CELLS_NO_SSL: 1
+      CELLS_NO_SSL: 0
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
