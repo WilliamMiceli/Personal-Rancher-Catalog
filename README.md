@@ -35,7 +35,6 @@ Hopefully it can also be of use to others as well!
 - [x] OpenProject - [Docker Hub](https://hub.docker.com/r/openproject/community) - [Website](https://www.openproject.org/)
 - [x] PHPMyAdmin - [Docker Hub](https://hub.docker.com/r/phpmyadmin/phpmyadmin) - [Website](https://www.phpmyadmin.net/)
 - [ ] PostgreSQL - [Docker Hub](https://hub.docker.com/_/postgres) - [Website](https://www.postgresql.org/)
-- [ ] ProjectSend - [Docker Hub](https://hub.docker.com/r/linuxserver/projectsend) - [Website](https://www.projectsend.org/)
 - [ ] Pydio Cells - [Docker Hub](https://hub.docker.com/r/pydio/cells/) - [Website](https://pydio.com/en/)
 - [ ] Redis - [Docker Hub](https://hub.docker.com/_/redis) - [Website](https://redis.io/)
 - [ ] Redmine - [Docker Hub](https://hub.docker.com/_/redmine) - [Website](http://www.redmine.org/)
