@@ -53,5 +53,5 @@ Hopefully it can also be of use to others as well!
 
 ## Using These Templates For Non-Rancher Configurations
 
-* Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`) on creation.
+* Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`).
   * Instead, network policies can be created within Rancher's "Environments"
