@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which containers should be deployed
+        The Label Key/Value pair of the host which containers should be deployed
       default: "host.id=Host1"
       required: false
       type: string
@@ -37,22 +37,22 @@ catalog:
       label: "SSH Port"
       description: |
         The port to access the SSH server on.
-      default: "10522"
+      default: "1022"
       required: true
       type: string
 
     - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
+      label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" database user.
       # default:
       required: true
       type: password
 
     - variable: "DB_USER_PASS"
-      label: "MySQL User Password"
+      label: "Database User Password"
       description: |
-        A secure password to be used by the "gogs_user" MySQL user.
+        A secure password to be used by the "gogs_user" database user.
       # default:
       required: true
       type: password

@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which containers should be deployed
+        The Label Key/Value pair of the host which containers should be deployed
       default: "host.id=Host3"
       required: false
       type: string
@@ -27,7 +27,7 @@ catalog:
     - variable: "DB_ROOT_PASS"
       label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" database user.
       # default:
       required: true
       type: password
@@ -35,7 +35,7 @@ catalog:
     - variable: "DB_USER_PASS"
       label: "Database User Password"
       description: |
-        A secure password to be used by the "xwiki_user" MySQL user.
+        A secure password to be used by the "xwiki_user" database user.
       # default:
       required: true
       type: password

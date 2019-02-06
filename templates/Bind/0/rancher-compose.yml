@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Key/Value pair on the host which Bind should be deployed.
+        The Key/Value pair of the host which Bind should be deployed.
       default: "host.id=Controller"
       required: false
       type: string
