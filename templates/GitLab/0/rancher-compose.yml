@@ -20,9 +20,8 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
-      required: false
+      required: true
       type: string
 
     - variable: "WEB_PORT"
@@ -37,6 +36,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal/Gitlab-CE"
+      default: "Personal/GitLab"
       required: true
       type: string
