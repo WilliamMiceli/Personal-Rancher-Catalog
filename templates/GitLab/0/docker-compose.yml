@@ -11,8 +11,6 @@ services:
         external_url 'https://${TRAEFIK_HOST}'
         gitlab_rails['gitlab_shell_ssh_port'] = 1022
         nginx['real_ip_trusted_addresses'] = [ '10.42.0.0/16' ] # 10.42.0.0/16 is the default Rancher managed subnet
-        # nginx['real_ip_header'] = 'X-Real-IP'
-        # nginx['real_ip_recursive'] = 'on'
         nginx['listen_port'] = 80 # Using HTTP between the Traefik container and GitLab
         nginx['listen_https'] = false # Traefik is handling HTTPS on outside
     hostname: ${TRAEFIK_HOST}
