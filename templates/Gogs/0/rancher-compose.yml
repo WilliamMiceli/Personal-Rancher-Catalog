@@ -47,9 +47,3 @@ catalog:
       default: "Personal/Gogs"
       required: true
       type: string
-
-services:
-  gogs:
-    scale: 1
-  mysql:
-    scale: 1
