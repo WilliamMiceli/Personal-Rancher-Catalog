@@ -14,16 +14,15 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       ### Start SSH Segment
-      traefik.ssh.frontend.entryPoints: ssh
-      traefik.ssh.frontend.headers.forceSTSHeader: true
-      traefik.ssh.frontend.headers.SSLRedirect: true
-      traefik.ssh.frontend.headers.STSPreload: true
-      traefik.ssh.frontend.headers.STSSeconds: 15552000
-      traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.ssh.port: "22"
+      # traefik.ssh.frontend.entryPoints: ssh
+      # traefik.ssh.frontend.headers.forceSTSHeader: true
+      # traefik.ssh.frontend.headers.SSLRedirect: true
+      # traefik.ssh.frontend.headers.STSPreload: true
+      # traefik.ssh.frontend.headers.STSSeconds: 15552000
+      # traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
+      # traefik.ssh.port: "22"
       ### End SSH Segment
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http,https
@@ -34,16 +33,8 @@ services:
       traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.port: "3000"
       ### End Web Segment
-      {{- else}}
-      traefik.enable: false
-      {{- end}}
     links:
       - mysql
-    networks:
-      - public-proxy
-    ports:
-      - "${SSH_PORT}:22"
-      - "${WEB_PORT}:3000"
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
@@ -55,7 +46,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      MYSQL_DATABASE: gogs # Will eventually rename this to "gogs_db"
+      MYSQL_DATABASE: gogs_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
       MYSQL_USER: gogs_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
@@ -64,18 +55,8 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-    networks:
-      db-admin:
-        aliases:
-          - gogs
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
-
-networks:
-  db-admin:
-    external: true
-  public-proxy:
-    external: true
