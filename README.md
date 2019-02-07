@@ -21,7 +21,6 @@ Hopefully it can also be of use to others as well!
 - [x] Ghost ([Docker Hub](https://hub.docker.com/_/ghost) | [Website](https://ghost.org/))
 - [ ] Gitea ([Docker Hub](https://hub.docker.com/r/gitea/gitea) | [Website](https://gitea.io/en-us/))
 - [ ] GitPitch Pro ([Docker Hub](https://hub.docker.com/_/gitpitch-pro) | [Website](https://gitpitch.com/))
-- [ ] Gogs ([Docker Hub](https://hub.docker.com/r/gogs/gogs) | [Website](https://gogs.io/))
 - [ ] Grafana ([Docker Hub](https://hub.docker.com/r/grafana/grafana) | [Website](https://grafana.com/))
 - [x] HTTPD ([Docker Hub](https://hub.docker.com/_/httpd) | [Website](http://httpd.apache.org/))
 - [x] InvoiceNinja ([Docker Hub](https://hub.docker.com/r/invoiceninja/invoiceninja) | [Website](https://www.invoiceninja.org/))
@@ -48,12 +47,16 @@ Hopefully it can also be of use to others as well!
 
 ### Will Complete at a Later Date
 
-- [ ] Pydio Cells ([Docker Hub](https://hub.docker.com/r/pydio/cells/) | [Website](https://pydio.com/en/))
-- [ ] Transmission ([Docker Hub](https://hub.docker.com/r/linuxserver/transmission) | [Website](https://transmissionbt.com/))
+- Pydio Cells ([Docker Hub](https://hub.docker.com/r/pydio/cells/) | [Website](https://pydio.com/en/))
+- Transmission ([Docker Hub](https://hub.docker.com/r/linuxserver/transmission) | [Website](https://transmissionbt.com/))
+
+### Removed/Ignored
+
+- Gogs ([Docker Hub](https://hub.docker.com/r/gogs/gogs) | [Website](https://gogs.io/)) - Gitea has far surpassed Gogs in many ways, to the point where I can't find a reason to use Gogs over Gitea, so I don't believe there would be any reason to keep a configuration around for it.
 
 ## Notices
 
-* I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled, since I can't even test out if it would work for someone else using a different setup.
+* I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled.
 
 ## Using These Templates For Non-Rancher Configurations
 
