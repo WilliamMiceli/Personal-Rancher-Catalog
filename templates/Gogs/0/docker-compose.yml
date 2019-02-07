@@ -17,13 +17,13 @@ services:
       {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       ### Start SSH Segment
-      traefik.ssh.frontend.entryPoints: ssh
-      traefik.ssh.frontend.headers.forceSTSHeader: true
-      traefik.ssh.frontend.headers.SSLRedirect: true
-      traefik.ssh.frontend.headers.STSPreload: true
-      traefik.ssh.frontend.headers.STSSeconds: 15552000
-      traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.ssh.port: "22"
+      # traefik.ssh.frontend.entryPoints: ssh
+      # traefik.ssh.frontend.headers.forceSTSHeader: true
+      # traefik.ssh.frontend.headers.SSLRedirect: true
+      # traefik.ssh.frontend.headers.STSPreload: true
+      # traefik.ssh.frontend.headers.STSSeconds: 15552000
+      # traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
+      # traefik.ssh.port: "22"
       ### End SSH Segment
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http,https
