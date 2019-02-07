@@ -51,6 +51,10 @@ Hopefully it can also be of use to others as well!
 - [ ] Pydio Cells ([Docker Hub](https://hub.docker.com/r/pydio/cells/) | [Website](https://pydio.com/en/))
 - [ ] Transmission ([Docker Hub](https://hub.docker.com/r/linuxserver/transmission) | [Website](https://transmissionbt.com/))
 
+## Notices
+
+* I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled, since I can't even test out if it would work for someone else using a different setup.
+
 ## Using These Templates For Non-Rancher Configurations
 
 * Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`).
