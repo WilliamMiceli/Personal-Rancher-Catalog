@@ -41,9 +41,6 @@ services:
       - mysql
     networks:
       - public-proxy
-    ports:
-      - "${SSH_PORT}:22"
-      - "${WEB_PORT}:3000"
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system

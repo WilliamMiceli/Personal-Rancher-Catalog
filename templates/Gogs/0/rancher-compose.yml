@@ -20,31 +20,14 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
-      required: false
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Local Web Port"
-      description: |
-        The port to locally access the web interface on.
-      default: "10500"
-      required: true
-      type: string
-
-    - variable: "SSH_PORT"
-      label: "SSH Port"
-      description: |
-        The port to access the SSH server on.
-      default: "10522"
       required: true
       type: string
 
     - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
+      label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" database user.
       # default:
       required: true
       type: password
@@ -52,7 +35,7 @@ catalog:
     - variable: "DB_USER_PASS"
       label: "MySQL User Password"
       description: |
-        A secure password to be used by the "gogs_user" MySQL user.
+        A secure password to be used by the "gogs_user" database user.
       # default:
       required: true
       type: password
