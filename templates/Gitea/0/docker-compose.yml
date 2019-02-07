@@ -1,0 +1,62 @@
+version: '2'
+
+services:
+  gogs:
+    image: gitea/gitea:latest
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      USER_UID: '1000'
+      USER_GID: '1000'
+      APP_NAME: 'Gitea: Git with a cup of tea' # Application name, used in the page title.
+      RUN_MODE: prod # ['dev' | 'prod']
+      DISABLE_SSH: true # SSH not yet possible with Traefik
+      DB_TYPE: postgres
+      DB_HOST: postgres:5432
+      DB_NAME: gitea_db
+      DB_USER: gitea_user
+      DB_PASSWD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.web.frontend.headers.SSLRedirect: true
+      traefik.web.frontend.headers.STSPreload: true
+      traefik.web.frontend.headers.STSSeconds: 15552000
+      traefik.web.frontend.passHostHeader: true
+      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.web.port: '3000'
+      ### End Web Segment
+    links:
+      - postgres
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Data:/data
+  postgres:
+    image: postgres:9.6
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      POSTGRES_DB: gitea_db
+      POSTGRES_USER: gitea_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/data
