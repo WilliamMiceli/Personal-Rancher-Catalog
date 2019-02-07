@@ -9,9 +9,9 @@ services:
     environment:
       USER_UID: '1000'
       USER_GID: '1000'
-      APP_NAME: 'Gitea: Git with a cup of tea' # Application name, used in the page title.
       RUN_MODE: prod # ['dev' | 'prod']
       DISABLE_SSH: true # SSH not yet possible with Traefik
+      ROOT_URL: 'https://${TRAEFIK_HOST}'
       DB_TYPE: postgres
       DB_HOST: postgres:5432
       DB_NAME: gitea_db
