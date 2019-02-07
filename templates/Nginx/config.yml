@@ -1,0 +1,8 @@
+name: Nginx
+description: |
+  A web server with a strong focus on high concurrency, performance and low memory usage.
+version: latest
+# category:
+maintainer: WilliamMiceli
+# license:
+# projectURL:

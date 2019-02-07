@@ -1,0 +1,8 @@
+name: Apache httpd
+description: |
+  A Web server application notable for playing a key role in the initial growth of the World Wide Web.
+version: latest
+# category:
+maintainer: WilliamMiceli
+# license:
+# projectURL:

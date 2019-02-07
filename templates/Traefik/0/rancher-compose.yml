@@ -12,7 +12,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Key/Value pair on the host which the stack should be deployed.
+        The Key/Value pair of the host which the stack should be deployed.
       default: "host.id=Proxy1"
       required: false
       type: string
@@ -21,7 +21,7 @@ catalog:
       label: "Dashboard Port"
       description: |
         The port to access the dashboard interface on.
-      default: "1200"
+      default: "10"
       required: true
       type: string
 

@@ -6,70 +6,45 @@ catalog:
   # minimum_rancher_version:
   # maximum_rancher_version:
   # upgrade_from:
+  # uuid:
   questions:
 
-    - variable: "guacamole_db"
-      label: "MySQL Database Name"
-      description: "Your MYSQL guacamole database name"
-      default: "guacamole_db"
-      required: true
-      type: "string"
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair of the host which the stack should be deployed.
+      default: "host.id=Controller"
+      required: false
+      type: string
 
-    - variable: "guacamole_user"
-      label: "MySQL Database User"
-      description: "Your MYSQL guacamole user name"
+    - variable: "TRAEFIK_HOSTNAME"
+      label: "Public Hostname"
+      description: |
+        The FQDN which Traefik should use to provide public access.
+      default: "subdomain.domain.tld"
       required: true
-      default: "guacamole_user"
-      type: "string"
+      type: string
 
-    - variable: "guacamole_password"
-      label: "MySQL Database Password"
-      description: "Your MYSQL guacamole user password. Defaults to \"guacamole_password\""
+    - variable: "DB_ROOT_PASS"
+      label: "Database Root Password"
+      description: |
+        A secure password to be used by the "root" user.
+      # default:
       required: true
-      default: "guacamole_password"
-      type: "password"
+      type: password
 
-    - variable: "public_port"
-      label: "Public Port"
-      description: "The public port that Guacamole listens on, defaults to 8080"
+    - variable: "DB_USER_PASS"
+      label: "Database User Password"
+      description: |
+        A secure password to be used by the "guacamole_user" user.
+      # default:
       required: true
-      default: 8080
-      type: "int"
+      type: password
 
-services:
-  guacamole:
-    scale: 1
-    health_check:
-      healthy_threshold: 2
-      response_timeout: 2000
-      port: 8080
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      strategy: recreate
-      request_line: GET "/guacamole" "HTTP/1.0"
-      reinitializing_timeout: 60000
-  guacd:
-    scale: 1
-    health_check:
-      healthy_threshold: 2
-      response_timeout: 2000
-      port: 4822
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      strategy: recreate
-      reinitializing_timeout: 60000
-  setup-get-db-script:
-    scale: 1
-  database:
-    scale: 1
-    health_check:
-      healthy_threshold: 2
-      response_timeout: 2000
-      port: 3306
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      strategy: recreate
-      reinitializing_timeout: 60000
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data for the stack.
+      default: "Personal/Guacamole"
+      required: true
+      type: string

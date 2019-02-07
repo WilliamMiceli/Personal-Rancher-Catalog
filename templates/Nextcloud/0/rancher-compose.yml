@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which containers should be deployed
+        The Label Key/Value pair of the host which containers should be deployed
       default: "host.id=Host1"
       required: false
       type: string
@@ -20,7 +20,6 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
       required: false
       type: string
@@ -29,22 +28,23 @@ catalog:
       label: "Web Port"
       description: |
         The port to locally access the web interface on.
+        Leaving this empty will disable opening any port on the host system.
       default: "10100"
-      required: true
+      required: false
       type: string
 
     - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
+      label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" database user.
       # default:
       required: true
       type: password
 
     - variable: "DB_USER_PASS"
-      label: "MySQL User Password"
+      label: "Database User Password"
       description: |
-        A secure password to be used by the "nextcloud_user" MySQL user.
+        A secure password to be used by the "nextcloud_user" database user.
       # default:
       required: true
       type: password
@@ -68,7 +68,7 @@ catalog:
     - variable: "REDIS"
       label: "Enable Redis"
       description: |
-        Add a Redis container for memory caching. Must be setup manually.
+        Add a Redis container for memory caching. Additional setup required, see README.
       default: true
       required: true
       type: boolean
@@ -80,17 +80,3 @@ catalog:
       default: "Personal/Nextcloud"
       required: true
       type: string
-
-services:
-  nextcloud:
-    scale: 1
-#    health_check:
-#      port: ${HOST_HTTP_PORT}
-#      request_line: GET /healthcheck HTTP/1.0
-#      interval: 5000
-#      response_timeout: 2000
-#      healthy_threshold: 2
-#      unhealthy_threshold: 3
-#      strategy: none
-  mysql:
-    scale: 1

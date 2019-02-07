@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: SnipeIT
+  name: Snipe-IT
   version: latest
   # description:
   # minimum_rancher_version:
@@ -11,24 +11,16 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which containers should be deployed
+        The Label Key/Value pair of the host which containers should be deployed
       default: "host.id=Host1"
       required: false
       type: string
 
-    - variable: "URL"
-      label: "URL"
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
       description: |
-        The domain or hostname the service can be accessed at.
-      default: "http://localhost"
-      required: true
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Local Web Port"
-      description: |
-        The port to locally access the web interface on.
-      default: "10300"
+        The host that Traefik will use to provide public access.
+      default: "subdomain.domain.tld"
       required: true
       type: string
 
@@ -41,17 +33,17 @@ catalog:
       type: string
 
     - variable: "DB_ROOT_PASS"
-      label: "MySQL Root Password"
+      label: "Database Root Password"
       description: |
-        A secure password to be used by the "root" MySQL user.
+        A secure password to be used by the "root" database user.
       # default:
       required: true
       type: password
 
     - variable: "DB_USER_PASS"
-      label: "MySQL User Password"
+      label: "Database User Password"
       description: |
-        A secure password to be used by the "snipe_user" MySQL user.
+        A secure password to be used by the "snipeit_user" database user.
       # default:
       required: true
       type: password
@@ -59,6 +51,6 @@ catalog:
     - variable: "APP_KEY"
       label: "Encryption Key"
       description: |
-        A random 32-Character string which will be used for encryption.
+        See README.
       required: true
       type: password

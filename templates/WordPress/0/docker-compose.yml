@@ -1,0 +1,56 @@
+version: '2'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress_db
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.web.frontend.entryPoints: http,https
+      traefik.web.frontend.headers.forceSTSHeader: true
+      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.web.frontend.headers.SSLRedirect: true
+      traefik.web.frontend.headers.STSPreload: true
+      traefik.web.frontend.headers.STSSeconds: 15552000
+      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.web.port: "80"
+      ### End Web Segment
+    links:
+      - mysql
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Wordpress:/var/www/html
+  mysql:
+    image: mysql:5
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql

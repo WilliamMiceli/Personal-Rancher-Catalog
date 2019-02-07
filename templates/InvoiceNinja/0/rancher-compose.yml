@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which InvoiceNinja should be deployed
+        The Label Key/Value pair of the host which InvoiceNinja should be deployed
       default: "host.id=Host1"
       required: false
       type: string
@@ -20,18 +20,25 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
-      required: false
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Local Web Port"
-      description: |
-        The port to locally access the web interface on.
-      default: "10200"
       required: true
       type: string
+
+    - variable: "DB_ROOT_PASS"
+      label: "Database Root Password"
+      description: |
+        A secure password to be used by the "root" database user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DB_USER_PASS"
+      label: "Database User Password"
+      description: |
+        A secure password to be used by the "ninja" database user.
+      # default:
+      required: true
+      type: password
 
     - variable: DATA_DIR
       label: "Data Directory"

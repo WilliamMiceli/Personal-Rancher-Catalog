@@ -1,7 +1,7 @@
 name: OpenProject
 description: |
-  Status: NOT READY
-# version:
+  A web-based project management system for location-independent team collaboration.
+version: latest
 category: Productivity
 maintainer: WilliamMiceli
 # license:

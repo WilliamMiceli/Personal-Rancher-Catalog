@@ -1,7 +1,7 @@
 name: Apache Guacamole
 description: |
-  Status: NOT READY
-# version:
+  A clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH.
+version: latest
 #category:
 maintainer: WilliamMiceli
 # license: 
