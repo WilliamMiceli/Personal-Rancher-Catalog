@@ -18,3 +18,5 @@ You can monitor if it is working by opening a shell terminal on your Redis conta
 
 * Explain how to manually setup Redis
 * Fix Cron container, does not yet properly execute yet
+* Better setup trusted_proxies
+  * [Documentation Reference](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html?highlight=reverse%20proxy)

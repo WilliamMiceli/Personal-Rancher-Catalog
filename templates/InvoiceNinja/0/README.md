@@ -49,3 +49,4 @@ The web interface provides an easy backup method by exporting to a JSON file, wh
 ## TODO
 
 * Add more integration instructions
+* Add better trusted proxies configuration
