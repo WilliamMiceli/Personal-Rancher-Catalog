@@ -20,11 +20,12 @@ services:
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http, https
       traefik.web.frontend.headers.forceSTSHeader: true
-      traefik.web.frontend.headers.referrerPolicy: no-referrer
+      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}" # HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.
+      traefik.web.frontend.passHostHeader: true
+      traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}" # HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.${TRAEFIK_HOST}
       traefik.web.port: "8080"
       ### End Web Segment
     links:
