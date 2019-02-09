@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: Gitlab-CE
+  name: GitLab
   version: latest
   # description:
   # minimum_rancher_version:
@@ -21,14 +21,6 @@ catalog:
       description: |
         The host that Traefik will use to provide public access.
       default: "subdomain.domain.tld"
-      required: true
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Web Port"
-      description: |
-        The port to access the web interface on.
-      default: "20300"
       required: true
       type: string
 
