@@ -8,9 +8,11 @@ services:
       - 1.0.0.1
     environment:
       PMA_ARBITRARY: 1 # Allows the user to specify any arbitrary server using address/hostname and port
-    {{- if .Values.SERVICE_LINK_1}}
+    {{- if or .Values.SERVICE_LINK_1 .Values.SERVICE_LINK_2 .Values.SERVICE_LINK_3}}
     external_links:
+      {{- if .Values.SERVICE_LINK_1}}
       - ${SERVICE_LINK_1}{{- if .Values.SERVICE_LINK_1_ALIAS}}:${SERVICE_LINK_1_ALIAS}{{- end}}
+      {{- end}}
       {{- if .Values.SERVICE_LINK_2}}
       - ${SERVICE_LINK_2}{{- if .Values.SERVICE_LINK_2_ALIAS}}:${SERVICE_LINK_2_ALIAS}{{- end}}
       {{- end}}
