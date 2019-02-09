@@ -1,7 +1,6 @@
 name: Eclipse Che
 description: |
-  (Multi-User)
-  Status: NOT READY
+  Eclipse Che is an open-source Java based developer workspace server and cloud integrated development environment (IDE) which provides a remote development platform for multi-user purpose.
 version: latest
 # category:
 maintainer: WilliamMiceli
