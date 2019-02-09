@@ -29,6 +29,7 @@ Hopefully it can also be of use to others as well!
 - [ ] Matomo ([Docker Hub](https://hub.docker.com/_/matomo) | [Website](https://matomo.org/))
 - [ ] MediaWiki ([Docker Hub](https://hub.docker.com/_/mediawiki) | [Website](https://www.mediawiki.org/))
 - [ ] Memcached ([Docker Hub](https://hub.docker.com/_/memcached) | [Website](https://www.memcached.org/))
+- [ ] MongoDB ([Docker Hub](https://hub.docker.com/_/mongo) | [Website](https://www.mongodb.com/))
 - [ ] MySQL ([Docker Hub](https://hub.docker.com/_/mysql) | [Website](https://www.mysql.com/))
 - [x] Nextcloud ([Docker Hub](https://hub.docker.com/_/nextcloud) | [Website](https://nextcloud.com/))
 - [ ] Nginx ([Docker Hub](https://hub.docker.com/_/nginx) | [Website](https://www.nginx.com/))
