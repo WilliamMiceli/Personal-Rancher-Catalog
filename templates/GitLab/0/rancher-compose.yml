@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: Gitlab-CE
+  name: GitLab
   version: latest
   # description:
   # minimum_rancher_version:
@@ -11,7 +11,7 @@ catalog:
     - variable: "HOST_LABEL"
       label: "Host Label Key/Value Pair"
       description: |
-        The Label Key/Value pair on the host which containers should be deployed
+        The Label Key/Value pair of the host which containers should be deployed
       default: "host.id=Host2"
       required: false
       type: string
@@ -20,16 +20,7 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
-      required: false
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Web Port"
-      description: |
-        The port to access the web interface on.
-      default: "20300"
       required: true
       type: string
 
@@ -37,6 +28,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal/Gitlab-CE"
+      default: "Personal/GitLab"
       required: true
       type: string
