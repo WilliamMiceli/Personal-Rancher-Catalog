@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  redis:
+    image: redis:${IMAGE_TAG}
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      {{- if .Values.DATA_DIR}}
+      {{- if eq .Values.CUSTOM_CONF "true"}}
+      - /RancherCattle/${DATA_DIR}/Redis/Configuration/redis.conf:/usr/local/etc/redis/redis.conf
+      {{- end}}
+      - /RancherCattle/${DATA_DIR}/Redis/Data:/data
+      {{- end}}

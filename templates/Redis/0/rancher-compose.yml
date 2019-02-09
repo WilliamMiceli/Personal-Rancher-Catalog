@@ -1,0 +1,48 @@
+version: '2'
+catalog:
+  name: Redis
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # uuid:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair on the host which the stack should be deployed.
+      default: "host.id=Host1"
+      required: false
+      type: string
+
+    - variable: "IMAGE_TAG"
+      label: "Image Tag"
+      description: |
+        The image tag to use for the desired container variant.
+      default: "latest"
+      required: true
+      type: enum
+      options:
+        - "latest"
+        - "alpine"
+        - "32bit"
+        - "stretch"
+
+    - variable: "CUSTOM_CONF"
+      label: "Custom Configuration"
+      description: |
+        Whether a custom configuration file should be mounted from the persistent data directory or not. Data Directory is required for this.
+      default: false
+      required: true
+      type: boolean
+
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data for the stack.
+        Leaving this blank will disable persistent data storage for the stack.
+      default: "Personal/Redis"
+      required: false
+      type: string
