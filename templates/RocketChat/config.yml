@@ -1,7 +1,7 @@
 name: RocketChat
 description: |
   Status: NOT READY
-# version:
+version: latest
 category: Communication
 maintainer: WilliamMiceli
 # license:
