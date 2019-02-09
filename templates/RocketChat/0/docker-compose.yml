@@ -1,36 +1,80 @@
-mongo:
-  image: mongo
-# volumes:
-#    - ./data/runtime/db:/data/db
-#    - ./data/dump:/dump
-  command: mongod --smallfiles --oplogSize 128
+version: '2'
 
-rocketchat:
-  image: rocketchat/rocket.chat:latest
-# volumes:
-#    - ./uploads:/app/uploads
-  environment:
-    - PORT=3000
-    - ROOT_URL=http://yourhost:3000
-    - MONGO_URL=mongodb://mongo:27017/rocketchat
-  links:
-    - mongo:mongo
-  ports:
-    - 3000:3000
-
-# hubot, the popular chatbot (add the bot user first and change the password before starting this image)
-hubot:
-  image: rocketchat/hubot-rocketchat
-  environment:
-    - ROCKETCHAT_URL=rocketchat:3000
-    - ROCKETCHAT_ROOM=GENERAL
-    - ROCKETCHAT_USER=bot
-    - ROCKETCHAT_PASSWORD=botpassword
-    - BOT_NAME=bot
-# you can add more scripts as you'd like here, they need to be installable by npm
-    - EXTERNAL_SCRIPTS=hubot-help,hubot-seen,hubot-links,hubot-diagnostics
-  links:
-    - rocketchat:rocketchat
-# this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
-  ports:
-    - 3001:8080
+services:
+  hubot:
+    image: rocketchat/hubot-rocketchat:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      ROCKETCHAT_URL: ${TRAEFIK_HOST}
+      ROCKETCHAT_ROOM: GENERAL
+      ROCKETCHAT_USER: Hubot
+      ROCKETCHAT_PASSWORD: BotPassw0rd
+      BOT_NAME: Hubot
+      EXTERNAL_SCRIPTS: hubot-help,hubot-seen,hubot-links,hubot-greetings
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Hubot Segment
+      traefik.hubot.frontend.entryPoints: http,https
+      traefik.hubot.frontend.headers.forceSTSHeader: true
+      traefik.hubot.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.hubot.frontend.headers.SSLRedirect: true
+      traefik.hubot.frontend.headers.STSPreload: true
+      traefik.hubot.frontend.headers.STSSeconds: 15552000
+      traefik.hubot.frontend.passHostHeader: true
+      traefik.hubot.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.hubot.port: "8080"
+      ### End Hubot Segment
+    links:
+      - rocketchat:rocketchat
+    # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
+    ports:
+      - 3001:8080
+  mongo:
+    image: mongo:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    volumes:
+      - ./data/runtime/db:/data/db
+      - ./data/dump:/dump
+    command: mongod --smallfiles
+  rocketchat:
+    image: rocketchat/rocket.chat:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+    environment:
+      MONGO_URL: mongodb://mongo:27017/rocketchat
+      ROOT_URL: https://chat.inumio.com
+      Accounts_UseDNSDomainCheck: true
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start RocketChat Segment
+      traefik.rocketchat.frontend.entryPoints: http,https
+      traefik.rocketchat.frontend.headers.forceSTSHeader: true
+      traefik.rocketchat.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.rocketchat.frontend.headers.SSLRedirect: true
+      traefik.rocketchat.frontend.headers.STSPreload: true
+      traefik.rocketchat.frontend.headers.STSSeconds: 15552000
+      traefik.rocketchat.frontend.passHostHeader: true
+      traefik.rocketchat.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.rocketchat.port: "3000"
+      ### End RocketChat Segment
+    links:
+      - mongo:mongo
