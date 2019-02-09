@@ -33,7 +33,7 @@ catalog:
     - variable: "CUSTOM_CONF"
       label: "Custom Configuration"
       description: |
-        Whether a custom configuration file should be mounted from the persistent data directory or not.
+        Whether a custom configuration file should be mounted from the persistent data directory or not. Data Directory is required for this.
       default: false
       required: true
       type: boolean
@@ -42,6 +42,7 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
+        Leaving this blank will disable persistent data storage for the stack.
       default: "Personal/Redis"
-      required: true
+      required: false
       type: string
