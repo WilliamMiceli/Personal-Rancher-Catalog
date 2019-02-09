@@ -1,12 +1,11 @@
 version: '2'
 
 services:
-  phpmyadmin:
+  redis:
     image: redis:${IMAGE_TAG}
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
-    environment:
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
