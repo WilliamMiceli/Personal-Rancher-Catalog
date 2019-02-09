@@ -20,36 +20,28 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
-        Leaving this empty will disable Traefik on this stack.
       default: "subdomain.domain.tld"
       required: false
       type: string
 
     - variable: "IMAGE_TAG"
-      label: "Base Image"
+      label: "Image Tag"
       description: |
-        Which base image would you like to use.
-      default: "11000"
+        The image tag to use for the desired container variant.
+      default: "latest"
       required: true
       type: enum
       options:
-        - <No Tag>
-        - Latest (Default)
-        - Latest (Alpine)
-
-    - variable: "WEB_PORT"
-      label: "Web Port"
-      description: |
-        The port to locally access the web interface on.
-        Leaving this empty will disable opening any port on the host system.
-      default: "11000"
-      required: false
-      type: string
+        - "latest"
+        - "alpine"
+        - "perl"
+        - "alpine-perl"
+        - "stable"
 
     - variable: "PERSIST_CONF"
       label: "Persistent Configuration"
       description: |
-        Have a persistent congiguration directory.
+        Mount a persistent congiguration directory.
       default: true
       required: true
       type: boolean
