@@ -7,7 +7,7 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     environment:
-      ROCKETCHAT_URL: ${TRAEFIK_HOST}
+      ROCKETCHAT_URL: hubot.${TRAEFIK_HOST}
       ROCKETCHAT_ROOM: GENERAL
       ROCKETCHAT_USER: Hubot
       ROCKETCHAT_PASSWORD: BotPassw0rd
@@ -32,9 +32,6 @@ services:
       ### End Hubot Segment
     links:
       - rocketchat:rocketchat
-    # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
-    ports:
-      - 3001:8080
   mongo:
     image: mongo:latest
     dns: # Using Cloudflare DNS
@@ -47,8 +44,8 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      - ./data/runtime/db:/data/db
-      - ./data/dump:/dump
+      - /RancherCattle/${DATA_DIR}/Database/Data:/data/db
+      - /RancherCattle/${DATA_DIR}/Database/Dump:/dump
     command: mongod --smallfiles
   rocketchat:
     image: rocketchat/rocket.chat:latest
