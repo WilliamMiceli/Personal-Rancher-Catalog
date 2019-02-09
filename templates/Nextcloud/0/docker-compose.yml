@@ -46,6 +46,7 @@ services:
       traefik.nextcloud.frontend.headers.SSLRedirect: true
       traefik.nextcloud.frontend.headers.STSPreload: true
       traefik.nextcloud.frontend.headers.STSSeconds: 15552000
+      traefik.nextcloud.frontend.passHostHeader: true
       traefik.nextcloud.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.nextcloud.port: "80"
       ### End Nextcloud Segment
@@ -54,10 +55,6 @@ services:
       {{- if eq .Values.REDIS "true"}}
       - redis
       {{- end}}
-    {{- if .Values.WEB_PORT}}
-    ports:
-      - "${WEB_PORT}:80"
-    {{- end}}
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system

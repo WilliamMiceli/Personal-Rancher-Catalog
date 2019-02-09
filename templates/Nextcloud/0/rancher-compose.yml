@@ -21,16 +21,7 @@ catalog:
       description: |
         The host that Traefik will use to provide public access.
       default: "subdomain.domain.tld"
-      required: false
-      type: string
-
-    - variable: "WEB_PORT"
-      label: "Web Port"
-      description: |
-        The port to locally access the web interface on.
-        Leaving this empty will disable opening any port on the host system.
-      default: "10100"
-      required: false
+      required: true
       type: string
 
     - variable: "DB_ROOT_PASS"

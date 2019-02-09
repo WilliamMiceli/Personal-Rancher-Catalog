@@ -18,21 +18,18 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-      ### Start HTTP Segment (Each EntryPoint has it's own segment, that way on initial HTTP connection, the prefix isn't added twice)
-      traefik.http.frontend.entryPoints: http
-      traefik.http.frontend.headers.SSLRedirect: true
-      traefik.http.frontend.rule: Host:${TRAEFIK_HOSTNAME}
-      traefik.http.port: "8080"
-      ### End HTTP Segment
-      ### Start HTTPS Segment
-      traefik.https.frontend.entryPoints: https
-      traefik.https.frontend.headers.forceSTSHeader: true
-      traefik.https.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.https.frontend.headers.STSPreload: true
-      traefik.https.frontend.headers.STSSeconds: 15552000
-      traefik.https.frontend.rule: "Host:${TRAEFIK_HOSTNAME}; AddPrefix:/guacamole"
-      traefik.https.port: "8080"
-      ### End HTTPS Segment
+
+      ### Start Web Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: "Host:${TRAEFIK_HOSTNAME}; AddPrefix:/guacamole"
+      traefik.port: "8080"
+      ### End Web Segment
     links:
       - guacd
       - mysql

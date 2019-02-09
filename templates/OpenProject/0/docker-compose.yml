@@ -26,7 +26,6 @@ services:
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-      {{- if .Values.TRAEFIK_HOST}}
       traefik.enable: true
       ### Start Web Segment
       traefik.web.frontend.entryPoints: http,https
@@ -34,26 +33,16 @@ services:
       traefik.web.frontend.headers.SSLRedirect: true
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.redirect.entryPoint: https
-      traefik.web.frontend.redirect.permanent: true
+      traefik.web.frontend.passHostHeader: true
       traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.web.port: "80"
       ### End Web Segment
-      {{- else}}
-      traefik.enable: false
-      {{- end}}
     links:
       - memcached
-    networks:
-      - public-proxy # Used for the connection to the Traefik container for public access
-    ports:
-      - "${WEB_PORT}:80"
     restart: on-failure
     volumes:
-      - /RancherCattleData/${DATA_DIR}/Database:/var/lib/postgresql/9.6/main
-      - /RancherCattleData/${DATA_DIR}/Logs:/var/log/supervisor
-      - /RancherCattleData/${DATA_DIR}/Static:/var/db/openproject
-
-networks:
-  public-proxy:
-    external: true
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /RancherCattle/${DATA_DIR}/Database:/var/lib/postgresql/9.6/main
+      - /RancherCattle/${DATA_DIR}/Logs:/var/log/supervisor
+      - /RancherCattle/${DATA_DIR}/Static:/var/db/openproject
