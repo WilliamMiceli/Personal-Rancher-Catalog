@@ -1,6 +1,6 @@
 name: Invoice Ninja
 description: |
-  Status: Functional
+  An open-source platform to invoice, track payments, expenses, and time billable tasks for clients.
 version: latest
 category: Invoicing
 maintainer: WilliamMiceli

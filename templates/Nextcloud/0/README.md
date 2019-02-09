@@ -1,5 +1,9 @@
 # Nextcloud
 
+Nextcloud offers industry-leading on-premises file sync and online collaboration technology. Our expertise is in combining the convenience and ease of use of consumer-grade solutions like Dropbox and Google Drive with the security, privacy and control business needs.
+
+Our self-hosted solutions ensure you know where data is, who has access, and that even meta-data does not leak.
+
 ## Pre-Requisites
 
 * Traefik deployed

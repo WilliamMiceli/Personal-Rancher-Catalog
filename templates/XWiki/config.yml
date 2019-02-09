@@ -1,6 +1,6 @@
 name: XWiki
 description: |
-  Status: EXPERIMENTAL
+  XWiki is a free wiki software platform written in Java with a design emphasis on extensibility.
 version: latest
 category: Wiki
 maintainer: WilliamMiceli

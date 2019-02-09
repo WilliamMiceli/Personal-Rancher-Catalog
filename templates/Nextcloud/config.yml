@@ -1,6 +1,6 @@
 name: Nextcloud
 description: |
-  Status: EXPERIMENTAL
+  Nextcloud is a suite of client-server software for creating and using file hosting services.
 version: latest
 # category:
 maintainer: WilliamMiceli

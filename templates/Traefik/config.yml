@@ -1,8 +1,8 @@
 name: Traefik
 description: |
-  Status: Functional
+  Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 version: latest
 category: Networking
 maintainer: WilliamMiceli
 # license:
-# projectURL: https://github.com/rawmind0/alpine-traefik
+# projectURL:

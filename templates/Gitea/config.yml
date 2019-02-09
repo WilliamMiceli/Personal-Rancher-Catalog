@@ -1,6 +1,6 @@
 name: Gitea
 description: |
-  Status: EXPERIMENTAL
+  Gitea is a community managed fork of Gogs, lightweight code hosting solution.
 version: latest
 # category:
 maintainer: WilliamMiceli

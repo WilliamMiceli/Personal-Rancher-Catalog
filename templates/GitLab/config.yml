@@ -1,6 +1,6 @@
 name: GitLab (Community Edition)
 description: |
-  Status: NOT READY
+  GitLab is a web-based Git-repository manager providing wiki, issue-tracking and CI/CD pipeline features, using an open-source license, developed by GitLab Inc.
 version: latest
 # category:
 maintainer: WilliamMiceli

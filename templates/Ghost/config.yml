@@ -1,8 +1,8 @@
 name: Ghost
 description: |
-  Status: Functional
+  Ghost is a free and open source blogging platform, designed to simplify the process of online publishing for individual bloggers as well as online publications.
 version: latest
-# category:
+category: blogging
 maintainer: WilliamMiceli
 # license:
 # projectURL:

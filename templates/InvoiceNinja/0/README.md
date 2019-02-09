@@ -8,9 +8,7 @@
 
 ## Description
 
-  Free Open-Source Invoicing
-
-  Expenses & time-tracking built with Laravel
+An open-source platform to invoice, track payments, expenses, and time billable tasks for clients.
 
 ## Pre-Deployment
 

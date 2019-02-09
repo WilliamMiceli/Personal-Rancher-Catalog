@@ -1,5 +1,6 @@
 # GitLab (Community Edition)
 
+GitLab is the first single application for the entire DevOps lifecycle. From planning to monitoring GitLab covers every stage and additionally lets you manage and secure across stages. Only GitLab enables Concurrent DevOps, unlocking organizations from the constraints of the toolchain. GitLab provides unmatched visibility, higher levels of efficiency, and comprehensive governance. This makes the software lifecycle 200% faster, radically improving the speed of business.
 
 ## Manually Adding More Environment Variables With Omnibus
 
