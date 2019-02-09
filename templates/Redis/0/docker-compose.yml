@@ -20,7 +20,7 @@ services:
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       {{- if .Values.DATA_DIR}}
       {{- if eq .Values.CUSTOM_CONF "true"}}
-      - /RancherCattle/${DATA_DIR}/Redis/Configuration/redis.conf:/usr/local/etc/redis/redis.conf
+      - /RancherCattle/${DATA_DIR}/Configuration/redis.conf:/usr/local/etc/redis/redis.conf
       {{- end}}
-      - /RancherCattle/${DATA_DIR}/Redis/Data:/data
+      - /RancherCattle/${DATA_DIR}/Data:/data
       {{- end}}
