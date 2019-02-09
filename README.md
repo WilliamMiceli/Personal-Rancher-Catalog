@@ -38,7 +38,7 @@ Hopefully it can also be of use to others as well!
 - [ ] PostgreSQL ([Docker Hub](https://hub.docker.com/_/postgres) | [Website](https://www.postgresql.org/))
 - [ ] Redis ([Docker Hub](https://hub.docker.com/_/redis) | [Website](https://redis.io/))
 - [ ] Redmine ([Docker Hub](https://hub.docker.com/_/redmine) | [Website](http://www.redmine.org/))
-- [ ] Rocket.Chat ([Docker Hub](https://hub.docker.com/_/rocketchat) | [Website](https://rocket.chat/))
+- [ ] Rocket.Chat ([Docker Hub](https://hub.docker.com/r/rocketchat/rocket.chat) | [Website](https://rocket.chat/))
 - [x] Snipe-IT ([Docker Hub](https://hub.docker.com/r/snipe/snipe-it) | [Website](https://snipeitapp.com/))
 - [x] Traefik ([Docker Hub](https://hub.docker.com/_/traefik) | [Website](https://traefik.io/))
 - [x] WordPress ([Docker Hub](https://hub.docker.com/_/wordpress) | [Website](https://wordpress.com/))
