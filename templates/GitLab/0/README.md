@@ -12,3 +12,6 @@ GitLab is the first single application for the entire DevOps lifecycle. From pla
 [https://docs.gitlab.com/runner/install/docker.html]
 [https://hub.docker.com/r/gitlab/gitlab-runner/tags]
 [https://medium.freecodecamp.org/how-to-setup-ci-on-gitlab-using-docker-66e1e04dcdc2]
+
+## TODO
+* Allow SMTP email configuration [https://docs.gitlab.com/omnibus/settings/smtp.html]
