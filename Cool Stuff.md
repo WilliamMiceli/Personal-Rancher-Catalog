@@ -13,11 +13,3 @@
 [https://github.com/garywiz/docker-grav]
 [https://hub.docker.com/r/librenms/librenms/]
 [https://www.librenms.org/]
-
-###### Testing out math functionality with Markdown???...
-
-$$
-\sum x = y
-$$
-
-
