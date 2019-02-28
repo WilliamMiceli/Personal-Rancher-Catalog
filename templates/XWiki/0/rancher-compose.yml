@@ -20,6 +20,7 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
+        Separate multiple domains by using a comma.
       default: "subdomain.domain.tld"
       required: true
       type: string
