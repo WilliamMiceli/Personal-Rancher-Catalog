@@ -6,11 +6,12 @@ As an application wiki, XWiki allows for the storing of structured data and the 
 
 XWiki.org's extension wiki is home to XWiki extensions ranging from code snippets which can be pasted into wiki pages to loadable core modules. Many of XWiki Enterprise's features are provided by extensions which are bundled with it.
 
-## Will continue this later
+## Upgrade Notices
 
-<https://store.docker.com/_/xwiki>
+* To 11.1 - If you are receiving an HTTP 500 error after upgrading, you need to make the change [described here](https://www.xwiki.org/xwiki/bin/view/ReleaseNotes/Data/XWiki/11.1/#HIntroductionoftheEventStreamStore)
 
 ## Popular Configuration Articles
+
 * [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/Configuration/]
 * [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/Virtualization/]
 * [https://www.xwiki.org/xwiki/bin/view/Documentation/AdminGuide/ShortURLs/]
