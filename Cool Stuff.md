@@ -4,6 +4,7 @@
 [https://hub.docker.com/_/logstash]
 [https://hub.docker.com/r/jellyfin/jellyfin]
 [https://jekyllrb.com/]
+[https://jellyfin.readthedocs.io/en/latest/administrator-docs/installing/]
 [https://github.com/xwiki-labs/cryptpad]
 [https://cryptpad.fr/]
 [https://github.com/trilbymedia/grav-plugin-git-sync]
