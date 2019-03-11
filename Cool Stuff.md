@@ -17,3 +17,11 @@
 [https://bitwarden.com/]
 [https://help.bitwarden.com/article/install-on-premise/]
 [https://www.passbolt.com/]
+
+
+
+###### GitLab Runner
+
+[https://docs.gitlab.com/runner/install/docker.html]
+[https://docs.gitlab.com/runner/register/index.html#one-line-registration-command]
+[https://github.com/rancher/community-catalog/blob/master/templates/gitlab-multi-runner/4/docker-compose.yml.tpl]
