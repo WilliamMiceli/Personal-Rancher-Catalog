@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  gitlab-runner:
+  gitlab-runner-config:
     image: gitlab/gitlab-runner:alpine
     command:
       - register
@@ -24,8 +24,6 @@ services:
       {{- end}}
       - --run-untagged
       - --locked=false
-      - ;
-      - run
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -42,3 +40,25 @@ services:
     restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    command:
+      - run
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    {{- if .Values.GITLAB_LINK}}
+    external_links:
+      - ${GITLAB_LINK}{{- if .Values.GITLAB_LINK_ALIAS}}:${GITLAB_LINK_ALIAS}{{- end}}
+    {{- end}}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      io.rancher.sidekicks: gitlab-runner-config
+      traefik.enable: false
+    restart: on-failure
+    volumes-from:
+      - gitlab-runner-config
