@@ -33,11 +33,11 @@ services:
     {{- end}}
     labels:
       io.rancher.container.pull_image: always
+      io.rancher.container.start_once: true
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: false
-    restart: on-failure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
