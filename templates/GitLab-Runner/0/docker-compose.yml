@@ -60,5 +60,5 @@ services:
       io.rancher.sidekicks: gitlab-runner-config
       traefik.enable: false
     restart: on-failure
-    volumes-from:
+    volumes_from:
       - gitlab-runner-config
