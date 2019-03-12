@@ -35,9 +35,8 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: false
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
+    volumes_from:
+      - gitlab-runner-config
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
     command:
@@ -54,5 +53,6 @@ services:
       io.rancher.sidekicks: gitlab-runner-config
       traefik.enable: false
     restart: on-failure
-    volumes_from:
-      - gitlab-runner-config
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
