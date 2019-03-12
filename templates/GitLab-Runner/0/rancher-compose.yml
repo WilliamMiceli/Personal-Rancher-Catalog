@@ -47,7 +47,7 @@ catalog:
       description: |
         (Optional) Tags for the GitLab Runner, separated by a comma.
         These can be changed later in GitLab.
-      default: "docker"
+      # default:
       required: false
       type: string
 
