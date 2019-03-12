@@ -27,7 +27,6 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    environment:
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}{{- if .Values.GITLAB_LINK_ALIAS}}:${GITLAB_LINK_ALIAS}{{- end}}
