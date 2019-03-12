@@ -23,7 +23,7 @@ services:
       - ${GITLAB_TAGS}
       {{- end}}
       - --run-untagged
-      - --locked="false"
+      - --locked=false
     dns:
       - 1.1.1.1
       - 1.0.0.1
