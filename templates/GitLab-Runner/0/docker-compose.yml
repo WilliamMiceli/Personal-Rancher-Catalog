@@ -2,7 +2,7 @@ version: '2'
 
 services:
   gitlab-runner-config:
-    image: gitlab/gitlab-runner:latest
+    image: gitlab/gitlab-runner:alpine
     command:
       - register
       - --non-interactive
@@ -39,7 +39,7 @@ services:
     volumes:
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
-    image: gitlab/gitlab-runner:latest
+    image: gitlab/gitlab-runner:alpine
     command:
       - run
     {{- if .Values.GITLAB_LINK}}
