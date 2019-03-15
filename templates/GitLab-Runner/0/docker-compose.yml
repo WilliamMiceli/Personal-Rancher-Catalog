@@ -37,6 +37,7 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
@@ -56,4 +57,5 @@ services:
     privileged: true # Required for Docker-in-Docker
     restart: on-failure
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
