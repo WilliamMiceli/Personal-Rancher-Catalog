@@ -2,7 +2,7 @@ version: '2'
 
 services:
   gitlab-runner-config:
-    image: gitlab/gitlab-runner:alpine
+    image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
       - register
       - --non-interactive
@@ -40,7 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
-    image: gitlab/gitlab-runner:alpine
+    image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
       - run
     {{- if .Values.GITLAB_LINK}}
