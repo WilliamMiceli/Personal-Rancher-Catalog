@@ -55,7 +55,7 @@ services:
       io.rancher.sidekicks: gitlab-runner-config
       traefik.enable: false
     privileged: true
-    restart: on-failure
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
