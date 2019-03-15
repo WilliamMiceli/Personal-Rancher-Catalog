@@ -13,7 +13,8 @@ services:
       - --executor
       - "docker"
       - --docker-image
-      - alpine:latest
+      - docker:stable
+      - --docker-privileged
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
       - ${GITLAB_RUNNER_DESCRIPTION}
@@ -36,7 +37,7 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
@@ -53,7 +54,8 @@ services:
       {{- end}}
       io.rancher.sidekicks: gitlab-runner-config
       traefik.enable: false
+    privileged: true # Required for Docker-in-Docker
     restart: on-failure
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
