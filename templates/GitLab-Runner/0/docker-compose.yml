@@ -2,7 +2,7 @@ version: '2'
 
 services:
   gitlab-runner-config:
-    image: gitlab/gitlab-runner:alpine
+    image: gitlab/gitlab-runner:latest
     command:
       - register
       - --non-interactive
@@ -13,7 +13,7 @@ services:
       - --executor
       - "docker"
       - --docker-image
-      - docker:stable
+      - docker:latest
       - --docker-privileged
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
@@ -37,10 +37,9 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      # - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
-    image: gitlab/gitlab-runner:alpine
+    image: gitlab/gitlab-runner:latest
     command:
       - run
     {{- if .Values.GITLAB_LINK}}
@@ -57,5 +56,4 @@ services:
     privileged: true # Required for Docker-in-Docker
     restart: on-failure
     volumes:
-      # - /var/run/docker.sock:/var/run/docker.sock
       - /RancherCattle/${DATA_DIR}:/etc/gitlab-runner
