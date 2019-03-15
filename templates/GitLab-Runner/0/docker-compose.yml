@@ -6,21 +6,15 @@ services:
     command:
       - register
       - --non-interactive
-      - --url
-      - ${GITLAB_URL}
-      - --registration-token
-      - ${GITLAB_TOKEN}
-      - --executor
-      - "docker"
-      - --docker-image
-      - alpine:latest
+      - --url ${GITLAB_URL}
+      - --registration-token ${GITLAB_TOKEN}
+      - --executor "docker"
+      - --docker-image alpine:latest
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
-      - --description
-      - ${GITLAB_RUNNER_DESCRIPTION}
+      - --description ${GITLAB_RUNNER_DESCRIPTION}
       {{- end}}
       {{- if .Values.GITLAB_TAGS}}
-      - --tag-list
-      - ${GITLAB_TAGS}
+      - --tag-list ${GITLAB_TAGS}
       {{- end}}
       - --run-untagged
       - --locked=false
