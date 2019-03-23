@@ -28,4 +28,4 @@ services:
       ### End Web Segment
     restart: on-failure
     volumes:
-      - /RancherCattle/${DATA_DIR}/Project:/home/project:cached
+      - /RancherCattle/${DATA_DIR}/Project:/home/project
