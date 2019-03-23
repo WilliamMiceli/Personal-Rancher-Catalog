@@ -16,7 +16,6 @@ Hopefully it can also be of use to others as well!
 - [x] Bind ([Docker Hub](https://hub.docker.com/r/sameersbn/bind))
 - [ ] Discourse ([Docker Hub](https://hub.docker.com/_/discourse) | [Website](https://www.discourse.org/))
 - [ ] Drupal ([Docker Hub](https://hub.docker.com/_/drupal) | [Website](https://www.drupal.org/))
-- [ ] Eclipse Che ([Docker Hub](https://hub.docker.com/_/eclipse-che) | [Website](https://www.eclipse.org/che/))
 - [ ] Emby ([Docker Hub](https://hub.docker.com/r/emby/embyserver) | [Website](https://emby.media/))
 - [x] Ghost ([Docker Hub](https://hub.docker.com/_/ghost) | [Website](https://ghost.org/))
 - [ ] Gitea ([Docker Hub](https://hub.docker.com/r/gitea/gitea) | [Website](https://gitea.io/en-us/))
@@ -54,6 +53,7 @@ Hopefully it can also be of use to others as well!
 ### Removed/Ignored
 
 - Gogs ([Docker Hub](https://hub.docker.com/r/gogs/gogs) | [Website](https://gogs.io/)) - Gitea has far surpassed Gogs in many ways, to the point where I can't find a reason to use Gogs over Gitea, so I don't believe there would be any reason to keep a configuration around for it.
+- Eclipse Che ([Docker Hub](https://hub.docker.com/_/eclipse-che) | [Website](https://www.eclipse.org/che/)) - It currently looks like Che 7 will require kubernetes and other requirements to have setup, and running it on Docker is even more complicated. Not worth it to me to try putting it together here.
 
 ## Notices
 
