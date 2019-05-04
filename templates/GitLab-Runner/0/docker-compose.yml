@@ -14,6 +14,9 @@ services:
       - "docker"
       - --docker-image
       - docker:latest
+      - --builds-dir
+      - "/test_dir/"
+      - --docker-privileged
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
       - ${GITLAB_RUNNER_DESCRIPTION}
@@ -52,6 +55,7 @@ services:
       {{- end}}
       io.rancher.sidekicks: gitlab-runner-config
       traefik.enable: false
+    privileged: true
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
