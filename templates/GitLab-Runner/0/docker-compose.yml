@@ -14,8 +14,6 @@ services:
       - "docker"
       - --docker-image
       - docker:latest
-      - --builds-dir
-      - "/test_dir/"
       - --docker-privileged
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
