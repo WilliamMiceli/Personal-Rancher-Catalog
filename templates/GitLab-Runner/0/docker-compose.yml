@@ -26,7 +26,7 @@ services:
       - --docker-privileged
       {{- if .Values.GITLAB_IP}}
       - --docker-extra-hosts
-      - ["gitlab:${GITLAB_IP}"]
+      - "gitlab:${GITLAB_IP}"
       {{- end}}
     {{- if .Values.GITLAB_LINK}}
     external_links:
