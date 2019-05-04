@@ -24,7 +24,6 @@ services:
       - --tag-list
       - ${GITLAB_TAGS}
       {{- end}}
-      - --run-untagged
       - --locked=false
     {{- if .Values.GITLAB_LINK}}
     external_links:
