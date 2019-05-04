@@ -12,9 +12,6 @@ services:
       - ${GITLAB_TOKEN}
       - --executor
       - "docker"
-      - --docker-image
-      - docker:latest
-      - --docker-privileged
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
       - ${GITLAB_RUNNER_DESCRIPTION}
@@ -24,6 +21,13 @@ services:
       - ${GITLAB_TAGS}
       {{- end}}
       - --locked=false
+      - --docker-image
+      - docker:latest
+      - --docker-privileged
+      {{- if .Values.GITLAB_IP}}
+      - --docker-extra-hosts
+      - ["gitlab:${GITLAB_IP}"]
+      {{- end}}
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}{{- if .Values.GITLAB_LINK_ALIAS}}:${GITLAB_LINK_ALIAS}{{- end}}

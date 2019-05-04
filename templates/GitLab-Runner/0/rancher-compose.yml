@@ -66,6 +66,14 @@ catalog:
       required: false
       type: string
 
+    - variable: "GITLAB_IP"
+      label: "Local GitLab IP"
+      description: |
+        (Optional) The local IP address of the GitLab service.
+      # default: ""
+      required: false
+      type: string
+
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
