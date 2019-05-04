@@ -58,14 +58,6 @@ catalog:
       required: false
       type: service
 
-    - variable: "GITLAB_LINK_ALIAS"
-      label: "GitLab Service Alias"
-      description: |
-        (Optional) Create an alias for the service.
-      default: "gitlab"
-      required: false
-      type: string
-
     - variable: "GITLAB_IP"
       label: "Local GitLab IP"
       description: |
