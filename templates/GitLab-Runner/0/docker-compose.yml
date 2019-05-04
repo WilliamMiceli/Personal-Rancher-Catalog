@@ -14,7 +14,8 @@ services:
       - "docker"
       - --docker-image
       - docker:latest
-      - --docker-privileged
+      - --docker-builds_dir
+      - "/builds_test/"
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
       - --description
       - ${GITLAB_RUNNER_DESCRIPTION}
