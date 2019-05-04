@@ -12,8 +12,6 @@ services:
       - ${GITLAB_TOKEN}
       - --executor
       - "docker"
-      - --builds_dir
-      - "/builds_test/"
       - --docker-image
       - docker:latest
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
