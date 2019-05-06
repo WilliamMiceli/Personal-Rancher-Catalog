@@ -30,7 +30,7 @@ catalog:
       description: |
         A secure password to be used by the "root" database user.
       # default:
-      required: true
+      required: false
       type: password
 
     - variable: "DB_USER_PASS"
@@ -38,7 +38,7 @@ catalog:
       description: |
         A secure password to be used by the "xwiki_user" database user.
       # default:
-      required: true
+      required: false
       type: password
 
     - variable: "DATA_DIR"

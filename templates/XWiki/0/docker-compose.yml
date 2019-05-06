@@ -10,7 +10,9 @@ services:
       DB_HOST: postgresql
       DB_DATABASE: xwiki_db
       DB_USER: xwiki_user
+      {{- if .Values.DB_USER_PASS}}
       DB_PASSWORD: ${DB_USER_PASS}
+      {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -43,9 +45,13 @@ services:
     environment:
       POSTGRES_INITDB_ARGS: "--encoding=UTF8"
       POSTGRES_DB: xwiki_db
+      {{- if .Values.DB_ROOT_PASS}}
       POSTGRES_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      {{- end}}
       POSTGRES_USER: xwiki_user
+      {{- if .Values.DB_USER_PASS}}
       POSTGRES_PASSWORD: ${DB_USER_PASS}
+      {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
