@@ -38,8 +38,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Application:/var/lib/snipeit
-      - /RancherCattle/${DATA_DIR}/Backups:/var/www/html/storage/app/backups
+      - /Rancher/${DATA_DIR}/Application:/var/lib/snipeit
+      - /Rancher/${DATA_DIR}/Backups:/var/www/html/storage/app/backups
   mysql:
     image: mysql:5
     dns:
@@ -60,4 +60,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql

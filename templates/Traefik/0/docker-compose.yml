@@ -23,6 +23,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
-      - /RancherCattle/${DATA_DIR}/LetsEncrypt/acme.json:/acme.json # For Let's Encrypt certificates
-      - /RancherCattle/${DATA_DIR}/Logs:/external/logs
+      - /Rancher/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
+      - /Rancher/${DATA_DIR}/LetsEncrypt/acme.json:/acme.json # For Let's Encrypt certificates
+      - /Rancher/${DATA_DIR}/Logs:/external/logs

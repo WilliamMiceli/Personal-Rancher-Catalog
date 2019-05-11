@@ -37,7 +37,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
+      - /Rancher/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
   guacd:
     image: guacamole/guacd:latest
     dns:
@@ -73,5 +73,5 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
-      - /RancherCattle/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
+      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql
+      - /Rancher/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler

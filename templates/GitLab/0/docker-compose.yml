@@ -41,6 +41,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Config:/etc/gitlab
-      - /RancherCattle/${DATA_DIR}/Logs:/var/log/gitlab
-      - /RancherCattle/${DATA_DIR}/Data:/var/opt/gitlab
+      - /Rancher/${DATA_DIR}/Config:/etc/gitlab
+      - /Rancher/${DATA_DIR}/Logs:/var/log/gitlab
+      - /Rancher/${DATA_DIR}/Data:/var/opt/gitlab

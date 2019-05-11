@@ -29,6 +29,6 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       {{- if eq .Values.PERSIST_CONF "true"}}
-      - /RancherCattle/${DATA_DIR}/Configuration:/etc/nginx
+      - /Rancher/${DATA_DIR}/Configuration:/etc/nginx
       {{- end}}
-      - /RancherCattle/${DATA_DIR}/HTML:/usr/share/nginx/html
+      - /Rancher/${DATA_DIR}/HTML:/usr/share/nginx/html

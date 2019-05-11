@@ -32,4 +32,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Content:/var/lib/ghost/content
+      - /Rancher/${DATA_DIR}/Content:/var/lib/ghost/content

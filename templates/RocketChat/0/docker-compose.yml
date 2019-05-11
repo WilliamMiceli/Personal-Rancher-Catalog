@@ -44,8 +44,8 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      - /RancherCattle/${DATA_DIR}/Database/Data:/data/db
-      - /RancherCattle/${DATA_DIR}/Database/Dump:/dump
+      - /Rancher/${DATA_DIR}/Database/Data:/data/db
+      - /Rancher/${DATA_DIR}/Database/Dump:/dump
     command: mongod --smallfiles
   rocketchat:
     image: rocketchat/rocket.chat:latest

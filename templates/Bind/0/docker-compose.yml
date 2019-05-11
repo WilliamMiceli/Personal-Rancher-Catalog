@@ -23,4 +23,4 @@ services:
       {{- end}}
     restart: on-failure
     volumes:
-      - /RancherCattle/${DATA_DIR}/Data:/data
+      - /Rancher/${DATA_DIR}/Data:/data
