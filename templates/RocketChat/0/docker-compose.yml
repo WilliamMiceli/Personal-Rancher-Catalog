@@ -32,6 +32,9 @@ services:
       ### End Hubot Segment
     links:
       - rocketchat:rocketchat
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
   mongo:
     image: mongo:latest
     dns: # Using Cloudflare DNS
@@ -44,6 +47,8 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /Rancher/${DATA_DIR}/Database/Data:/data/db
       - /Rancher/${DATA_DIR}/Database/Dump:/dump
     command: mongod --smallfiles
@@ -75,3 +80,6 @@ services:
       ### End RocketChat Segment
     links:
       - mongo:mongo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system

@@ -36,3 +36,6 @@ services:
       traefik.web.port: "80"
       ### End Web Segment
     restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
