@@ -23,6 +23,8 @@ services:
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.port: "80"
       ### End Grav Segment
+    ports:
+      - "80:80"
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
