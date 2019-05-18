@@ -25,6 +25,7 @@
 [https://microbadger.com/]
 [https://github.com/iluminar/goodwork]
 [https://wekan.github.io/]
+[http://sabre.io/baikal/]
 
 
 ###### GitLab Runner
