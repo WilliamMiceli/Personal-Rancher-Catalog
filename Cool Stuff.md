@@ -26,6 +26,8 @@
 [https://github.com/iluminar/goodwork]
 [https://wekan.github.io/]
 [http://sabre.io/baikal/]
+[https://radicale.org/]
+[https://www.xandikos.org/]
 
 
 ###### GitLab Runner
