@@ -2,8 +2,8 @@ version: '2'
 
 services:
   mongo:
-    image: mongo:latest
-    command: 'mongod --smallfiles'
+    image: mongo:3
+    command: '--smallfiles --bind_ip ::,0.0.0.0'
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
