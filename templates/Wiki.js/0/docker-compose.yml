@@ -42,7 +42,7 @@ services:
       traefik.web.frontend.headers.STSSeconds: 15552000
       traefik.web.frontend.passHostHeader: true
       traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}" # HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.${TRAEFIK_HOST}
-      traefik.web.port: "3000"
+      traefik.web.port: "80"
       ### End Web Segment
     links:
       - mongo
