@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: XWiki
-  version: latest
+  version: 1
   # description:
   # minimum_rancher_version:
   # maximum_rancher_version:
