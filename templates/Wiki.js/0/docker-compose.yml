@@ -27,11 +27,6 @@ services:
       - 1.0.0.1
     environment:
       WIKI_ADMIN_EMAIL: ${ADMIN_EMAIL}
-      # TITLE: 
-      HOST: https://${TRAEFIK_HOST} # The public-facing view
-      PORT: 80 # Port to listen on internally
-      PUBLIC: false
-      DB: mongodb://mongo:27017/wiki
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
