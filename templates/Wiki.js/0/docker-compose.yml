@@ -21,12 +21,17 @@ services:
       - /Rancher/${DATA_DIR}/Database/Data:/data/db
       - /Rancher/${DATA_DIR}/Database/Dump:/dump
   wikijs:
-    image: requarks/wiki:latest
+    image: requarks/wiki:latest #v1 Only
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
     environment:
       WIKI_ADMIN_EMAIL: ${ADMIN_EMAIL}
+      # TITLE: 
+      HOST: https://${TRAEFIK_HOST} # The public-facing view
+      PORT: 80 # Port to listen on internally
+      PUBLIC: false
+      MONGO_URI: mongodb://mongo:27017/wiki
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -41,7 +46,7 @@ services:
       traefik.web.frontend.headers.STSPreload: true
       traefik.web.frontend.headers.STSSeconds: 15552000
       traefik.web.frontend.passHostHeader: true
-      traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}" # HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.${TRAEFIK_HOST}
+      traefik.web.frontend.rule: "Host:${TRAEFIK_HOST}"
       traefik.web.port: "80"
       ### End Web Segment
     links:
