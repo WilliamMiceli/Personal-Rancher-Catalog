@@ -21,7 +21,7 @@ services:
       - /Rancher/${DATA_DIR}/Database/Data:/data/db
       - /Rancher/${DATA_DIR}/Database/Dump:/dump
   wikijs:
-    image: requarks/wiki:latest #v1 Only
+    image: requarks/wiki:latest # v1 Only
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
