@@ -46,8 +46,6 @@ services:
       ### End Web Segment
     links:
       - mongo
-    ports:
-    - "80:80"
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
