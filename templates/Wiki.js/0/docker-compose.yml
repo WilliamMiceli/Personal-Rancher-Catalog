@@ -31,7 +31,7 @@ services:
       HOST: https://${TRAEFIK_HOST} # The public-facing view
       PORT: 80 # Port to listen on internally
       PUBLIC: false
-      MONGO_URI: mongodb://mongo:27017/wiki
+      DB: mongodb://mongo:27017/wiki
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
