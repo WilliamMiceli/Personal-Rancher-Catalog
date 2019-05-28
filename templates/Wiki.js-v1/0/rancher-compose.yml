@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: GitLab
+  name: Wiki.js (v1)
   version: latest
   # description:
   # minimum_rancher_version:
@@ -20,7 +20,16 @@ catalog:
       label: "Public Host Domain"
       description: |
         The host that Traefik will use to provide public access.
+        Only one domain is allowed by Wiki.js
       default: "subdomain.domain.tld"
+      required: true
+      type: string
+
+    - variable: "ADMIN_EMAIL"
+      label: "Administrator Email"
+      description: |
+        The email address for the main administrator
+      default: "user@tld.com"
       required: true
       type: string
 
@@ -28,6 +37,6 @@ catalog:
       label: "Data Directory"
       description: |
         The directory to store persistent data for the stack.
-      default: "Personal/GitLab"
+      default: "Personal/Wiki.js"
       required: true
       type: string
