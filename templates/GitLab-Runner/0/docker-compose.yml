@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  gitlab-runner-config:
+    image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
+    command:
+      - register
+      - --non-interactive
+      - --url
+      - ${GITLAB_URL}
+      - --registration-token
+      - ${GITLAB_TOKEN}
+      - --executor
+      - "docker"
+      {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
+      - --description
+      - ${GITLAB_RUNNER_DESCRIPTION}
+      {{- end}}
+      {{- if .Values.GITLAB_TAGS}}
+      - --tag-list
+      - ${GITLAB_TAGS}
+      {{- end}}
+      - --locked=false
+      - --docker-image
+      - docker:latest
+      - --docker-privileged
+      {{- if .Values.GITLAB_IP}}
+      - --docker-extra-hosts
+      - "gitlab:${GITLAB_IP}"
+      {{- end}}
+    {{- if .Values.GITLAB_LINK}}
+    external_links:
+      - ${GITLAB_LINK}:gitlab
+    {{- end}}
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: true
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /Rancher/${DATA_DIR}:/etc/gitlab-runner
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
+    command:
+      - run
+    {{- if .Values.GITLAB_LINK}}
+    external_links:
+      - ${GITLAB_LINK}:gitlab
+    {{- end}}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      io.rancher.sidekicks: gitlab-runner-config
+      traefik.enable: false
+    privileged: true
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /Rancher/${DATA_DIR}:/etc/gitlab-runner
