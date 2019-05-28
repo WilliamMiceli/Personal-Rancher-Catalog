@@ -28,7 +28,6 @@
 [http://sabre.io/baikal/]
 [https://radicale.org/]
 [https://www.xandikos.org/]
-
 [https://hub.docker.com/r/libreplan/libreplan/]
 [https://hub.docker.com/r/fjudith/draw.io]
 [https://hub.docker.com/r/linuxserver/openvpn-as]
@@ -47,6 +46,14 @@
 [https://getcockpit.com/]
 [https://hub.docker.com/r/agentejo/cockpit]
 [https://hub.docker.com/r/homeassistant/home-assistant]
+- Factorio
+- Eclipse Theia
+- Joomla
+- Matomo
+- MediaWiki
+- Mongo
+- Transmission
+- YOURLS
 
 ###### GitLab Runner
 
