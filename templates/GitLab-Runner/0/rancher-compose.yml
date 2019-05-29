@@ -1,0 +1,75 @@
+version: '2'
+catalog:
+  name: GitLab Runner
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # uuid:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        (Optional) The Key/Value pair of the host which the stack should be deployed.
+      default: "host.id=Host2"
+      required: false
+      type: string
+
+    - variable: "GITLAB_URL"
+      label: "GitLab URL"
+      description: |
+        The URL which your GitLab instance can be reached at.
+        You can use the service selection and alias to create a direct link if it is in your Rancher environment.
+      default: "http://gitlab/"
+      required: true
+      type: string
+
+    - variable: "GITLAB_TOKEN"
+      label: "GitLab Registration Token"
+      description: |
+        The registration token provided by the GitLab instance.
+      # default:
+      required: true
+      type: string
+
+    - variable: "GITLAB_RUNNER_DESCRIPTION"
+      label: "GitLab Runner Description"
+      description: |
+        (Optional) A description for the GitLab Runner.
+      # default:
+      required: false
+      type: string
+
+    - variable: "GITLAB_TAGS"
+      label: "GitLab Runner Tags"
+      description: |
+        (Optional) Tags for the GitLab Runner, separated by a comma.
+        These can be changed later in GitLab.
+      default: "docker"
+      required: false
+      type: string
+
+    - variable: "GITLAB_LINK"
+      label: "GitLab Service"
+      description: |
+        (Optional) Create a direct link to the GitLab service.
+      required: false
+      type: service
+
+    - variable: "GITLAB_IP"
+      label: "Local GitLab IP"
+      description: |
+        (Optional) The local IP address of the GitLab service.
+      # default: ""
+      required: false
+      type: string
+
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data for the stack.
+      default: "Personal/GitLab-Runner"
+      required: true
+      type: string

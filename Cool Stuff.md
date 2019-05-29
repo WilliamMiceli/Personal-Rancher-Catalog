@@ -28,7 +28,32 @@
 [http://sabre.io/baikal/]
 [https://radicale.org/]
 [https://www.xandikos.org/]
-
+[https://hub.docker.com/r/libreplan/libreplan/]
+[https://hub.docker.com/r/fjudith/draw.io]
+[https://hub.docker.com/r/linuxserver/openvpn-as]
+[https://hub.docker.com/_/drupal]
+[https://hub.docker.com/_/redmine]
+[https://hub.docker.com/_/node]
+[https://hub.docker.com/r/zabbix/zabbix-server-mysql]
+[https://hub.docker.com/r/zulip/zulip-postgresql]
+[https://hub.docker.com/r/zulip/docker-zulip]
+[https://hub.docker.com/r/openhab/openhab]
+[https://hub.docker.com/r/devdocs/devdocs]
+[https://hub.docker.com/r/bitnami/opencart]
+[https://polrproject.org/]
+[https://hub.docker.com/r/prestashop/prestashop]
+[https://wiki.js.org/]
+[https://getcockpit.com/]
+[https://hub.docker.com/r/agentejo/cockpit]
+[https://hub.docker.com/r/homeassistant/home-assistant]
+- Factorio
+- Eclipse Theia
+- Joomla
+- Matomo
+- MediaWiki
+- Mongo
+- Transmission
+- YOURLS
 
 ###### GitLab Runner
 
