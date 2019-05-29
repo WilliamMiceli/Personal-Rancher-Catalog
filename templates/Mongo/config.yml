@@ -1,8 +1,0 @@
-name: Mongo
-description: |
-  MongoDB is a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
-version: latest
-# category:
-maintainer: WilliamMiceli
-# license:
-# projectURL:
