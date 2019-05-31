@@ -27,5 +27,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Backups:/var/www/backup:rw # Backups
-      - /Rancher/${DATA_DIR}/Images:/var/www/images:rw # Images
+      - /Rancher/${DATA_DIR}/Backups:/var/www/backup # Backups
+      - /Rancher/${DATA_DIR}/Logs:/var/www/logs # Logs
+      - /Rancher/${DATA_DIR}/User:/var/www/user # User
