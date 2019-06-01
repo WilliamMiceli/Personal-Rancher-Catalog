@@ -24,6 +24,14 @@ catalog:
       required: true
       type: string
 
+    - variable: "DB_ROOT_PASS"
+      label: "Database Root Password"
+      description: |
+        A secure password to be used by the "root" database user.
+      # default:
+      required: true
+      type: password
+
     - variable: "DB_USER_PASS"
       label: "Database User Password"
       description: |
