@@ -2,7 +2,7 @@ version: '2'
 
 services:
   joomla:
-    image: joomla:fpm-alpine
+    image: joomla:latest
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
