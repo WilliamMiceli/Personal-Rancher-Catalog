@@ -40,6 +40,18 @@ catalog:
       required: true
       type: password
 
+    - variable: "IMAGE_VERSION"
+      label: "Image Version"
+      description: |
+        What version of the image should be used.
+      # default:
+      required: true
+      type: enum
+      options:
+        - Apache (PHP 7.1)
+        - Apache (PHP 7.2)
+        - Apache (PHP 7.3)
+
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
