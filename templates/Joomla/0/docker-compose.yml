@@ -9,7 +9,7 @@ services:
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      JOOMLA_DB_HOST: postgres:5432
+      JOOMLA_DB_HOST: mysql
       JOOMLA_DB_NAME: joomla_db
       JOOMLA_DB_USER: joomla_user
       JOOMLA_DB_PASSWORD: ${DB_USER_PASS}
@@ -31,23 +31,24 @@ services:
       traefik.port: "80"
       ### End Joomla Segment
     links:
-      - postgres
+      - mysql
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /Rancher/${DATA_DIR}/Files:/var/www/html # Joomla Public Files
-  postgres:
-    image: postgres:latest
+  mysql:
+    image: mysql:5
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      POSTGRES_DB: joomla_db
-      POSTGRES_USER: joomla_user
-      POSTGRES_PASSWORD: ${DB_USER_PASS}
+      MYSQL_DATABASE: joomla_db
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_USER: joomla_user
+      MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -58,4 +59,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/postgresql/data # PostgreSQL data
+      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql # MySQL data
