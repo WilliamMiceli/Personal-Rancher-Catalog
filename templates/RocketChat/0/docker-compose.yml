@@ -6,6 +6,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       ROCKETCHAT_URL: hubot.${TRAEFIK_HOST}
       ROCKETCHAT_ROOM: GENERAL
@@ -40,6 +42,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
@@ -57,6 +61,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       MONGO_URL: mongodb://mongo:27017/rocketchat
       ROOT_URL: https://${TRAEFIK_HOST}

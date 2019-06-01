@@ -6,6 +6,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       USER_UID: '1000'
       USER_GID: '1000'
@@ -46,6 +48,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       POSTGRES_DB: gitea_db
       POSTGRES_USER: gitea_user

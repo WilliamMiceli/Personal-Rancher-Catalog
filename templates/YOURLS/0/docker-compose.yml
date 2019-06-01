@@ -6,6 +6,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       YOURLS_DB_HOST: mysql
       YOURLS_DB_NAME: yourls_db
@@ -39,6 +41,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       MYSQL_DATABASE: yourls_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}

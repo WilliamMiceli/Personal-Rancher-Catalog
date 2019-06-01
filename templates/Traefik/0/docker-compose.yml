@@ -7,6 +7,8 @@ services:
     dns:
       - 1.1.1.1 # Cloudflare Public DNS 1
       - 1.0.0.1 # Cloudflare Public DNS 2
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: true

@@ -6,6 +6,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       CELLS_BIND: "localhost:80"
       CELLS_EXTERNAL: "${TRAEFIK_HOST}:443"
@@ -39,6 +41,8 @@ services:
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       MYSQL_DATABASE: cells_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}

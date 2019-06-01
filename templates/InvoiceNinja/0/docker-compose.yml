@@ -6,6 +6,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     labels:
       io.rancher.container.pull_image: always
       {{- if (.Values.HOST_LABEL)}}
@@ -26,6 +28,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     entrypoint: |
       bash -c 'bash -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
@@ -52,6 +56,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       MYSQL_DATABASE: ninja_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
@@ -73,6 +79,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}

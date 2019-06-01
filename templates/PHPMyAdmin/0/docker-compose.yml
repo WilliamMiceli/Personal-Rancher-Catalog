@@ -6,6 +6,8 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
     environment:
       PMA_ARBITRARY: 1 # Allows the user to specify any arbitrary server using address/hostname and port
     {{- if or .Values.SERVICE_LINK_1 .Values.SERVICE_LINK_2 .Values.SERVICE_LINK_3}}
