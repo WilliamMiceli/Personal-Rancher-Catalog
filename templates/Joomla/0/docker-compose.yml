@@ -1,0 +1,61 @@
+version: '2'
+
+services:
+  joomla:
+    image: joomla:fpm-alpine
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      JOOMLA_DB_HOST: postgres
+      JOOMLA_DB_NAME: joomla_db
+      JOOMLA_DB_USER: joomla_user
+      JOOMLA_DB_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Joomla Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      ### End Joomla Segment
+    links:
+      - postgres
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Rancher/${DATA_DIR}/Files:/var/www/html # Joomla Public Files
+  postgres:
+    image: postgres:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      POSTGRES_DB: joomla_db
+      POSTGRES_USER: joomla_user
+      POSTGRES_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Rancher/${DATA_DIR}/Database:/var/lib/postgresql/data # PostgreSQL data
