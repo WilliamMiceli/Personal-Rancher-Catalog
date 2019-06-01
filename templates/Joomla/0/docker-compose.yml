@@ -2,14 +2,9 @@ version: '2'
 
 services:
   joomla:
-    {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.1)"}}image: joomla:php7.1-apache
-    {{- else}}
-      {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.2)"}}image: joomla:php7.2-apache
-      {{- else}}
-        {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.3)"}}image: joomla:php7.3-apache
-        {{- end}}
-      {{- end}}
-    {{- end}}
+    {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.1)"}}image: joomla:php7.1-apache{{- end}}
+    {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.2)"}}image: joomla:php7.2-apache{{- end}}
+    {{- if eq .Values.IMAGE_VERSION "Apache (PHP 7.3)"}}image: joomla:php7.3-apache{{- end}}
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
