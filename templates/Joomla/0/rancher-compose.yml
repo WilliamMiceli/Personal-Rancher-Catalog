@@ -48,9 +48,9 @@ catalog:
       required: true
       type: enum
       options:
-        - Apache (PHP 7.1)
-        - Apache (PHP 7.2)
-        - Apache (PHP 7.3)
+        - php7.1-apache
+        - php7.2-apache
+        - php7.3-apache
 
     - variable: "DATA_DIR"
       label: "Data Directory"
