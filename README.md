@@ -8,6 +8,7 @@ Hopefully it can also be of use to others as well!
 * Have DATA_DIR be optional
 * Include logos for all stacks
 * Include descriptions and setup instructions for all stacks
+* Snipe-IT now has a simplified setup for Docker, so an update is needed there...
 
 ## Stack Completion Statuses
 
