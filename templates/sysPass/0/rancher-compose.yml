@@ -32,14 +32,6 @@ catalog:
       required: true
       type: password
 
-    - variable: "DB_USER_PASS"
-      label: "Database User Password"
-      description: |
-        A secure password to be used by the "syspass_user" database user.
-      # default:
-      required: true
-      type: password
-
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
