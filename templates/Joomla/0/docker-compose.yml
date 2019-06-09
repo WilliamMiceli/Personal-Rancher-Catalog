@@ -1,41 +1,42 @@
 version: '2'
 
 services:
-  yourls:
-    image: yourls:apache
+  joomla:
+    image: williammiceli/joomla:${IMAGE_VERSION}
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      YOURLS_DB_HOST: mysql
-      YOURLS_DB_NAME: yourls_db
-      YOURLS_DB_USER: yourls_user
-      YOURLS_DB_PASS: ${DB_USER_PASS}
-      YOURLS_SITE: https://${TRAEFIK_HOST}
+      JOOMLA_DB_HOST: mysql
+      JOOMLA_DB_NAME: joomla_db
+      JOOMLA_DB_USER: joomla_user
+      JOOMLA_DB_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-      ### Start Web Segment
-      traefik.web.frontend.entryPoints: http,https
-      traefik.web.frontend.headers.forceSTSHeader: true
-      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.web.frontend.headers.SSLRedirect: true
-      traefik.web.frontend.headers.STSPreload: true
-      traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.web.port: "80"
-      ### End Web Segment
+      ### Start Joomla Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      ### End Joomla Segment
     links:
       - mysql
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Rancher/${DATA_DIR}/Files:/var/www/html # Joomla Public Files
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -44,9 +45,9 @@ services:
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      MYSQL_DATABASE: yourls_db
+      MYSQL_DATABASE: joomla_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_USER: yourls_user
+      MYSQL_USER: joomla_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
@@ -58,4 +59,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql # MySQL data

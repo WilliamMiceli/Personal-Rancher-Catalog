@@ -46,6 +46,7 @@
 [https://getcockpit.com/]
 [https://hub.docker.com/r/agentejo/cockpit]
 [https://hub.docker.com/r/homeassistant/home-assistant]
+
 - Factorio
 - Eclipse Theia
 - Joomla
@@ -54,6 +55,12 @@
 - Mongo
 - Transmission
 - YOURLS
+
+  [https://www.silverstripe.com/]
+
+[https://www.mautic.org/](https://www.mautic.org/)
+
+
 
 ###### GitLab Runner
 
