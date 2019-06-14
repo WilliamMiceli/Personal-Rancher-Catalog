@@ -36,7 +36,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Wordpress:/var/www/html
+      - /Persistent/${DATA_DIR}/Wordpress:/var/www/html
   mysql:
     image: mysql:5
     dns:
@@ -58,4 +58,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql

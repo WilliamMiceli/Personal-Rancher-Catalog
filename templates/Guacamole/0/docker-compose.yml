@@ -20,7 +20,6 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-
       ### Start Web Segment
       traefik.frontend.entryPoints: http,https
       traefik.frontend.headers.forceSTSHeader: true
@@ -39,7 +38,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
+      - /Persistent/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
   guacd:
     image: guacamole/guacd:latest
     dns:
@@ -77,5 +76,5 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql
-      - /Rancher/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
+      - /Persistent/${DATA_DIR}/Setup:/setup # Used to make initial setup much simpler

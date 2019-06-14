@@ -20,8 +20,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database/Data:/data/db
-      - /Rancher/${DATA_DIR}/Database/Dump:/dump
+      - /Persistent/${DATA_DIR}/Database/Data:/data/db
+      - /Persistent/${DATA_DIR}/Database/Dump:/dump
   wikijs:
     image: requarks/wiki:latest # v1 Only
     dns: # Using Cloudflare DNS
@@ -54,4 +54,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Wiki/config.yml:/var/wiki/config.yml
+      - /Persistent/${DATA_DIR}/Wiki/config.yml:/var/wiki/config.yml

@@ -38,6 +38,6 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       {{- if eq .Values.PERSIST_CONF "true"}}
-      - /Rancher/${DATA_DIR}/Configuration:/usr/local/apache2/conf
+      - /Persistent/${DATA_DIR}/Configuration:/usr/local/apache2/conf
       {{- end}}
-      - /Rancher/${DATA_DIR}/Public-HTML:/usr/local/apache2/htdocs/
+      - /Persistent/${DATA_DIR}/Public-HTML:/usr/local/apache2/htdocs/

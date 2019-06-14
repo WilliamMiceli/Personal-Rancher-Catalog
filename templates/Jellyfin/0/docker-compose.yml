@@ -29,6 +29,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Cache:/cache # Cache files
-      - /RancherCattle/${DATA_DIR}/Configuration:/config # Configuration files
-      - /RancherCattle/${DATA_DIR}/Media:/mnt/library # Media files
+      - /Persistent/${DATA_DIR}/Cache:/cache # Cache files
+      - /Persistent/${DATA_DIR}/Configuration:/config # Configuration files
+      - /Persistent/${DATA_DIR}/Media:/mnt/library # Media files

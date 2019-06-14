@@ -42,7 +42,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Data:/data
+      - /Persistent/${DATA_DIR}/Data:/data
   postgres:
     image: postgres:9.6
     dns:
@@ -63,4 +63,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/postgresql/data
+      - /Persistent/${DATA_DIR}/Database:/var/lib/postgresql/data

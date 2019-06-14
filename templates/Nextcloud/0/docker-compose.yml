@@ -61,10 +61,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
-      - /Rancher/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
-      - /Rancher/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
-      - /Rancher/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
+      - /Persistent/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
+      - /Persistent/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
+      - /Persistent/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
+      - /Persistent/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -87,7 +87,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
   {{- if eq .Values.REDIS "true"}}
   redis:
     image: redis:alpine
