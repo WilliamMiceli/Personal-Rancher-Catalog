@@ -9,8 +9,8 @@ services:
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      APP_ENV: production # [ development | production ]
-      APP_DEBUG: false
+      APP_ENV: ${ENVIRONMENT} # [ development | production ]
+      APP_DEBUG: ${DEBUG}
       APP_URL: https://${TRAEFIK_HOST} # No port number needed
       APP_KEY: ${APP_KEY}
       MYSQL_HOST: mysql
