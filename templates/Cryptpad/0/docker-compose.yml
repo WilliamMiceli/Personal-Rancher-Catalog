@@ -29,10 +29,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Blob:/cryptpad/blob
-      - /RancherCattle/${DATA_DIR}/BlobStage:/cryptpad/blobstage
-      - /RancherCattle/${DATA_DIR}/Block:/cryptpad/block
-      - /RancherCattle/${DATA_DIR}/Configuration:/cryptpad/customize
-      - /RancherCattle/${DATA_DIR}/Data:/cryptpad/datastore
-      - /RancherCattle/${DATA_DIR}/Pins:/cryptpad/pins
-      - /RancherCattle/${DATA_DIR}/Tasks:/cryptpad/tasks
+      - /Persistent/${DATA_DIR}/Blob:/cryptpad/blob
+      - /Persistent/${DATA_DIR}/BlobStage:/cryptpad/blobstage
+      - /Persistent/${DATA_DIR}/Block:/cryptpad/block
+      - /Persistent/${DATA_DIR}/Configuration:/cryptpad/customize
+      - /Persistent/${DATA_DIR}/Data:/cryptpad/datastore
+      - /Persistent/${DATA_DIR}/Pins:/cryptpad/pins
+      - /Persistent/${DATA_DIR}/Tasks:/cryptpad/tasks

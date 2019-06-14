@@ -45,6 +45,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/postgresql/9.6/main
-      - /Rancher/${DATA_DIR}/Logs:/var/log/supervisor
-      - /Rancher/${DATA_DIR}/Static:/var/db/openproject
+      - /Persistent/${DATA_DIR}/Database:/var/lib/postgresql/9.6/main
+      - /Persistent/${DATA_DIR}/Logs:/var/log/supervisor
+      - /Persistent/${DATA_DIR}/Static:/var/db/openproject

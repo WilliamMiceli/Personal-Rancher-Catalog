@@ -38,7 +38,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/XWiki:/usr/local/xwiki
+      - /Persistent/${DATA_DIR}/XWiki:/usr/local/xwiki
   postgresql:
     image: postgres:alpine
     dns:
@@ -65,4 +65,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/postgresql/data
+      - /Persistent/${DATA_DIR}/Database:/var/lib/postgresql/data

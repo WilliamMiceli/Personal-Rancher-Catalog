@@ -41,7 +41,7 @@ services:
       traefik.enable: false
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /Rancher/${DATA_DIR}:/etc/gitlab-runner
+      - /Persistent/${DATA_DIR}:/etc/gitlab-runner
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
@@ -61,4 +61,4 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /Rancher/${DATA_DIR}:/etc/gitlab-runner
+      - /Persistent/${DATA_DIR}:/etc/gitlab-runner

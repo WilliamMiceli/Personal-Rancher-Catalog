@@ -36,7 +36,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Files:/var/www/html # Joomla Public Files
+      - /Persistent/${DATA_DIR}/Files:/var/www/html # Joomla Public Files
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -59,4 +59,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql # MySQL data
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql # MySQL data

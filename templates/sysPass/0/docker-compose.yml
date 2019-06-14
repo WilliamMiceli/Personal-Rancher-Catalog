@@ -31,8 +31,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Configuration:/var/www/html/sysPass/app/config # sysPass configuration files
-      - /Rancher/${DATA_DIR}/Backups:/var/www/html/sysPass/app/backup # sysPass backups
+      - /Persistent/${DATA_DIR}/Configuration:/var/www/html/sysPass/app/config # sysPass configuration files
+      - /Persistent/${DATA_DIR}/Backups:/var/www/html/sysPass/app/backup # sysPass backups
   mysql:
     image: mysql:5
     dns: # Using Cloudflare DNS
@@ -52,4 +52,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Rancher/${DATA_DIR}/Database:/var/lib/mysql # MySQL database files
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql # MySQL database files

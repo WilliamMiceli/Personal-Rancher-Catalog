@@ -34,7 +34,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}:/root/.config/pydio/cells
+      - /Persistent/${DATA_DIR}:/root/.config/pydio/cells
   mysql:
     image: mysql:5.7
     command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
@@ -58,4 +58,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /RancherCattle/${DATA_DIR}/Database:/var/lib/mysql
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
