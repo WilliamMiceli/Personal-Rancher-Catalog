@@ -24,7 +24,7 @@ catalog:
       required: true
       type: string
 
-    - variable: "Environment"
+    - variable: "ENVIRONMENT"
       label: "Environment"
       # description:
       default: production
@@ -34,7 +34,7 @@ catalog:
         - production
         - development
 
-    - variable: "Debug"
+    - variable: "DEBUG"
       label: "Debug Mode"
       # description:
       default: false
