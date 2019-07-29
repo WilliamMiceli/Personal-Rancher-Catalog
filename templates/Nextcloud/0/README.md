@@ -24,3 +24,7 @@ You can monitor if it is working by opening a shell terminal on your Redis conta
 * Fix Cron container, does not yet properly execute yet
 * Better setup trusted_proxies
   * [Documentation Reference](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html?highlight=reverse%20proxy)
+* Create my own Nextcloud image and make the following changes:
+  * Add the Redis config
+  * Add the reverse proxy config
+  * Have the entrypoint automatically run the "php occ db:add-missing-indices"
