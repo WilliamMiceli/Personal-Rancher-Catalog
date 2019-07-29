@@ -53,6 +53,11 @@ services:
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.port: "80"
       ### End Web UI Segment
+      ### Start CalDAV/CardDAV Redirect Segment
+      traefik.frontend.redirect.permanent: true
+      traefik.frontend.redirect.regex: https://(.*)/.well-known/(card|cal)dav
+      traefik.frontend.redirect.replacement: https://${TRAEFIK_HOST}/remote.php/dav/
+      ### End CalDAV/CardDAV Redirect Segment
     links:
       - mysql
       {{- if eq .Values.REDIS "true"}}
