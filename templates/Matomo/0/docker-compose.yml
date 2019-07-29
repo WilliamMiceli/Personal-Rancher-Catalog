@@ -1,0 +1,65 @@
+version: '2'
+
+services:
+  matomo:
+    image: matomo:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: true
+      ### Start Web Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      ### End Web Segment
+    links:
+      - mysql
+      {{- if eq .Values.REDIS "true"}}
+      - redis
+      {{- end}}
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}/Apps:/var/www/html/custom_apps # Nextcloud apps
+      - /Persistent/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
+      - /Persistent/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
+      - /Persistent/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
+  mariadb:
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      MYSQL_DATABASE: matomo_db
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_USER: matomo_user
+      MYSQL_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
