@@ -28,6 +28,8 @@ services:
       - --docker-extra-hosts
       - "gitlab:${GITLAB_IP}"
       {{- end}}
+      - --host
+      - "tcp://docker:2375/"
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}:gitlab
