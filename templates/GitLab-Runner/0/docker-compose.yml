@@ -40,10 +40,9 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Persistent/${DATA_DIR}:/etc/gitlab-runner
+      - GitLab-Runner:/etc/gitlab-runner
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
@@ -62,7 +61,10 @@ services:
     privileged: true
     restart: always
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-      - /Persistent/${DATA_DIR}:/etc/gitlab-runner
+      - GitLab-Runner:/etc/gitlab-runner
+
+volumes:
+  GitLab-Runner:
+    driver: local
