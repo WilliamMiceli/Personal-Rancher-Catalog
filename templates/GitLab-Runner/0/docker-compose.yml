@@ -6,7 +6,7 @@ services:
     command:
       - register
       - --non-interactive
-      - "--url ${GITLAB_URL}"
+      - '--url ${GITLAB_URL}'
       - --registration-token ${GITLAB_TOKEN}
       - --executor "docker"
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
