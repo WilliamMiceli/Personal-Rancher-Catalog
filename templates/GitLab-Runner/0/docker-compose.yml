@@ -6,30 +6,23 @@ services:
     command:
       - register
       - --non-interactive
-      - --url
-      - ${GITLAB_URL}
-      - --registration-token
-      - ${GITLAB_TOKEN}
-      - --executor
-      - "docker"
+      - --url ${GITLAB_URL}
+      - --registration-token ${GITLAB_TOKEN}
+      - --executor "docker"
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
-      - --description
-      - ${GITLAB_RUNNER_DESCRIPTION}
+      - --description ${GITLAB_RUNNER_DESCRIPTION}
       {{- end}}
       {{- if .Values.GITLAB_TAGS}}
-      - --tag-list
-      - ${GITLAB_TAGS}
+      - --tag-list ${GITLAB_TAGS}
       {{- end}}
       - --locked=false
       - --docker-image
       - docker:latest
       - --docker-privileged
       {{- if .Values.GITLAB_IP}}
-      - --docker-extra-hosts
-      - "gitlab:${GITLAB_IP}"
+      - --docker-extra-hosts "gitlab:${GITLAB_IP}"
       {{- end}}
-      - --docker-host
-      - "tcp://docker:2375/"
+      - --docker-host "tcp://docker:2375/"
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}:gitlab
