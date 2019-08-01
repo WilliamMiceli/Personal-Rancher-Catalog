@@ -18,6 +18,7 @@ services:
       DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}
       DOCKER_HOST: tcp://docker:2375/
     external_links:
+    {{- if .Values.GITLAB_LINK}}
       - ${GITLAB_LINK}:gitlab
     {{- end}}
     labels:
