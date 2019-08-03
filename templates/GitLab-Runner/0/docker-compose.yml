@@ -16,7 +16,7 @@ services:
       DOCKER_IMAGE: docker:latest                   # Docker image to be used
       DOCKER_PRIVILEGED: true                       # Give extended privileges to container
       DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}       # Add a custom host-to-IP mapping
-      DOCKER_HOST: tcp://docker:2375                # Docker daemon address
+      DOCKER_HOST: tcp://localhost:2375             # Docker daemon address
       DOCKER_TLS_CERTDIR: "" # HOTFIX?
     external_links:
     {{- if .Values.GITLAB_LINK}}
