@@ -1,6 +1,6 @@
-name: Nextcloud
+name: Mautic
 description: |
-  Nextcloud is a suite of client-server software for creating and using file hosting services.
+  Status: Experimental
 version: latest
 # category:
 maintainer: WilliamMiceli
