@@ -18,6 +18,7 @@ services:
       {{- end}}
       REGISTER_LOCKED: false                                          # Lock Runner for current project
       DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
       DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
     external_links:
     {{- if .Values.GITLAB_LINK}}
@@ -49,6 +50,7 @@ services:
       {{- end}}
       REGISTER_LOCKED: false                                          # Lock Runner for current project
       DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
       DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
     {{- if .Values.GITLAB_LINK}}
     external_links:
