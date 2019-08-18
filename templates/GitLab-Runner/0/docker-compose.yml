@@ -6,23 +6,19 @@ services:
     command:
       - register
     environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
-      REGISTER_NON_INTERACTIVE: true                # Run registration unattended
-      CI_SERVER_URL: http://gitlab/                 # Runner URL
-      REGISTRATION_TOKEN: ${GITLAB_TOKEN}           # Runner's registration token
-      RUNNER_EXECUTOR: docker                       # Select executor, eg. shell, docker, etc.
+      REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
+      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
+      RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
-      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}     # Runner name
+      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}                       # Runner name
       {{- end}}
       {{- if .Values.GITLAB_TAGS}}
-      RUNNER_TAG_LIST: ${GITLAB_TAGS}               # Tag list
+      RUNNER_TAG_LIST: ${GITLAB_TAGS}                                 # Tag list
       {{- end}}
-      REGISTER_LOCKED: false                        # Lock Runner for current project
-      DOCKER_IMAGE: docker:latest                   # Docker image to be used
-      DOCKER_PRIVILEGED: true                       # Give extended privileges to container
-      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}       # Add a custom host-to-IP mapping
-      DOCKER_HOST: tcp://docker:2375/               # Docker daemon address
-      DOCKER_TLS_CERTDIR: "/certs"                  # TLS Enabled
-      DOCKER_VOLUMES: "/certs/client"               # TLS Enabled
+      REGISTER_LOCKED: false                                          # Lock Runner for current project
+      DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # TLS Enabled
     external_links:
     {{- if .Values.GITLAB_LINK}}
       - ${GITLAB_LINK}:gitlab
@@ -41,23 +37,19 @@ services:
     command:
       - run
     environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
-      REGISTER_NON_INTERACTIVE: true                # Run registration unattended
-      CI_SERVER_URL: http://gitlab/                 # Runner URL
-      REGISTRATION_TOKEN: ${GITLAB_TOKEN}           # Runner's registration token
-      RUNNER_EXECUTOR: docker                       # Select executor, eg. shell, docker, etc.
+      REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
+      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
+      RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
-      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}     # Runner name
+      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}                       # Runner name
       {{- end}}
       {{- if .Values.GITLAB_TAGS}}
-      RUNNER_TAG_LIST: ${GITLAB_TAGS}               # Tag list
+      RUNNER_TAG_LIST: ${GITLAB_TAGS}                                 # Tag list
       {{- end}}
-      REGISTER_LOCKED: false                        # Lock Runner for current project
-      DOCKER_IMAGE: docker:latest                   # Docker image to be used
-      DOCKER_PRIVILEGED: true                       # Give extended privileges to container
-      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}       # Add a custom host-to-IP mapping
-      DOCKER_HOST: tcp://docker:2375/               # Docker daemon address
-      DOCKER_TLS_CERTDIR: "/certs"                  # TLS Enabled
-      DOCKER_VOLUMES: "/certs/client"               # TLS Enabled
+      REGISTER_LOCKED: false                                          # Lock Runner for current project
+      DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # TLS Enabled
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}:gitlab
