@@ -5,31 +5,23 @@ services:
     image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
       - register
-      - --non-interactive
-      - --url
-      - ${GITLAB_URL}
-      - --registration-token
-      - ${GITLAB_TOKEN}
-      - --executor
-      - "docker"
+    environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
+      REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
+      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
+      RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
-      - --description
-      - ${GITLAB_RUNNER_DESCRIPTION}
+      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}                       # Runner name
       {{- end}}
       {{- if .Values.GITLAB_TAGS}}
-      - --tag-list
-      - ${GITLAB_TAGS}
+      RUNNER_TAG_LIST: ${GITLAB_TAGS}                                 # Tag list
       {{- end}}
-      - --locked=false
-      - --docker-image
-      - docker:latest
-      - --docker-privileged
-      {{- if .Values.GITLAB_IP}}
-      - --docker-extra-hosts
-      - "gitlab:${GITLAB_IP}"
-      {{- end}}
-    {{- if .Values.GITLAB_LINK}}
+      REGISTER_LOCKED: false                                          # Lock Runner for current project
+      DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
+      DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
     external_links:
+    {{- if .Values.GITLAB_LINK}}
       - ${GITLAB_LINK}:gitlab
     {{- end}}
     labels:
@@ -40,12 +32,26 @@ services:
       {{- end}}
       traefik.enable: false
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - GitLab-Runner:/etc/gitlab-runner
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine # Alpine Linux image is designed to use only Docker as the method of spawning runners
     command:
       - run
+    environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
+      REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
+      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
+      RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
+      {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
+      RUNNER_NAME: ${GITLAB_RUNNER_DESCRIPTION}                       # Runner name
+      {{- end}}
+      {{- if .Values.GITLAB_TAGS}}
+      RUNNER_TAG_LIST: ${GITLAB_TAGS}                                 # Tag list
+      {{- end}}
+      REGISTER_LOCKED: false                                          # Lock Runner for current project
+      DOCKER_IMAGE: docker:latest                                     # Docker image to be used
+      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
+      DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
     {{- if .Values.GITLAB_LINK}}
     external_links:
       - ${GITLAB_LINK}:gitlab
@@ -60,6 +66,8 @@ services:
     privileged: true
     restart: always
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /var/run/docker.sock:/var/run/docker.sock
       - GitLab-Runner:/etc/gitlab-runner
 

@@ -1,63 +1,31 @@
 version: '2'
 
 services:
-#  cron:
-#    image: nextcloud:stable-apache
-#    dns: # Using Cloudflare DNS
-#      - 1.1.1.1
-#      - 1.0.0.1
-#    entrypoint: | # www-data uid: 82
-#      sh -c 'sh -s <<EOF
-#      trap "break;exit" SIGHUP SIGINT SIGTERM
-#      while /bin/true; do
-#        su -s "/bin/sh" -c "/usr/local/bin/php /var/www/html/cron.php" www-data
-#        echo $$(date) - Running cron finished
-#        sleep 900
-#      done
-#      EOF'
-#    restart: on-failure
-#    user: "www-data"
-#    volumes_from:
-#      - nginx
-  nextcloud:
-    image: nextcloud:stable-apache
+  matomo:
+    image: matomo:latest
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_DATABASE: nextcloud_db
-      MYSQL_USER: nextcloud_user
-      MYSQL_PASSWORD: ${DB_USER_PASS}
-      NEXTCLOUD_ADMIN_USER: ${NC_ADMIN}
-      NEXTCLOUD_ADMIN_PASSWORD: ${NC_ADMIN_PASS}
-      NEXTCLOUD_TRUSTED_DOMAINS: ${TRAEFIK_HOST}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
-#      io.rancher.sidekicks: cron
       traefik.enable: true
-      ### Start Web UI Segment
+      ### Start Web Segment
       traefik.frontend.entryPoints: http,https
       traefik.frontend.headers.forceSTSHeader: true
       traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
       traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSIncludeSubdomains: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
       traefik.frontend.passHostHeader: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
       traefik.port: "80"
-      ### End Web UI Segment
-      ### Start CalDAV/CardDAV Redirect Segment
-      traefik.frontend.redirect.permanent: true
-      traefik.frontend.redirect.regex: https://(.*)/.well-known/(card|cal)dav
-      traefik.frontend.redirect.replacement: https://${TRAEFIK_HOST}/remote.php/dav/
-      ### End CalDAV/CardDAV Redirect Segment
+      ### End Web Segment
     links:
       - mysql
       {{- if eq .Values.REDIS "true"}}
@@ -71,17 +39,18 @@ services:
       - /Persistent/${DATA_DIR}/Configuration:/var/www/html/config # Nextcloud configuration files
       - /Persistent/${DATA_DIR}/Nextcloud:/var/www/html # Nextcloud site
       - /Persistent/${DATA_DIR}/UserData:/var/www/html/data # Users' data file
-  mysql:
-    image: mysql:5
+  mariadb:
+    image: mariadb
+    command: --max-allowed-packet=64MB
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
     environment:
-      MYSQL_DATABASE: nextcloud_db
+      MYSQL_DATABASE: matomo_db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MYSQL_USER: nextcloud_user
+      MYSQL_USER: matomo_user
       MYSQL_PASSWORD: ${DB_USER_PASS}
     labels:
       io.rancher.container.pull_image: always
@@ -94,22 +63,3 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
-  {{- if eq .Values.REDIS "true"}}
-  redis:
-    image: redis:alpine
-    dns: # Using Cloudflare DNS
-      - 1.1.1.1
-      - 1.0.0.1
-      - 2606:4700:4700::1111
-      - 2606:4700:4700::1001
-    labels:
-      io.rancher.container.pull_image: always
-      {{- if .Values.HOST_LABEL}}
-      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
-      {{- end}}
-      traefik.enable: false
-    restart: on-failure
-    volumes:
-      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
-      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
-  {{- end}}

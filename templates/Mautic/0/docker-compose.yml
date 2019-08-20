@@ -1,0 +1,66 @@
+version: '2'
+
+services:
+  mautic:
+    image: mautic/mautic:latest
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      MAUTIC_DB_HOST: mysql
+      MAUTIC_DB_USER: mautic_user
+      MAUTIC_DB_PASSWORD: ${DB_USER_PASS}
+      MAUTIC_DB_NAME: mautic_db
+      MAUTIC_TRUSTED_PROXIES: 10.42.0.0/16 # 10.42.0.0/16 is the default Rancher-managed subnet
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+#      io.rancher.sidekicks: cron
+      traefik.enable: true
+      ### Start Web UI Segment
+      traefik.frontend.entryPoints: http,https
+      traefik.frontend.headers.forceSTSHeader: true
+      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.STSSeconds: 15552000
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+      traefik.port: "80"
+      ### End Web UI Segment
+    links:
+      - mysql
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}:/var/www/html # Mautic site
+  mysql:
+    image: mysql:5.6
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      MYSQL_DATABASE: mautic_db
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_USER: mautic_user
+      MYSQL_PASSWORD: ${DB_USER_PASS}
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}/Database:/var/lib/mysql
+
