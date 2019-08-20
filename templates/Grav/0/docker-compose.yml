@@ -2,7 +2,7 @@ version: '2'
 
 services:
   grav:
-    image: williammiceli/grav:latest-git
+    image: williammiceli/grav:dev-1.6.14-git
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
@@ -19,6 +19,7 @@ services:
       traefik.frontend.headers.forceSTSHeader: true
       traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
       traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSIncludeSubdomains: true
       traefik.frontend.headers.STSPreload: true
       traefik.frontend.headers.STSSeconds: 15552000
       traefik.frontend.passHostHeader: true
