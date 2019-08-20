@@ -5,34 +5,34 @@ Hopefully it can also be of use to others as well!
 
 ## TODO List
 
-* Have DATA_DIR be optional
-* Include logos for all stacks
-* Include descriptions and setup instructions for all stacks
-* Snipe-IT now has a simplified setup for Docker, so an update is needed there...
+- Finish what I've started
+- Have DATA_DIR be optional
+- Include logos for all stacks
+- Include descriptions and setup instructions for all stacks
 
-## Stack Completion Statuses
+## Stack Completion Overview
 
 - [ ] Adminer ([Docker Hub](https://hub.docker.com/_/adminer) | [Website](https://www.adminer.org/en/))
-- [x] Apache Guacamole ([Docker Hub](https://hub.docker.com/r/guacamole/guacamole) | [Website](https://guacamole.apache.org/))
 - [x] Bind ([Docker Hub](https://hub.docker.com/r/sameersbn/bind))
 - [ ] Discourse ([Docker Hub](https://hub.docker.com/_/discourse) | [Website](https://www.discourse.org/))
 - [ ] Drupal ([Docker Hub](https://hub.docker.com/_/drupal) | [Website](https://www.drupal.org/))
-- [ ] Emby ([Docker Hub](https://hub.docker.com/r/emby/embyserver) | [Website](https://emby.media/))
 - [x] Ghost ([Docker Hub](https://hub.docker.com/_/ghost) | [Website](https://ghost.org/))
-- [ ] Gitea ([Docker Hub](https://hub.docker.com/r/gitea/gitea) | [Website](https://gitea.io/en-us/))
+- [x] Gitea ([Docker Hub](https://hub.docker.com/r/gitea/gitea) | [Website](https://gitea.io/en-us/))
+- [x] GitLab ([Docker Hub](https://hub.docker.com/r/gitlab/gitlab-ce) | [Website](https://about.gitlab.com/))
+- [x] GitLab Runner ([Docker Hub](https://hub.docker.com/r/gitlab/gitlab-runner) | [Website](https://docs.gitlab.com/runner/))
 - [ ] GitPitch Pro ([Docker Hub](https://hub.docker.com/_/gitpitch-pro) | [Website](https://gitpitch.com/))
 - [ ] Grafana ([Docker Hub](https://hub.docker.com/r/grafana/grafana) | [Website](https://grafana.com/))
+- [x] Grav ([Docker Hub](https://hub.docker.com/r/williammiceli/grav) | [Website](https://getgrav.org/))
 - [x] HTTPD ([Docker Hub](https://hub.docker.com/_/httpd) | [Website](http://httpd.apache.org/))
 - [x] InvoiceNinja ([Docker Hub](https://hub.docker.com/r/invoiceninja/invoiceninja) | [Website](https://www.invoiceninja.org/))
+- [x] Jellyfin ([Docker Hub](https://hub.docker.com/r/jellyfin/jellyfin) | [Website](https://jellyfin.github.io/))
 - [ ] Joomla ([Docker Hub](https://hub.docker.com/_/joomla) | [Website](https://www.joomla.org/))
-- [ ] Logstash ([Docker Hub](https://hub.docker.com/_/logstash) | [Website](https://www.elastic.co/products/logstash))
 - [ ] Matomo ([Docker Hub](https://hub.docker.com/_/matomo) | [Website](https://matomo.org/))
-- [ ] MediaWiki ([Docker Hub](https://hub.docker.com/_/mediawiki) | [Website](https://www.mediawiki.org/))
 - [ ] Memcached ([Docker Hub](https://hub.docker.com/_/memcached) | [Website](https://www.memcached.org/))
 - [ ] MongoDB ([Docker Hub](https://hub.docker.com/_/mongo) | [Website](https://www.mongodb.com/))
 - [ ] MySQL ([Docker Hub](https://hub.docker.com/_/mysql) | [Website](https://www.mysql.com/))
 - [x] Nextcloud ([Docker Hub](https://hub.docker.com/_/nextcloud) | [Website](https://nextcloud.com/))
-- [ ] Nginx ([Docker Hub](https://hub.docker.com/_/nginx) | [Website](https://www.nginx.com/))
+- [x] Nginx ([Docker Hub](https://hub.docker.com/_/nginx) | [Website](https://www.nginx.com/))
 - [ ] Node RED ([Docker Hub](https://hub.docker.com/r/nodered/node-red-docker) | [Website](https://nodered.org/))
 - [x] OpenProject ([Docker Hub](https://hub.docker.com/r/openproject/community) | [Website](https://www.openproject.org/))
 - [x] PHPMyAdmin ([Docker Hub](https://hub.docker.com/r/phpmyadmin/phpmyadmin) | [Website](https://www.phpmyadmin.net/))
@@ -41,15 +41,24 @@ Hopefully it can also be of use to others as well!
 - [ ] Redmine ([Docker Hub](https://hub.docker.com/_/redmine) | [Website](http://www.redmine.org/))
 - [ ] Rocket.Chat ([Docker Hub](https://hub.docker.com/r/rocketchat/rocket.chat) | [Website](https://rocket.chat/))
 - [x] Snipe-IT ([Docker Hub](https://hub.docker.com/r/snipe/snipe-it) | [Website](https://snipeitapp.com/))
+- [ ] sysPass ([Docker Hub](https://hub.docker.com/r/syspass/syspass) | [Website](https://www.syspass.org/en))
 - [x] Traefik ([Docker Hub](https://hub.docker.com/_/traefik) | [Website](https://traefik.io/))
+- [x] Wiki.js v1 ([Docker Hub](https://hub.docker.com/r/requarks/wiki/) | [Website](https://wiki.js.org/))
 - [x] WordPress ([Docker Hub](https://hub.docker.com/_/wordpress) | [Website](https://wordpress.com/))
-- [x] XWiki ([Docker Hub](https://hub.docker.com/_/xwiki) | [Website](https://www.xwiki.org/))
-- [ ] YOURLS ([Docker Hub](https://hub.docker.com/_/yourls) | [Website](http://yourls.org/))
 
 ### Will Complete at a Later Date
 
-- Pydio Cells ([Docker Hub](https://hub.docker.com/r/pydio/cells/) | [Website](https://pydio.com/en/))
 - Transmission ([Docker Hub](https://hub.docker.com/r/linuxserver/transmission) | [Website](https://transmissionbt.com/))
+
+### Archived (May Or May Not Be Completed)
+
+- Guacamole ([Docker Hub](https://hub.docker.com/r/guacamole/guacamole) | [Website](https://guacamole.apache.org/))
+- Logstash ([Docker Hub](https://hub.docker.com/_/logstash) | [Website](https://www.elastic.co/products/logstash))
+- Mautic ([Docker Hub](https://hub.docker.com/r/mautic/mautic) | [Website](https://www.mautic.org/))
+- MediaWiki ([Docker Hub](https://hub.docker.com/_/mediawiki) | [Website](https://www.mediawiki.org/))
+- Pydio Cells ([Docker Hub](https://hub.docker.com/r/pydio/cells/) | [Website](https://pydio.com/en/))
+- XWiki ([Docker Hub](https://hub.docker.com/_/xwiki) | [Website](https://www.xwiki.org/))
+- YOURLS ([Docker Hub](https://hub.docker.com/_/yourls) | [Website](http://yourls.org/))
 
 ### Removed/Ignored
 
@@ -58,9 +67,9 @@ Hopefully it can also be of use to others as well!
 
 ## Notices
 
-* I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled.
+- I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled.
 
 ## Using These Templates For Non-Rancher Configurations
 
-* Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`).
-  * Instead, network policies can be created within Rancher's "Environments"
+- Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`).
+  - Instead, network policies can be created within Rancher's "Environments"
