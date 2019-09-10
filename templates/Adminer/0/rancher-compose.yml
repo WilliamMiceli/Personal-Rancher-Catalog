@@ -1,0 +1,71 @@
+version: '2'
+catalog:
+  name: Adminer
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # uuid:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair of the host which the stack should be deployed.
+      default: "host.id=Host1"
+      required: false
+      type: string
+
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
+      description: |
+        The host that Traefik will use to provide public access.
+      default: "subdomain.domain.tld"
+      required: true
+      type: string
+
+    - variable: "SERVICE_LINK_1"
+      label: "Service 1"
+      description: |
+        (Optional) Create a link to another service
+      required: false
+      type: service
+
+    - variable: "SERVICE_LINK_1_ALIAS"
+      label: "Service 1 Alias"
+      description: |
+        (Optional) Create an alias for the service
+      # default:
+      required: false
+      type: string
+
+    - variable: "SERVICE_LINK_2"
+      label: "Service 2"
+      description: |
+        (Optional) Create a link to another service
+      required: false
+      type: service
+
+    - variable: "SERVICE_LINK_2_ALIAS"
+      label: "Service 2 Alias"
+      description: |
+        (Optional) Create an alias for the service
+      # default:
+      required: false
+      type: string
+
+    - variable: "SERVICE_LINK_3"
+      label: "Service 3"
+      description: |
+        (Optional) Create a link to another service
+      required: false
+      type: service
+
+    - variable: "SERVICE_LINK_3_ALIAS"
+      label: "Service 3 Alias"
+      description: |
+        (Optional) Create an alias for the service
+      # default:
+      required: false
+      type: string

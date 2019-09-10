@@ -1,0 +1,8 @@
+name: Adminer
+description: |
+  A full-featured database management tool available for MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch and MongoDB.
+version: latest
+category: Database Administration
+maintainer: WilliamMiceli
+# license:
+# projectURL:
