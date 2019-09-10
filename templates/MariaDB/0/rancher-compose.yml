@@ -1,0 +1,58 @@
+version: '2'
+catalog:
+  name: MariaDB
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # uuid:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair of the host which containers should be deployed
+      default: "host.id=Host1"
+      required: false
+      type: string
+
+    - variable: "DB"
+      label: "Database Name"
+      description: |
+        The name of the database.
+      # default:
+      required: true
+      type: string
+
+    - variable: "DB_ROOT_PASS"
+      label: "Database Root Password"
+      description: |
+        A secure password to be used by the "root" database user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DB_USER"
+      label: "Database User"
+      description: |
+        The name of the database user.
+      # default:
+      required: true
+      type: string
+
+    - variable: "DB_USER_PASS"
+      label: "Database User Password"
+      description: |
+        A secure password to be used by the database user.
+      # default:
+      required: true
+      type: password
+
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The directory to store persistent data for the stack.
+      default: "Personal/MariaDB"
+      required: true
+      type: string

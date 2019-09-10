@@ -1,0 +1,8 @@
+name: MariaDB
+description: |
+  A community-developed fork of the MySQL relational database management system intended to remain free under the GNU GPL.
+version: latest
+# category:
+maintainer: WilliamMiceli
+# license:
+# projectURL:
