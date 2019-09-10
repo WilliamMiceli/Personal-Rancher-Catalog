@@ -38,7 +38,7 @@ services:
       traefik.frontend.headers.STSSeconds: 15552000
       traefik.frontend.passHostHeader: true
       traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
+      traefik.port: "8080"
       ### End Web Segment
     restart: on-failure
     volumes:
