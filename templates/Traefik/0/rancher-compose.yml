@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: traefik
-  version: latest
+  version: 1.6 ≤ x ≤ 1.7
   # description:
   # minimum_rancher_version:
   # maximum_rancher_version:

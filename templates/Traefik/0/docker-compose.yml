@@ -2,7 +2,7 @@ version: '2'
 
 services:
   traefik:
-    image: traefik:latest
+    image: traefik:1.7-alpine
     command: --api # Use Web Dashboard
     dns: # Using Cloudflare DNS
       - 1.1.1.1
