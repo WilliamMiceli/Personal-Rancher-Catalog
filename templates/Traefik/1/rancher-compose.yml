@@ -1,0 +1,34 @@
+version: '2'
+catalog:
+  name: traefik
+  version: 2.0
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  # uuid: traefik-0
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Key/Value pair of the host which the stack should be deployed.
+      default: "host.id=Proxy1"
+      required: false
+      type: string
+
+    - variable: "DASHBOARD_PORT"
+      label: "Dashboard Port"
+      description: |
+        The port to access the dashboard interface on.
+      default: "10"
+      required: true
+      type: string
+
+    - variable: "DATA_DIR"
+      label: "Data Directory"
+      description: |
+        The persistent data directory.
+      default: "Personal/Traefik"
+      required: true
+      type: string
