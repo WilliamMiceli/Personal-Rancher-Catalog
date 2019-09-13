@@ -1,7 +1,7 @@
 name: Traefik
 description: |
   Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
-version: latest
+version: 2.0
 category: Networking
 maintainer: WilliamMiceli
 # license:
