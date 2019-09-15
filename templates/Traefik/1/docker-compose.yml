@@ -8,10 +8,6 @@ services:
       - 1.0.0.1
       - 2606:4700:4700::1111
       - 2606:4700:4700::1001
-    environment:
-      TRAEFIK_API: true # Enable API/Dashboard (Default: false)
-      TRAEFIK_API_DASHBOARD: true # Activate dashboard (Default: true)
-      TRAEFIK_API_INSECURE: false # Activate API directly on the entryPoint named traefik (Default: false)
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: true
@@ -20,7 +16,6 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     ports:
-      - "${DASHBOARD_PORT}:8080" # Traefik Dashboard
       - "22:22" # SSH
       #- "80:80" # HTTP
       #- "443:443" # HTTPS
@@ -32,6 +27,6 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /Persistent/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
-      - /Persistent/${DATA_DIR}/FileProviders:/FileProviders
+      - /Persistent/${DATA_DIR}/Configuration/ExtraConfig:/ExtraConfig
       - /Persistent/${DATA_DIR}/LetsEncrypt:/letsencrypt # For Let's Encrypt certificates
       - /Persistent/${DATA_DIR}/Logs:/external/logs
