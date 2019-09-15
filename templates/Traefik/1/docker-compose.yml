@@ -2,7 +2,7 @@ version: '2'
 
 services:
   traefik:
-    image: traefik:2.0-alpine
+    image: traefik:2.0
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
