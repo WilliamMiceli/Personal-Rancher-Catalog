@@ -17,14 +17,6 @@ catalog:
       required: false
       type: string
 
-    - variable: "DASHBOARD_PORT"
-      label: "Dashboard Port"
-      description: |
-        The port to access the dashboard interface on.
-      default: "10"
-      required: true
-      type: string
-
     - variable: "DATA_DIR"
       label: "Data Directory"
       description: |
