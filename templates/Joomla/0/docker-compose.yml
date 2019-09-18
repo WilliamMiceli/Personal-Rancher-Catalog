@@ -30,9 +30,9 @@ services:
 #      traefik.frontend.rule: Host:${TRAEFIK_HOST}
 #      traefik.port: "80"
       ### End Joomla Segment
-      # Might need to include $${service_name} too
+      # Might need to include {{.Environment.Name}} too at some point
       traefik.http.routers.{{.Stack.Name}}.rule: "Host('${TRAEFIK_HOST}')"
-      traefik.http.routers.{{.Stack.Name}}.entrypoints: "['http','https']"
+      traefik.http.routers.{{.Stack.Name}}.entrypoints: "https"
       traefik.http.routers.{{.Stack.Name}}.tls.certresolver: "letsencrypt"
     links:
       - mysql
