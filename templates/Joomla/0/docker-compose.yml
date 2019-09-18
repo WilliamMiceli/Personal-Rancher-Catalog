@@ -31,9 +31,9 @@ services:
 #      traefik.port: "80"
       ### End Joomla Segment
       # Might need to include $${service_name} too
-      traefik.http.routers.$${stack_name}.rule: "Host('${TRAEFIK_HOST}')"
-      traefik.http.routers.$${stack_name}.entrypoints: "['http','https']"
-      traefik.http.routers.$${stack_name}.tls.certresolver: "letsencrypt"
+      traefik.http.routers.{{.Stack.Name}}.rule: "Host('${TRAEFIK_HOST}')"
+      traefik.http.routers.{{.Stack.Name}}.entrypoints: "['http','https']"
+      traefik.http.routers.{{.Stack.Name}}.tls.certresolver: "letsencrypt"
     links:
       - mysql
     restart: on-failure
