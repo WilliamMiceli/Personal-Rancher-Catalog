@@ -16,9 +16,10 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     ports:
+      - "1200:1200" # Traefik Dashboard (Might be temporary)
       - "22:22" # SSH
-      #- "80:80" # HTTP
-      #- "443:443" # HTTPS
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
       - "3306:3306" # MySQL
       - "19132:19132" # Minecraft
     restart: always
@@ -27,6 +28,7 @@ services:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
       - /Persistent/${DATA_DIR}/Configuration/traefik.toml:/traefik.toml
-      - /Persistent/${DATA_DIR}/Configuration/ExtraConfig:/ExtraConfig
-      - /Persistent/${DATA_DIR}/LetsEncrypt:/letsencrypt # For Let's Encrypt certificates
+      - /Persistent/${DATA_DIR}/Configuration/FileProviders:/FileProviders
+      - /Persistent/${DATA_DIR}/Certificates:/Certificates
+      - /Persistent/${DATA_DIR}/Certificates/ACME:/etc/traefik/acme # For Let's Encrypt certificates
       - /Persistent/${DATA_DIR}/Logs:/external/logs
