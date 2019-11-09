@@ -41,22 +41,31 @@ services:
       {{- end}}
 #      io.rancher.sidekicks: cron
       traefik.enable: true
-      ### Start Web UI Segment
-      traefik.frontend.entryPoints: http,https
-      traefik.frontend.headers.forceSTSHeader: true
-      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.frontend.headers.SSLRedirect: true
-      traefik.frontend.headers.STSIncludeSubdomains: true
-      traefik.frontend.headers.STSPreload: true
-      traefik.frontend.headers.STSSeconds: 15552000
-      traefik.frontend.passHostHeader: true
-      traefik.frontend.rule: Host:${TRAEFIK_HOST}
-      traefik.port: "80"
-      ### End Web UI Segment
-      ### Start CalDAV/CardDAV Redirect Segment
-      traefik.frontend.redirect.permanent: true
-      traefik.frontend.redirect.regex: https://(.*)/.well-known/(card|cal)dav
-      traefik.frontend.redirect.replacement: https://${TRAEFIK_HOST}/remote.php/dav/
+      traefik.http.routers.nextcloud-router.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.nextcloud-router.entrypoints: https
+      traefik.http.routers.nextcloud-router.service: nextcloud-service
+      traefik.http.routers.nextcloud-router.tls: true
+      traefik.http.routers.nextcloud-router.tls.certresolver: letsencrypt
+      traefik.http.services.nextcloud-service.loadbalancer.server.port: "80"
+      traefik.http.services.nextcloud-service.loadbalancer.server.scheme: http
+      traefik.http.services.nextcloud-service.loadbalancer.passhostheader: true
+# Will come back to finish the conversion to Traefik v2 later
+#      ### Start Web UI Segment
+#      traefik.frontend.entryPoints: http,https
+#     traefik.frontend.headers.forceSTSHeader: true
+#      traefik.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
+#      traefik.frontend.headers.SSLRedirect: true
+#      traefik.frontend.headers.STSIncludeSubdomains: true
+#      traefik.frontend.headers.STSPreload: true
+#      traefik.frontend.headers.STSSeconds: 15552000
+#      traefik.frontend.passHostHeader: true
+#      traefik.frontend.rule: Host:${TRAEFIK_HOST}
+#      traefik.port: "80"
+#      ### End Web UI Segment
+#      ### Start CalDAV/CardDAV Redirect Segment
+#      traefik.frontend.redirect.permanent: true
+#      traefik.frontend.redirect.regex: https://(.*)/.well-known/(card|cal)dav
+#      traefik.frontend.redirect.replacement: https://${TRAEFIK_HOST}/remote.php/dav/
       ### End CalDAV/CardDAV Redirect Segment
     links:
       - mysql

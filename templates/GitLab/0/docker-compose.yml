@@ -14,7 +14,7 @@ services:
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         nginx['real_ip_trusted_addresses'] = [ '10.42.0.0/16' ] # 10.42.0.0/16 is the default Rancher-managed subnet
         nginx['listen_port'] = 80 # Using HTTP between the Traefik container and GitLab
-        nginx['listen_https'] = false # Traefik is handling HTTPS on outside
+        nginx['listen_https'] = false # Traefik is handling HTTPS termination
     hostname: ${TRAEFIK_HOST}
     labels:
       io.rancher.container.pull_image: always
@@ -22,23 +22,14 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
       traefik.enable: true
-      ### Start Web Segment
-      traefik.web.frontend.entryPoints: http,https
-      traefik.web.frontend.headers.forceSTSHeader: true
-      traefik.web.frontend.headers.referrerPolicy: no-referrer # Security enhancement (Prevents leaking of referer information)
-      traefik.web.frontend.headers.SSLRedirect: true
-      traefik.web.frontend.headers.STSPreload: true
-      traefik.web.frontend.headers.STSSeconds: 15552000
-      traefik.web.frontend.passHostHeader: true
-      traefik.web.frontend.rule: HostRegexp:${TRAEFIK_HOST},{subdomain:.+}.${TRAEFIK_HOST}
-      traefik.web.port: "80"
-      ### End Web Segment
-      ### Start SSH Segment
-      # traefik.ssh.frontend.entryPoints: ssh
-      # traefik.ssh.frontend.rule: Host:${TRAEFIK_HOST}
-      # traefik.ssh.frontend.passHostHeader: true
-      # traefik.ssh.port: "22"
-      ### End SSH Segment
+      traefik.http.routers.gitlab-router.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.gitlab-router.entrypoints: https
+      traefik.http.routers.gitlab-router.service: gitlab-service
+      traefik.http.routers.gitlab-router.tls: true
+      traefik.http.routers.gitlab-router.tls.certresolver: letsencrypt
+      traefik.http.services.gitlab-service.loadbalancer.server.port: "80"
+      traefik.http.services.gitlab-service.loadbalancer.server.scheme: http
+      traefik.http.services.gitlab-service.loadbalancer.passhostheader: true
     restart: on-failure
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
