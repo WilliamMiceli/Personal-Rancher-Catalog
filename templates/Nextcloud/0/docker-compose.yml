@@ -41,14 +41,19 @@ services:
       {{- end}}
 #      io.rancher.sidekicks: cron
       traefik.enable: true
-      traefik.http.routers.nextcloud-router.rule: Host(`${TRAEFIK_HOST}`)
-      traefik.http.routers.nextcloud-router.entrypoints: https
-      traefik.http.routers.nextcloud-router.service: nextcloud-service
-      traefik.http.routers.nextcloud-router.tls: true
-      traefik.http.routers.nextcloud-router.tls.certresolver: letsencrypt
+      traefik.http.routers.nextcloud-router-http.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.nextcloud-router-http.entrypoints: http
+      traefik.http.routers.nextcloud-router-http.middlewares: nextcloud-redirectHttp
+      traefik.http.routers.nextcloud-router-http.service: nextcloud-service
+      traefik.http.routers.nextcloud-router-https.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.nextcloud-router-https.entrypoints: https
+      traefik.http.routers.nextcloud-router-https.tls: true
+      traefik.http.routers.nextcloud-router-https.tls.certresolver: letsencrypt
+      traefik.http.routers.nextcloud-router-https.service: nextcloud-service
       traefik.http.services.nextcloud-service.loadbalancer.server.port: "80"
-      traefik.http.services.nextcloud-service.loadbalancer.server.scheme: http
       traefik.http.services.nextcloud-service.loadbalancer.passhostheader: true
+      traefik.http.middlewares.nextcloud-redirectHttp.redirectscheme.scheme: https
+      traefik.http.middlewares.nextcloud-redirectHttp.redirectscheme.permanent: false # While testing
 # Will come back to finish the conversion to Traefik v2 later
 #      ### Start Web UI Segment
 #      traefik.frontend.entryPoints: http,https
