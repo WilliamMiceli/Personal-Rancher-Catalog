@@ -7,7 +7,7 @@ services:
       - register
     environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
       REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
-      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      CI_SERVER_URL: http://${GITLAB_HOST}/                           # GitLab Server URL
       REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
       RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
@@ -18,12 +18,7 @@ services:
       {{- end}}
       REGISTER_LOCKED: false                                          # Lock Runner for current project
       DOCKER_IMAGE: docker:latest                                     # Docker image to be used
-      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
       DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
-    external_links:
-    {{- if .Values.GITLAB_LINK}}
-      - ${GITLAB_LINK}:gitlab
-    {{- end}}
     labels:
       io.rancher.container.pull_image: always
       io.rancher.container.start_once: true
@@ -39,7 +34,7 @@ services:
       - run
     environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
       REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
-      CI_SERVER_URL: http://gitlab/                                   # Runner URL
+      CI_SERVER_URL: http://${GITLAB_HOST}/                           # GitLab Server URL
       REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
       RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}
@@ -50,12 +45,7 @@ services:
       {{- end}}
       REGISTER_LOCKED: false                                          # Lock Runner for current project
       DOCKER_IMAGE: docker:latest                                     # Docker image to be used
-      DOCKER_EXTRA_HOSTS: gitlab:${GITLAB_IP}                         # Add local alias for GitLab instance within Rancher network
       DOCKER_VOLUMES: "/var/run/docker.sock:/var/run/docker.sock"     # Docker Socket binding
-    {{- if .Values.GITLAB_LINK}}
-    external_links:
-      - ${GITLAB_LINK}:gitlab
-    {{- end}}
     labels:
       io.rancher.container.pull_image: always
       {{- if .Values.HOST_LABEL}}

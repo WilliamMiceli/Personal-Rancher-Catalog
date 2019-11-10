@@ -17,12 +17,11 @@ catalog:
       required: false
       type: string
 
-    - variable: "GITLAB_URL"
-      label: "GitLab URL"
+    - variable: "GITLAB_HOST"
+      label: "GitLab Server Hostname/IP"
       description: |
-        The URL which your GitLab instance can be reached at.
-        You can use the service selection and alias to create a direct link if it is in your Rancher environment.
-      default: "http://gitlab/"
+        The Hostname/IP which your GitLab instance can be reached at.
+      default: "gitlab.com"
       required: true
       type: string
 
@@ -48,20 +47,5 @@ catalog:
         (Optional) Tags for the GitLab Runner, separated by a comma.
         These can be changed later in GitLab.
       default: "docker"
-      required: false
-      type: string
-
-    - variable: "GITLAB_LINK"
-      label: "GitLab Service"
-      description: |
-        (Optional) Create a direct link to the GitLab service.
-      required: false
-      type: service
-
-    - variable: "GITLAB_IP"
-      label: "Local GitLab IP"
-      description: |
-        (Optional) The local IP address of the GitLab service.
-      # default: ""
       required: false
       type: string
