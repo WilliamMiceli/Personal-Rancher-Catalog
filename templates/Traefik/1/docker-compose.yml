@@ -16,7 +16,6 @@ services:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
       {{- end}}
     ports:
-      - "1200:8080" # Traefik Dashboard
       - "22:22" # SSH
       - "80:80" # HTTP
       - "443:443" # HTTPS
