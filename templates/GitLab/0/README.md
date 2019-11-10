@@ -8,10 +8,6 @@ GitLab is the first single application for the entire DevOps lifecycle. From pla
 [All Available Options Located Here](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template)
 [NGINX Settings](https://docs.gitlab.com/omnibus/settings/nginx.html)
 
-# GitLab Runner (future project)
-[https://docs.gitlab.com/runner/install/docker.html]
-[https://hub.docker.com/r/gitlab/gitlab-runner/tags]
-[https://medium.freecodecamp.org/how-to-setup-ci-on-gitlab-using-docker-66e1e04dcdc2]
-
 ## TODO
+* SSH Status is unknown, unable to test thoroughly at the moment
 * Allow SMTP email configuration [https://docs.gitlab.com/omnibus/settings/smtp.html]
