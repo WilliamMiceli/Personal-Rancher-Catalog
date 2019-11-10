@@ -45,6 +45,10 @@ services:
       traefik.http.routers.nextcloud-router-http.entrypoints: http
       traefik.http.routers.nextcloud-router-http.middlewares: nextcloud-redirectHttp
       traefik.http.routers.nextcloud-router-http.service: nextcloud-service
+      traefik.http.routers.nextcloud-router-dav.rule: Host(`${TRAEFIK_HOST}`) && Path(`/.well-known/(card|cal)dav`)
+      traefik.http.routers.nextcloud-router-dav.entrypoints: https
+      traefik.http.routers.nextcloud-router-dav.middlewares: nextcloud-redirectDav
+      traefik.http.routers.nextcloud-router-dav.service: nextcloud-service
       traefik.http.routers.nextcloud-router-https.rule: Host(`${TRAEFIK_HOST}`)
       traefik.http.routers.nextcloud-router-https.entrypoints: https
       traefik.http.routers.nextcloud-router-https.tls: true
@@ -54,6 +58,8 @@ services:
       traefik.http.services.nextcloud-service.loadbalancer.passhostheader: true
       traefik.http.middlewares.nextcloud-redirectHttp.redirectscheme.scheme: https
       traefik.http.middlewares.nextcloud-redirectHttp.redirectscheme.permanent: false # While testing
+      traefik.http.middlewares.nextcloud-redirectDav.redirectregex.regex: https://(.*)/.well-known/(card|cal)dav
+      traefik.http.middlewares.nextcloud-redirectDav.redirectregex.replacement: https://${TRAEFIK_HOST}/remote.php/dav/
 # Will come back to finish the conversion to Traefik v2 later
 #      ### Start Web UI Segment
 #      traefik.frontend.entryPoints: http,https
