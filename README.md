@@ -65,10 +65,6 @@ Hopefully it can also be of use to others as well!
 - Gogs ([Docker Hub](https://hub.docker.com/r/gogs/gogs) | [Website](https://gogs.io/)) - Gitea has far surpassed Gogs in many ways, to the point where I can't find a reason to use Gogs over Gitea, so I don't believe there would be any reason to keep a configuration around for it.
 - Eclipse Che ([Docker Hub](https://hub.docker.com/_/eclipse-che) | [Website](https://www.eclipse.org/che/)) - It currently looks like Che 7 will require kubernetes and other requirements to have setup, and running it on Docker is even more complicated. Not worth it to me to try putting it together here.
 
-## Notices
-
-- I use Traefik for routing all traffic to/from my services, and although it's an awesome piece of software, it's biggest limitation (to me) is that it cannot be a reverse proxy for SSH connections until [TCP connections are implemented](https://github.com/containous/traefik/issues/10). Until then, all of my own systems simply have SSH disabled.
-
 ## Using These Templates For Non-Rancher Configurations
 
 - Rancher provides networking for stacks, so any declarations to `networks` and `expose` are ignored (excluding `ports`).
