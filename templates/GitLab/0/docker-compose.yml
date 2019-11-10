@@ -27,13 +27,18 @@ services:
       traefik.http.routers.{{.Stack.Name}}-router-http.entrypoints: http
       traefik.http.routers.{{.Stack.Name}}-router-http.rule: Host(`${TRAEFIK_HOST}`)
       traefik.http.routers.{{.Stack.Name}}-router-http.middlewares: {{.Stack.Name}}-redirectHttp
-      traefik.http.routers.{{.Stack.Name}}-router-http.service: {{.Stack.Name}}-service
+      traefik.http.routers.{{.Stack.Name}}-router-http.service: {{.Stack.Name}}-service-http
       traefik.http.routers.{{.Stack.Name}}-router-https.entrypoints: https
       traefik.http.routers.{{.Stack.Name}}-router-https.rule: Host(`${TRAEFIK_HOST}`)
-      traefik.http.routers.{{.Stack.Name}}-router-https.middlewares: {{.Stack.Name}}-security
       traefik.http.routers.{{.Stack.Name}}-router-https.tls: true
       traefik.http.routers.{{.Stack.Name}}-router-https.tls.certresolver: letsencrypt
-      traefik.http.routers.{{.Stack.Name}}-router-https.service: {{.Stack.Name}}-service
+      traefik.http.routers.{{.Stack.Name}}-router-https.middlewares: {{.Stack.Name}}-security
+      traefik.http.routers.{{.Stack.Name}}-router-https.service: {{.Stack.Name}}-service-http
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.entrypoints: ssh
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.rule: HostSNI(`${TRAEFIK_HOST}`)
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.tls: true
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.tls.certresolver: letsencrypt
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.service: {{.Stack.Name}}-service-ssh
       # Middlewares
       traefik.http.middlewares.{{.Stack.Name}}-redirectHttp.redirectscheme.permanent: true
       traefik.http.middlewares.{{.Stack.Name}}-redirectHttp.redirectscheme.scheme: https
@@ -44,8 +49,9 @@ services:
       traefik.http.middlewares.{{.Stack.Name}}-security.headers.stsPreload: true
       traefik.http.middlewares.{{.Stack.Name}}-security.headers.stsSeconds: "15552000"
       # Services
-      traefik.http.services.{{.Stack.Name}}-service.loadbalancer.passhostheader: true
-      traefik.http.services.{{.Stack.Name}}-service.loadbalancer.server.port: "80"
+      traefik.http.services.{{.Stack.Name}}-service-http.loadbalancer.passhostheader: true
+      traefik.http.services.{{.Stack.Name}}-service-http.loadbalancer.server.port: "80"
+      traefik.tcp.services.{{.Stack.Name}}-service-ssh.loadbalancer.server.port: "22"
       ### End Traefik Configuration
     restart: on-failure
     volumes:
