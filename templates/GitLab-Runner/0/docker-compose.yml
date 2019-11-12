@@ -34,7 +34,7 @@ services:
       - run
     environment: # Options can be found by running "gitlab-runner register". More info found at https://docs.gitlab.com/runner/configuration/advanced-configuration.html
       REGISTER_NON_INTERACTIVE: true                                  # Run registration unattended
-      CI_SERVER_URL: http://${GITLAB_HOST}/                           # GitLab Server URL
+      CI_SERVER_URL: ${GITLAB_URL}                                    # GitLab Server URL
       REGISTRATION_TOKEN: ${GITLAB_TOKEN}                             # Runner's registration token
       RUNNER_EXECUTOR: docker                                         # Select executor, eg. shell, docker, etc.
       {{- if .Values.GITLAB_RUNNER_DESCRIPTION}}

@@ -17,11 +17,11 @@ catalog:
       required: false
       type: string
 
-    - variable: "GITLAB_HOST"
-      label: "GitLab Server Hostname/IP"
+    - variable: "GITLAB_URL"
+      label: "GitLab Server URL"
       description: |
-        The Hostname/IP which your GitLab instance can be reached at.
-      default: "gitlab.com"
+        The URL which your GitLab instance can be reached at.
+      default: "https://gitlab.com"
       required: true
       type: string
 
