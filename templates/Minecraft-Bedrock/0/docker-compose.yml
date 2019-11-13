@@ -25,3 +25,5 @@ services:
       traefik.tcp.services.{{.Stack.Name}}-service-game.loadbalancer.server.port: "19132"
       ### End Traefik Configuration
     restart: on-failure
+    stdin_open: true
+    tty: true
