@@ -1,0 +1,33 @@
+version: '2'
+catalog:
+  name: Minecraft Bedrock
+  version: latest
+  # description:
+  # minimum_rancher_version:
+  # maximum_rancher_version:
+  # upgrade_from:
+  questions:
+
+    - variable: "HOST_LABEL"
+      label: "Host Label Key/Value Pair"
+      description: |
+        The Label Key/Value pair of the host which containers should be deployed
+      default: "host.id=Host1"
+      required: false
+      type: string
+
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
+      description: |
+        The host that Traefik will use to provide public access.
+      default: "subdomain.domain.tld"
+      required: true
+      type: string
+
+    - variable: "IMAGE_TAG"
+      label: "Image Tag"
+      description: |
+        The desired version of the image to use.
+      default: "latest"
+      required: true
+      type: string

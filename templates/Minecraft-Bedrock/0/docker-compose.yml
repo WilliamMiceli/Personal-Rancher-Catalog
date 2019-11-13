@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  minecraft-bedrock:
+    image: williammiceli/minecraft-bedrock:${IMAGE_TAG}
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      ### Begin Traefik Configuration
+      traefik.enable: true
+      # Routers
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.entrypoints: minecraft
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.rule: HostSNI(`${TRAEFIK_HOST}`)
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.tls: true
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.tls.certresolver: letsencrypt
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.service: {{.Stack.Name}}-service-game
+      # Services
+      traefik.tcp.services.{{.Stack.Name}}-service-game.loadbalancer.server.port: "19132"
+      ### End Traefik Configuration
+    restart: on-failure
