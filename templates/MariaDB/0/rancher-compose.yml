@@ -17,6 +17,14 @@ catalog:
       required: false
       type: string
 
+    - variable: "TRAEFIK_HOST"
+      label: "Public Host Domain"
+      description: |
+        The host that Traefik will use to provide public access.
+      default: "subdomain.domain.tld"
+      required: true
+      type: string
+
     - variable: "DB"
       label: "Database Name"
       description: |
