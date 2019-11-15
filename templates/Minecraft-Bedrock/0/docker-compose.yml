@@ -17,9 +17,7 @@ services:
       traefik.enable: true
       # Routers
       traefik.tcp.routers.{{.Stack.Name}}-router-game.entrypoints: minecraft
-      traefik.tcp.routers.{{.Stack.Name}}-router-game.rule: HostSNI(`${TRAEFIK_HOST}`)
-      traefik.tcp.routers.{{.Stack.Name}}-router-game.tls: true
-      traefik.tcp.routers.{{.Stack.Name}}-router-game.tls.certresolver: letsencrypt
+      traefik.tcp.routers.{{.Stack.Name}}-router-game.rule: HostSNI(`*`)
       traefik.tcp.routers.{{.Stack.Name}}-router-game.service: {{.Stack.Name}}-service-game
       # Services
       traefik.tcp.services.{{.Stack.Name}}-service-game.loadbalancer.server.port: "19132"
