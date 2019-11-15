@@ -22,9 +22,10 @@ services:
       traefik.enable: true
       # Routers
       traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.entrypoints: mysql
-      traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.rule: HostSNI(`${TRAEFIK_HOST}`)
-      traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.tls: true
-      traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.tls.certresolver: letsencrypt
+      #traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.rule: HostSNI(`${TRAEFIK_HOST}`)
+      traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.rule: HostSNI(`*`)
+      #traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.tls: true
+      #traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.tls.certresolver: letsencrypt
       traefik.tcp.routers.{{.Stack.Name}}-router-mariadb.service: {{.Stack.Name}}-service-mariadb
       # Services
       traefik.tcp.services.{{.Stack.Name}}-service-mariadb.loadbalancer.server.port: "3306"
