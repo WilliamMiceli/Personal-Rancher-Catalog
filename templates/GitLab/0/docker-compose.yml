@@ -38,6 +38,7 @@ services:
       traefik.tcp.routers.{{.Stack.Name}}-router-ssh.rule: HostSNI(`${TRAEFIK_HOST}`)
       traefik.tcp.routers.{{.Stack.Name}}-router-ssh.tls: true
       traefik.tcp.routers.{{.Stack.Name}}-router-ssh.tls.certresolver: letsencrypt
+      traefik.tcp.routers.{{.Stack.Name}}-router-ssh.tls.passthrough: true
       traefik.tcp.routers.{{.Stack.Name}}-router-ssh.service: {{.Stack.Name}}-service-ssh
       # Middlewares
       traefik.http.middlewares.{{.Stack.Name}}-redirectHttp.redirectscheme.permanent: true
