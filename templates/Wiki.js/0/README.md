@@ -1,3 +1,3 @@
-# Wiki.js (v1)
+# Wiki.js
 
 Default admin password: "admin123"
