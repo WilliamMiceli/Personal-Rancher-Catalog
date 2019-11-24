@@ -24,7 +24,7 @@ services:
       - /Persistent/${DATA_DIR}/Database/Data:/data/db
       - /Persistent/${DATA_DIR}/Database/Dump:/dump
   wikijs:
-    image: requarks/wiki:latest # v1 Only
+    image: requarks/wiki:1.0
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1

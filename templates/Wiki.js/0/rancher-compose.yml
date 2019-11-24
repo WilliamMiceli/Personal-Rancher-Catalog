@@ -1,7 +1,7 @@
 version: '2'
 catalog:
-  name: Wiki.js (v1)
-  version: latest
+  name: Wiki.js
+  version: 1.0
   # description:
   # minimum_rancher_version:
   # maximum_rancher_version:

@@ -3,6 +3,8 @@
 My personal rancher catalog to make my own life just a little bit easier.
 Hopefully it can also be of use to others as well!
 
+I'll generally only keep the latest version of templates up to date, just FYI.
+
 ## TODO List
 
 - Finish what I've started
@@ -37,13 +39,13 @@ Hopefully it can also be of use to others as well!
 - [x] OpenProject ([Docker Hub](https://hub.docker.com/r/openproject/community) | [Website](https://www.openproject.org/))
 - [x] PHPMyAdmin ([Docker Hub](https://hub.docker.com/r/phpmyadmin/phpmyadmin) | [Website](https://www.phpmyadmin.net/))
 - [ ] PostgreSQL ([Docker Hub](https://hub.docker.com/_/postgres) | [Website](https://www.postgresql.org/))
-- [ ] Redis ([Docker Hub](https://hub.docker.com/_/redis) | [Website](https://redis.io/))
+- [x] Redis ([Docker Hub](https://hub.docker.com/_/redis) | [Website](https://redis.io/))
 - [ ] Redmine ([Docker Hub](https://hub.docker.com/_/redmine) | [Website](http://www.redmine.org/))
 - [ ] Rocket.Chat ([Docker Hub](https://hub.docker.com/r/rocketchat/rocket.chat) | [Website](https://rocket.chat/))
 - [x] Snipe-IT ([Docker Hub](https://hub.docker.com/r/snipe/snipe-it) | [Website](https://snipeitapp.com/))
 - [ ] sysPass ([Docker Hub](https://hub.docker.com/r/syspass/syspass) | [Website](https://www.syspass.org/en))
 - [x] Traefik ([Docker Hub](https://hub.docker.com/_/traefik) | [Website](https://traefik.io/))
-- [x] Wiki.js v1 ([Docker Hub](https://hub.docker.com/r/requarks/wiki/) | [Website](https://wiki.js.org/))
+- [x] Wiki.js ([Docker Hub](https://hub.docker.com/r/requarks/wiki/) | [Website](https://wiki.js.org/))
 - [x] WordPress ([Docker Hub](https://hub.docker.com/_/wordpress) | [Website](https://wordpress.com/))
 
 ### Will Complete at a Later Date

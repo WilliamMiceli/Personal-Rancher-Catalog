@@ -1,0 +1,76 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9-alpine
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      POSTGRES_DB: wikijs
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: wikijs_user
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      traefik.enable: false
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}/Database/Data:/var/lib/postgresql/data
+  wikijs:
+    image: requarks/wiki:2.0 # v1 Only
+    dns: # Using Cloudflare DNS
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: wikijs_user
+      DB_PASS: ${DB_PASS}
+      DB_NAME: wikijs
+    labels:
+      io.rancher.container.pull_image: always
+      {{- if .Values.HOST_LABEL}}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+      {{- end}}
+      ### Begin Traefik Configuration
+      traefik.enable: true
+      # Routers
+      traefik.http.routers.{{.Stack.Name}}-router-http.entrypoints: http
+      traefik.http.routers.{{.Stack.Name}}-router-http.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.{{.Stack.Name}}-router-http.middlewares: {{.Stack.Name}}-redirectHttp
+      traefik.http.routers.{{.Stack.Name}}-router-http.service: {{.Stack.Name}}-service-http
+      traefik.http.routers.{{.Stack.Name}}-router-https.entrypoints: https
+      traefik.http.routers.{{.Stack.Name}}-router-https.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.{{.Stack.Name}}-router-https.tls: true
+      traefik.http.routers.{{.Stack.Name}}-router-https.tls.certresolver: letsencrypt
+      traefik.http.routers.{{.Stack.Name}}-router-https.middlewares: {{.Stack.Name}}-security
+      traefik.http.routers.{{.Stack.Name}}-router-https.service: {{.Stack.Name}}-service-http
+      # Middlewares
+      traefik.http.middlewares.{{.Stack.Name}}-redirectHttp.redirectscheme.permanent: true
+      traefik.http.middlewares.{{.Stack.Name}}-redirectHttp.redirectscheme.scheme: https
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.forceSTSHeader: true
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.referrerPolicy: no-referrer # Prevents leaking of referer information
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.sslredirect: true # Maybe good for redundancy?
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.stsIncludeSubdomains: true
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.stsPreload: true
+      traefik.http.middlewares.{{.Stack.Name}}-security.headers.stsSeconds: "15552000"
+      # Services
+      traefik.http.services.{{.Stack.Name}}-service-http.loadbalancer.passhostheader: true
+      traefik.http.services.{{.Stack.Name}}-service-http.loadbalancer.server.port: "3000"
+      ### End Traefik Configuration
+    links:
+      - postgres
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
+      - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
