@@ -74,3 +74,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # Syncronize time of container with the host system
       - /etc/timezone:/etc/timezone:ro # Syncronize timezone of container with the host system
+      - /Persistent/${DATA_DIR}/Wiki/config.yml:/wiki/config.yml
