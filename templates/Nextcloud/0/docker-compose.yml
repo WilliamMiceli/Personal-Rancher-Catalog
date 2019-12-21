@@ -20,7 +20,7 @@ services:
 #    volumes_from:
 #      - nginx
   nextcloud:
-    image: nextcloud:stable-apache
+    image: nextcloud:apache
     dns: # Using Cloudflare DNS
       - 1.1.1.1
       - 1.0.0.1
