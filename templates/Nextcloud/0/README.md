@@ -28,3 +28,5 @@ You can monitor if it is working by opening a shell terminal on your Redis conta
   * Add the Redis config
   * Add the reverse proxy config
   * Have the entrypoint automatically run the "php occ db:add-missing-indices"
+* Removing the "Get your own free account" link on shared folders/files
+  * [Help Site Article](https://help.nextcloud.com/t/remove-link-get-your-own-free-account/41131/5)
